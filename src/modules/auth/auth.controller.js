@@ -1,4 +1,4 @@
-import AuthModel, {hashStr} from './auth.model';
+import Auth, {hashStr} from './auth.model';
 import constants from '../../config/constants';
 import CryptoJS from 'crypto-js';
 import jwt from 'jsonwebtoken';
@@ -14,7 +14,7 @@ function handingRegister({name, email, password}) {
     }
     try {
         const token =  hashStr(email);
-        return AuthModel.create({name, email, password, token});
+        return Auth.create({name, email, password, token});
     } catch (err) {
         throw err;
     }
@@ -30,7 +30,7 @@ export const signUp = async (req, res) => {
 }
 //Sign In
 export const signIn = async (req, res, next) => {
-    req.status(200).json(req.user.toAuthJson())
+    req.status(200).json(req.user.toAuthJson());
     return next();
 };
 //Confirm Email

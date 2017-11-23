@@ -5,13 +5,33 @@ import './config/database';
 import middleware from './config/middleware';
 import Routes from './modules';
 const app = express();
-//Setup Middleware
+/**
+ * @Description: Fetch Api
+ */
+import promise from 'es6-promise'
+promise.polyfill();
+import 'isomorphic-fetch';
+/**
+ * @Description: Graphql
+ */
+// import graphql from './graphql';
+// graphql(app);
+/**
+ * @Description: Setup Middleware
+ */
 middleware(app);
-//Setup Router
-const views = path.join(__dirname , './views');
-app.use('/', express.static('src/public'))
+/**
+ * @Description: Setup Router
+ */
+const views = path.join(__dirname , './views/');
+app.use('/', express.static('src/public'));
 app.use('/api', Routes);
-//Setup Listening Server
+app.get('/page', (req, res) => {
+    return res.sendFile(views + 'page.html');
+});
+/**
+ * @Description: Setup Listening Server
+ */
 app.listen(constants.PORT, err => {
     if(err) {
         throw err;

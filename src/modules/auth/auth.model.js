@@ -62,6 +62,11 @@ AuthSchema.pre('save', function(next) {
     return next();
 });
 
+AuthSchema.statics.findByName = function(name, cb) {
+    console.log(this);
+    this.find({name: new RegExp(name, 'i')}, cb);
+};
+
 AuthSchema.methods = {
     // _hashPassword(password) {
     //     return hashSync(password);

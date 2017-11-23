@@ -8,6 +8,7 @@ import constants from '../../config/constants';
 const localOpts = {
     usernameField: 'email',
 };
+
 const localLogin = new LocalStrategy(localOpts, async (email, password, done) => {
     try {
         const user = await AuthModel.findOne({email});
