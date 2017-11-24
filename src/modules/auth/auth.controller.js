@@ -27,7 +27,7 @@ export const signUp = async (req, res) => {
     } catch (err) {
         return res.status(400).json({error: String(err)})
     }
-}
+};
 //Sign In
 export const signIn = async (req, res, next) => {
     req.status(200).json(req.user.toAuthJson());

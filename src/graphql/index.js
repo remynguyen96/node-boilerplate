@@ -1,12 +1,20 @@
-import {graphqlExpress, graphiqlExpress} from 'apollo-server-express';
-import {makeExecutableSchema} from 'graphql-tools';
-import bodyParser from 'body-parser';
-import schema from './schema';
-import resolverQuery from './resolvers'
+import { graphiqlExpress, graphqlExpress } from 'apollo-server-express';
+import { makeExecutableSchema } from 'graphql-tools';
+import typeDefs from './schema';
+import resolvers from './resolvers';
 
-const executableSchema = makeExecutableSchema({schema, resolverQuery});
+const executableSchema = makeExecutableSchema({
+    typeDefs,
+    resolvers,
+});
 
 export default app => {
-    app.use('/graphql', bodyParser.json(), graphqlExpress({executableSchema}));
+    app.use('/graphiql', graphiqlExpress({
+        endPointURL: '/graphql',
+        passHeader: `'Authorization': 'bearer token-foo@bar.com'`,
+    }));
+    app.use('/graphql', graphqlExpress(req => ({
+        executableSchema
+    })),);
 };
 

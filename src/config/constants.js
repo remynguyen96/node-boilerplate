@@ -1,6 +1,6 @@
 const defaultConfig = {
     PORT: process.env.PORT || 4500
-}
+};
 
 const config = {
     development: {
@@ -20,7 +20,8 @@ const config = {
     production: {
         MONGO_URL: 'mongodb://localhost/node-boilerplate'
     }
-}
+};
+
 function getENV(env) {
     return config[env];
 }

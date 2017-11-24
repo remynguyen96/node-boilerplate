@@ -8,7 +8,7 @@ const CategorySchema = new Schema({
         required: true,
         trim: true,
         validate: {
-            validate(title) {
+            validator(title) {
                 const regx = /^[^(!@#$%^&*()_.,<>?'";)]{5,60}$/g;
                 return regx.test(title);
             },
@@ -20,7 +20,7 @@ const CategorySchema = new Schema({
         required: true,
         trim: true,
         validate: {
-            validate(slug) {
+            validator(slug) {
                 const regx = /^[^(!@#$%^&*()_.,<>?'";)]{5,60}$/g;
                 return regx.test(slug);
             },
@@ -30,7 +30,7 @@ const CategorySchema = new Schema({
     description: {
         type: String,
         validate: {
-            validate(desc) {
+            validator(desc) {
                 if(desc.length > 1000) {
                     return false;
                 }
@@ -57,4 +57,4 @@ CategorySchema.methods = {
     }
 };
 
-export  mongoose.model('categories', CategorySchema);
+export default mongoose.model('categories', CategorySchema);

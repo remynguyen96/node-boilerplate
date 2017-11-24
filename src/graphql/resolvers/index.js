@@ -1,3 +1,6 @@
+import GraphQLDate from 'graphql-date';
+// import AuthResolver from './auth-resolver';
+
 const links = [
     {
         id: 1,
@@ -11,10 +14,10 @@ const links = [
     },
 ];
 
-export default () => {
-    Query = {
+export default {
+    Date: GraphQLDate,
+    Query: {
         allLinks: () => links,
+        // getAuth: AuthResolver.getAuth,
     }
 }
-
-
