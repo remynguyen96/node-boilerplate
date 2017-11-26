@@ -3,18 +3,21 @@ import { makeExecutableSchema } from 'graphql-tools';
 import typeDefs from './schema';
 import resolvers from './resolvers';
 
-const executableSchema = makeExecutableSchema({
+const schema = makeExecutableSchema({
     typeDefs,
     resolvers,
 });
 
 export default app => {
     app.use('/graphiql', graphiqlExpress({
-        endPointURL: '/graphql',
-        passHeader: `'Authorization': 'bearer token-foo@bar.com'`,
+        endpointURL: '/graphql',
+        // passHeader: `'Authorization': 'bearer token-foo@bar.com'`,
     }));
-    app.use('/graphql', graphqlExpress(req => ({
-        executableSchema
-    })),);
+    app.use('/graphql', graphqlExpress(req => {
+        // console.log(req);
+        return {
+            schema
+        }
+    }));
 };
 
