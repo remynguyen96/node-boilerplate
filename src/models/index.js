@@ -48,17 +48,4 @@ Object.keys(db).forEach(modelName => {
 });
 db.sequelize = sequelize;
 
-// const project = db.Post.build({
-//     title: 'my awesome project',
-//     slug: 'my-awesome-project',
-//     description: 'woot woot. this will make me a rich man'
-// });
-
-// project.save().then(() => {
-//   console.log('save ok !!!');
-// }).catch(error => {
-//     Ooops, do some error-handling
-    // console.log(error);
-// });
-
 export default db;

@@ -8,16 +8,16 @@ import Routes from './modules';
 import GraphQL from './graphql';
 import promise from 'es6-promise';
 import 'isomorphic-fetch';
-import fakerModels, {UserFaker} from './models/faker';
+// import fakerModels from './models/faker';
 
 promise.polyfill();
-const app = express();``
+const app = express();
 /**
  * @Description: Setup Middleware
  */
 middleware(app);
 /**
- * @Description: GraphQL
+ * @Description: GraphQLd
  */
 GraphQL(app);
 /**
@@ -32,17 +32,10 @@ app.get('/page', (req, res) => {
 /**
  * @Description: Setup Listening Server
  */
-
-
-models.sequelize.sync()
-    .then(() => {
-        // models.sequelize.drop();
-        console.log('Mysql connection has been established !');
-        fakerModels();
-        // fakerModels().then((fakeData) => {
-            // for(let i =1 ; i <= 10; i++) {
-            //     UserFaker().then();
-            // }
+// fakerModels().then(() => {
+    models.sequelize.sync()
+        .then(() => {
+            console.log('Mysql connection has been established !');
             app.listen(constants.PORT, err => {
                 if (err) {
                     throw err;
@@ -50,6 +43,7 @@ models.sequelize.sync()
                     console.log(`${process.env.NODE_ENV} nunning with port: ${constants.PORT}`);
                 }
             });
-        // });
-    })
-    .catch(err => console.error('Unable to connect to the database:', err));
+        })
+        .catch(err => console.error('Unable to connect to the database:', err));
+// });
+
