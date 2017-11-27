@@ -31,7 +31,6 @@ export default (sequelize, DataTypes) => {
     User.associate = (models) => {
         models.User.hasMany(models.Post);
     };
-
     return User;
 }
 

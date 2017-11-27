@@ -4,11 +4,12 @@ const User = models.User;
 const Post = models.Post;
 const Product = models.Product;
 
-User.destroy({where: {}}, {truncate: true}).then();
-Post.destroy({where: {}}, {truncate: true}).then();
-Product.destroy({where: {}}, {truncate: true}).then();
+
 export default async () => {
     try {
+        await User.destroy({where: {}}, {truncate: true});
+        await Post.destroy({where: {}}, {truncate: true});
+        await Product.destroy({where: {}}, {truncate: true});
         await Array.from({length: 5}).forEach(async (_, i) => {
             /**
              * @Description: User
@@ -35,6 +36,7 @@ export default async () => {
                 name: faker.commerce.productName(),
                 price: faker.commerce.price(),
                 description: faker.commerce.product(),
+                images: faker.image.image(),
             });
         })
     } catch (err) {

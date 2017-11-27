@@ -8,7 +8,7 @@ import Routes from './modules';
 import GraphQL from './graphql';
 import promise from 'es6-promise';
 import 'isomorphic-fetch';
-// import fakerModels from './models/faker';
+import fakerModels from './models/faker';
 
 promise.polyfill();
 const app = express();
@@ -33,7 +33,7 @@ app.get('/page', (req, res) => {
  * @Description: Setup Listening Server
  */
 // fakerModels().then(() => {
-    models.sequelize.sync()
+    models.sequelize.sync({force: false})
         .then(() => {
             console.log('Mysql connection has been established !');
             app.listen(constants.PORT, err => {

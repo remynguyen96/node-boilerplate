@@ -1,7 +1,7 @@
 import {Router} from 'express';
 import Auth from './auth';
 import Posts from './posts';
-import Category from './categories';
+import Products from './products';
 
 const routes = new Router();
 // routes.use((req, res, next) => {
@@ -12,6 +12,6 @@ const routes = new Router();
 // });
 routes.use('/auth', Auth);
 routes.use('/posts', Posts);
-routes.use('/categories', Category);
+routes.use('/products', Products);
 
 export default routes;

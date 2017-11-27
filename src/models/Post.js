@@ -15,6 +15,8 @@ export default (sequelize, DataTypes) => {
         timestamps: true,
         validate: {
             bothCoordsOrNone() {
+                const regx = /^[^(!@#$%^&*()_.,<>?'";)]{5,60}$/g;
+                // regx.test(title);
                 if ((this.title === null) || (this.slug === null)) {
                     throw new Error('Require either both latitude and longitude or neither')
                 }
@@ -26,11 +28,9 @@ export default (sequelize, DataTypes) => {
             }
         },
     });
-
     // Post.prototype.testTitleUppercase = (models) => {
     //     return
     // }
-
     Post.associate = (models) => {
         models.Post.belongsTo(models.User, {
             onDelete: "CASCADE",
