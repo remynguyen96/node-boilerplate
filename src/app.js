@@ -5,12 +5,12 @@ import constants from './config/constants';
 import models from './models/index';
 import middleware from './config/middleware';
 import Routes from './modules';
-import GraphQL from './graphql';
-import promise from 'es6-promise';
-import 'isomorphic-fetch';
-import fakerModels from './models/faker';
+// import GraphQL from './graphql';
+// import promise from 'es6-promise';
+// import 'isomorphic-fetch';
+// import fakerModels from './models/faker';
 
-promise.polyfill();
+// promise.polyfill();
 const app = express();
 /**
  * @Description: Setup Middleware
@@ -19,7 +19,7 @@ middleware(app);
 /**
  * @Description: GraphQLd
  */
-GraphQL(app);
+// GraphQL(app);
 /**
  * @Description: Setup Router
  */
