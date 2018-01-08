@@ -1,5 +1,5 @@
-import mongoose, { Schema } from 'mongoose';
-import uniqueValidator from 'mongoose-unique-validator';
+// import mongoose, { Schema } from 'mongoose';
+// import uniqueValidator from 'mongoose-unique-validator';
 import { hashSync, compareSync } from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
 import constants from '../../config/constants';

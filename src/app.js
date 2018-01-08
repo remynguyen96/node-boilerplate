@@ -1,16 +1,11 @@
 import express from 'express';
 import path from 'path';
 import constants from './config/constants';
-// import './config/database-mongo';
 import models from './models/index';
 import middleware from './config/middleware';
 import Routes from './modules';
 // import GraphQL from './graphql';
-// import promise from 'es6-promise';
-// import 'isomorphic-fetch';
 // import fakerModels from './models/faker';
-
-// promise.polyfill();
 const app = express();
 /**
  * @Description: Setup Middleware

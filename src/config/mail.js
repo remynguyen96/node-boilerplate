@@ -2,17 +2,19 @@ import nodemailer from 'nodemailer';
 import constants from './constants';
 
 const transporter = nodemailer.createTransport({
-   host: constants.MAIL_HOST,
-   port: constants.MAIL_PORT,
+    host: constants.MAIL_HOST,
+    port: constants.MAIL_PORT,
     secure: false,
     auth: {
         user: constants.MAIL_PASSWORD,
         pass: constants.MAIL_USERNAME,
-   },
+    },
 });
 
 export function verifiedEmail({email, token, name, url}) {
     let url = `${req.protocol}://${req.get('host')}`;
+    // return new Promise((resolve, reject) => {
+    // });
     return {
         from: `Welcome to website meditation 👻 <remynguyen@gmail.com>`,
         to: `${email}`,

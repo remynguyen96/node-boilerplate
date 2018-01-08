@@ -1,7 +1,7 @@
 import {Router} from 'express';
-import Auth from './auth';
-import Posts from './posts';
-import Products from './products';
+import Users from './users/users';
+import Posts from './posts/posts';
+import Products from './products/products';
 
 const routes = new Router();
 // routes.use((req, res, next) => {
@@ -10,7 +10,7 @@ const routes = new Router();
 //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
 //     next();
 // });
-routes.use('/auth', Auth);
+routes.use('/users', Users);
 routes.use('/posts', Posts);
 routes.use('/products', Products);
 

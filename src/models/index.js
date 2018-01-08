@@ -2,7 +2,7 @@ import Sequelize from 'sequelize';
 import constants from '../config/constants';
 
 const configDB = {
-    host: 'localhost',
+    host: 'phpmyadmin.test',
     dialect: 'mysql',
     port: 3306,
     protocol: null,
@@ -37,9 +37,9 @@ const sequelize = new Sequelize(
                     constants.MYSQL_PASSWORD,
                     configDB);
 const db = {
-    User: sequelize.import('./User'),
-    Post: sequelize.import('./Post'),
-    Product: sequelize.import('./Product'),
+    User: sequelize.import('../modules/users/users.model'),
+    Post: sequelize.import('../modules/posts/posts.model'),
+    Product: sequelize.import('../modules/products/products.model'),
 };
 Object.keys(db).forEach(modelName => {
     if (db[modelName].associate) {

@@ -1,5 +1,5 @@
 import models from '../../models';
-import UploadFile from '../common/upload';
+import UploadFile from '../../config/upload';
 
 const Product = models.Product;
 
@@ -18,8 +18,11 @@ export async function addProducts(req, res) {
                 return res.status(400).json({success: false, message: 'File was not able to be uploaded !'});
             }
             const dataProduct = req.body;
-            dataProduct.images = req.file.filename;
-            const addProduct = await Product.create(dataProduct);
+            dataProduct.images = null;
+            if (req.file) {
+                dataProduct.images = req.file.filename;
+            };
+            await Product.create(dataProduct);
             return res.status(200).json({success: true});
         });
     } catch (err) {
@@ -29,6 +32,7 @@ export async function addProducts(req, res) {
 
 export const getProducts = async (req, res) => {
     try {
+        console.log(Product.Instance.field);
         const listProducts = await Product.findAll();
         return res.status(200).json(listProducts);
     } catch (err) {

@@ -1,7 +1,7 @@
 import Auth, {hashStr} from './auth.model';
-import constants from '../../config/constants';
-import CryptoJS from 'crypto-js';
-import jwt from 'jsonwebtoken';
+// import constants from '../../config/constants';
+// import CryptoJS from 'crypto-js';
+// import jwt from 'jsonwebtoken';
 
 //Sign Up
 function handingRegister({name, email, password}) {

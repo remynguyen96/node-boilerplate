@@ -2,9 +2,6 @@ export default (sequelize, DataTypes) => {
     const Post = sequelize.define('Posts', {
         title: {
             type: DataTypes.STRING(150),
-            get() {
-                return `${this.getDataValue('title')}--RemyNguyen`;
-            }
         },
         slug: DataTypes.STRING(180),
         description: DataTypes.TEXT,
