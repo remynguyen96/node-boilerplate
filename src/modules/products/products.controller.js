@@ -33,6 +33,7 @@ export async function addProducts(req, res) {
 export const getProducts = async (req, res) => {
     try {
         console.log(Product.Instance.field);
+        console.log(Product.Instance.field);
         const listProducts = await Product.findAll();
         return res.status(200).json(listProducts);
     } catch (err) {
