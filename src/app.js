@@ -1,11 +1,11 @@
 import express from 'express';
 import path from 'path';
 import constants from './config/constants';
-import models from './models/index';
+import mysql from './config/mysql';
 import middleware from './config/middleware';
 import Routes from './modules';
+import fakerModels from './config/faker';
 // import GraphQL from './graphql';
-// import fakerModels from './models/faker';
 const app = express();
 /**
  * @Description: Setup Middleware
@@ -28,9 +28,9 @@ app.get('/page', (req, res) => {
  * @Description: Setup Listening Server
  */
 // fakerModels().then(() => {
-    models.sequelize.sync({force: false})
+    mysql.sequelize.sync({force: false})
         .then(() => {
-            console.log('Mysql connection has been established !');
+            console.log('Mysql Connection has been established successfully. !');
             app.listen(constants.PORT, err => {
                 if (err) {
                     throw err;

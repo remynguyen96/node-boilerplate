@@ -1,12 +1,17 @@
 export default (sequelize, DataTypes) => {
-    const Post = sequelize.define('Posts', {
+    const Posts = sequelize.define('posts', {
         title: {
             type: DataTypes.STRING(150),
+            allowNull: false,
         },
-        slug: DataTypes.STRING(180),
+        slug: {
+            type: DataTypes.STRING(180),
+            allowNull: false,
+        },
         description: DataTypes.TEXT,
         userId: {
             type: DataTypes.INTEGER,
+            allowNull: false,
         },
     }, {
         timestamps: true,
@@ -26,10 +31,10 @@ export default (sequelize, DataTypes) => {
         },
     });
     // Post.prototype.testTitleUppercase = (models) => {
-    //     return
+    //     console.log(models);
     // }
-    Post.associate = (models) => {
-        models.Post.belongsTo(models.User, {
+    Posts.associate = (models) => {
+        models.Posts.belongsTo(models.Users, {
             onDelete: "CASCADE",
             foreignKey: {
                 allowNull: false
@@ -37,5 +42,5 @@ export default (sequelize, DataTypes) => {
         });
     };
 
-    return Post;
+    return Posts;
 }

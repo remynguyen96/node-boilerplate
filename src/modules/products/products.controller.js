@@ -1,7 +1,7 @@
-import models from '../../models';
+import models from '../../config/mysql';
 import UploadFile from '../../config/upload';
 
-const Product = models.Product;
+const Products = models.Products;
 
 export async function addProducts(req, res) {
     try {
@@ -32,9 +32,13 @@ export async function addProducts(req, res) {
 
 export const getProducts = async (req, res) => {
     try {
-        console.log(Product.Instance.field);
-        console.log(Product.Instance.field);
-        const listProducts = await Product.findAll();
+
+        const listProducts = await Products.findAll({
+            limit: 2
+            // include: [ models.User ]
+        });
+        console.log(Products.testClass());
+        console.log(Products.Instance);
         return res.status(200).json(listProducts);
     } catch (err) {
         return res.status(400).json({error: String(err)})
@@ -47,7 +51,7 @@ export const getProduct = async (req, res) => {
         // method1: const product = await Product.findOne({
         //     where: {id: id}
         // });
-        const product = await Product.findById(id);
+        const product = await Products.findById(id);
         return res.status(200).json(product);
     } catch (err) {
         return res.status(400).json(err);
@@ -57,7 +61,7 @@ export const getProduct = async (req, res) => {
 export async function editProducts(req, res) {
     try {
         const id = req.params.id;
-        const editProduct = await Product.findById(id);
+        const editProduct = await Products.findById(id);
         Object.keys(req.body).forEach((key) => {
             editProduct[key] = req.body[key];
         });
@@ -70,7 +74,7 @@ export async function editProducts(req, res) {
 export async function removeProducts(req, res) {
     try {
         const id = req.params.id;
-        await Product.destroy({where: {id: id}});
+        await Products.destroy({where: {id: id}});
         return res.status(200).json({'status': 'successful'});
     } catch (err) {
         return res.status(400).json(err);

@@ -3,7 +3,7 @@ import LocalStrategy from 'passport-local';
 import {Strategy as JwtStrategy, ExtractJwt} from 'passport-jwt';
 import GoogleStrategyToken from 'passport-google-plus-token';
 import FbStrategyToken from 'passport-facebook-token';
-import models from '../models';
+import models from './mysql';
 import constants from './constants';
 
 const User = models.User;

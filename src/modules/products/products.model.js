@@ -1,5 +1,6 @@
+
 const ProductModel = (sequelize, DataTypes) => {
-    const Product = sequelize.define('Products', {
+    const Products = sequelize.define('products', {
         name: {
             type: DataTypes.STRING(120),
             allowNull: false,
@@ -32,19 +33,29 @@ const ProductModel = (sequelize, DataTypes) => {
           }
         },
     });
-    return Product;
+
+    Products.testClass = function() {
+        console.log(this.price);
+        return this;
+    };
+
+    Products.prototype.testPrototype = function() {
+        return 'foo';
+    }
+
+    Products.associate = (models) => {
+        models.Products.belongsTo(models.Users, {
+            // onDelete
+            foreignKey: {
+                allowNull: false,
+            },
+        })
+    };
+
+    return Products;
 }
 
 
-ProductModel.test = function() {
-    console.log('okok');
-    console.log(this.name);
-    console.log(this.description);
-    return 'foo';
-};
 
-ProductModel.prototype.testPrototype = function() {
-    return 'foo';
-}
 
 export default ProductModel;

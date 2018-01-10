@@ -1,3 +1,3 @@
-import models from '../../models';
-const Post = models.Post;
+import models from '../../config/mysql';
+const Posts = models.Posts;
 

@@ -1,9 +1,10 @@
 import { hashSync } from 'bcrypt-nodejs';
 
 const UserModel = (sequelize, DataTypes) => {
-    const User = sequelize.define('user', {
+    const Users = sequelize.define('users', {
         name: {
             type: DataTypes.STRING(120),
+            allowNull: false,
             validate: {
                 notEmpty:{
                     args:true,
@@ -28,23 +29,19 @@ const UserModel = (sequelize, DataTypes) => {
                 min: 8,
             }
         },
-        // password: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false,
-        //     set(pass) {
-        //        this.setDataValue('password', hashSync(pass));
-        //     }
-        // },
-        password_hash: DataTypes.STRING,
         password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        password_hash: {
             type: DataTypes.VIRTUAL,
             set: function (val) {
-                this.setDataValue('password', val);
-                this.setDataValue('password_hash', 'goodJOB' + val);
+                this.setDataValue('password_hash', val);
+                this.setDataValue('password', hashSync(val));
             },
             validate: {
                 isLongEnough: (val) => {
-                    if (val.length < 7) {
+                    if (val.length < 5) {
                         throw new Error("Please choose a longer password")
                     }
                 }
@@ -53,17 +50,18 @@ const UserModel = (sequelize, DataTypes) => {
         verified: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
-            allowNull: false
+            allowNull: false,
         },
     }, {
-        tableName: 'users',
+        // tableName: 'users',
         timestamps: true,
     });
 
-    User.associate = (models) => {
-        models.User.hasMany(models.Post);
+    Users.associate = (models) => {
+        models.Users.hasMany(models.Posts);
+        models.Users.hasMany(models.Products);
     };
-    return User;
+    return Users;
 };
 
 UserModel.prototype.test = () => {
