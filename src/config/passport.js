@@ -1,8 +1,8 @@
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import {Strategy as JwtStrategy, ExtractJwt} from 'passport-jwt';
-import GoogleStrategyToken from 'passport-google-plus-token';
-import FbStrategyToken from 'passport-facebook-token';
+// import GoogleStrategyToken from 'passport-google-plus-token';
+// import FbStrategyToken from 'passport-facebook-token';
 import models from './mysql';
 import constants from './constants';
 
@@ -12,8 +12,8 @@ const localOpts = {
 };
 const localLogin = new LocalStrategy(localOpts, async (email, password, done) => {
     try {
-        const user = await User.findOne({ where: { email: email } });
-        if(!user) {
+        const user = await User.findOne({where: {email: email}});
+        if (!user) {
             return done(null, false);
         } else if (!user._comparePassword(password)) {
             return done(null, false);
@@ -27,13 +27,13 @@ const localLogin = new LocalStrategy(localOpts, async (email, password, done) =>
 const jwtOpts = {
     // jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'),
     jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-    secretOrKey: constants.JWT_SECRET
+    secretOrKey: constants.JWT_SECRET,
 };
 const jwtLogin = new JwtStrategy(jwtOpts, async (payload, done) => {
     try {
         console.log(payload);
         const user = await User.findById(payload.id);
-        if(!user) {
+        if (!user) {
             return done(null, false);
         }
         return done(null, user);
@@ -45,5 +45,5 @@ const jwtLogin = new JwtStrategy(jwtOpts, async (payload, done) => {
 passport.use(localLogin);
 passport.use(jwtLogin);
 
-export const authLocal =  passport.authenticate('local', {session: false});
+export const authLocal = passport.authenticate('local', {session: false});
 export const authJwt = passport.authenticate('jwt', {session: false});

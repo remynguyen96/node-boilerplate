@@ -1,5 +1,5 @@
 const defaultConfig = {
-    PORT: process.env.PORT || 4500
+    PORT: process.env.PORT || 4500,
 };
 
 const config = {
@@ -22,15 +22,13 @@ const config = {
         MAIL_PASSWORD: '0875bbf87059c7',
     },
     production: {
-        MONGO_URL: 'mongodb://localhost/node-boilerplate'
-    }
+        MONGO_URL: 'mongodb://localhost/node-boilerplate',
+    },
 };
 
-function getENV(env) {
-    return config[env];
-}
+const getENV = (env) => config[env];
 
 export default {
     ...defaultConfig,
     ...getENV(process.env.NODE_ENV),
-}
+};

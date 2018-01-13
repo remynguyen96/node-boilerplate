@@ -17,17 +17,17 @@ export default (sequelize, DataTypes) => {
         timestamps: true,
         validate: {
             bothCoordsOrNone() {
-                const regx = /^[^(!@#$%^&*()_.,<>?'";)]{5,60}$/g;
+                // const regx = /^[^(!@#$%^&*()_.,<>?'";)]{5,60}$/g;
                 // regx.test(title);
                 if ((this.title === null) || (this.slug === null)) {
-                    throw new Error('Require either both latitude and longitude or neither')
+                    throw new Error('Require either both latitude and longitude or neither');
                 }
-            }
+            },
         },
         getterMethods: {
             fullName() {
-                return this.title + ' ' + this.slug
-            }
+                return `${this.title}---${this.slug}`;
+            },
         },
     });
     // Post.prototype.testTitleUppercase = (models) => {
@@ -35,12 +35,12 @@ export default (sequelize, DataTypes) => {
     // }
     Posts.associate = (models) => {
         models.Posts.belongsTo(models.Users, {
-            onDelete: "CASCADE",
+            onDelete: 'CASCADE',
             foreignKey: {
-                allowNull: false
-            }
+                allowNull: false,
+            },
         });
     };
 
     return Posts;
-}
+};
