@@ -6,10 +6,16 @@
   "author": "Remy Nguyen",
   "license": "MIT",
   "scripts": {
+    "lint": "npm run lint:js",
+    "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
+    "lint:js": "npm run lint:eslint -- . ",
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/app.js",
     "prettier": "prettier --single-quote --print-width 80 --trailing-comma all --write 'src/**/*.js'",
     "build": "cross-env NODE_ENV=production nodemon --exec babel-node src/app.js"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "dependencies": {
     "apollo-server-express": "^1.2.0",
     "bcrypt-nodejs": "^0.0.3",
@@ -38,15 +44,20 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-3": "^6.24.1",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
     "cors": "^2.8.4",
     "cross-env": "^5.1.0",
+    "eslint": "^4.15.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
     "helmet": "^3.9.0",
     "morgan": "^1.9.0",
     "nodemon": "^1.12.1",
+    "pre-commit": "^1.2.2",
     "prettier": "^1.8.2"
   }
 }

@@ -52,6 +52,9 @@ const UserModel = (sequelize, DataTypes) => {
             defaultValue: false,
             allowNull: false,
         },
+        description: {
+            type: DataTypes.TEXT('tiny'),
+        }
     }, {
         // tableName: 'users',
         timestamps: true,

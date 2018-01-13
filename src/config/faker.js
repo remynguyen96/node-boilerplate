@@ -4,7 +4,6 @@ const Users = models.Users;
 const Posts = models.Posts;
 const Products = models.Products;
 
-
 export default async () => {
     try {
         await Users.destroy({where: {}}, {truncate: true});
@@ -19,6 +18,7 @@ export default async () => {
                 email: faker.internet.email(),
                 password: '123456',
                 token: faker.phone.phoneNumber(),
+                description: faker.company.companyName(),
                 verified: true,
             });
             for await (const item of [users]) {

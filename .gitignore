@@ -1,5 +1,42 @@
-# Dependency directories
-node_modules/
+# Filesystem
+.DS_Store
+.idea
+.vscode
+Thumbs.db
+Desktop.ini
+._*
+# Node
+npm-debug.log
+node_modules
+
+# Cordova Auto-Generation
+coverage
+build
+node_modules
+npm-debug.log
+cordova/platforms
+cordova/plugins
+cordova/npm-debug.log
+cordova/node_modules
+cordova/www
+cordova/package.json
+cordova/build.sh
+platforms
+plugins
+
+platforms
+plugins
+www
+
+# Cruft
+.DS_Store
+npm-debug.log
+.idea
+/.vscode
 src/config/constants.js
+src/config/mysql.js
 yarn.lock
+package-lock.json
 .idea/workspace.xml
+application/cache
+

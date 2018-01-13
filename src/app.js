@@ -27,7 +27,7 @@ app.get('/page', (req, res) => {
 /**
  * @Description: Setup Listening Server
  */
-// fakerModels().then(() => {
+fakerModels().then(() => {
     mysql.sequelize.sync({force: false})
         .then(() => {
             console.log('Mysql Connection has been established successfully. !');
@@ -40,5 +40,5 @@ app.get('/page', (req, res) => {
             });
         })
         .catch(err => console.error('Unable to connect to the database:', err));
-// });
+});
 
