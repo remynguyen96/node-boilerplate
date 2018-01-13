@@ -1,4 +1,3 @@
-
 const ProductModel = (sequelize, DataTypes) => {
     const Products = sequelize.define('products', {
         name: {
@@ -25,12 +24,12 @@ const ProductModel = (sequelize, DataTypes) => {
         // getterMethods: {
         //     test() {
         //         console.log(this.price);
-        //     }
+        //     },
         // },
         setterMethods: {
           test(val) {
               this.setDataValue('price', val);
-          }
+          },
         },
     });
 
@@ -39,23 +38,19 @@ const ProductModel = (sequelize, DataTypes) => {
         return this;
     };
 
-    Products.prototype.testPrototype = function() {
-        return 'foo';
-    }
+    Products.prototype.max = function(price) {
+        return price;
+    };
 
     Products.associate = (models) => {
         models.Products.belongsTo(models.Users, {
-            // onDelete
             foreignKey: {
                 allowNull: false,
             },
-        })
+        });
     };
 
     return Products;
-}
-
-
-
+};
 
 export default ProductModel;

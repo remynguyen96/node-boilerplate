@@ -4,7 +4,7 @@ import constants from './config/constants';
 import mysql from './config/mysql';
 import middleware from './config/middleware';
 import Routes from './modules';
-import fakerModels from './config/faker';
+// import fakerModels from './config/faker';
 // import GraphQL from './graphql';
 const app = express();
 /**
@@ -21,17 +21,15 @@ middleware(app);
 const views = path.join(__dirname, './views/');
 app.use('/', express.static('src/public'));
 app.use('/api', Routes);
-app.get('/page', (req, res) => {
-    return res.sendFile(views + 'page.html');
-});
+app.get('/page', (req, res) => res.sendFile(`${views}page.html`));
 /**
  * @Description: Setup Listening Server
  */
-fakerModels().then(() => {
+// fakerModels().then(() => {
     mysql.sequelize.sync({force: false})
         .then(() => {
             console.log('Mysql Connection has been established successfully. !');
-            app.listen(constants.PORT, err => {
+            app.listen(constants.PORT, (err) => {
                 if (err) {
                     throw err;
                 } else {
@@ -39,6 +37,6 @@ fakerModels().then(() => {
                 }
             });
         })
-        .catch(err => console.error('Unable to connect to the database:', err));
-});
+        .catch((err) => console.error('Unable to connect to the database:', err));
+// });
 

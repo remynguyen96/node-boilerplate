@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
         const typeFile = file.originalname.split('.')[file.originalname.split('.').length - 1];
         const nameFile = file.originalname.replace(`.${typeFile}`, '');
         cb(null, `${nameFile}-${Date.now()}.${typeFile}`);
-    }
+    },
 });
 
 const uploadFile = multer({
@@ -25,8 +25,8 @@ const uploadFile = multer({
     //     }
     // },
     limits: {
-        fileSize: 8000000 //8MB
-    }
+        fileSize: 8000000, // 8MB
+    },
 }).single('images');
 
 export default uploadFile;

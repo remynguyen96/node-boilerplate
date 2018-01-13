@@ -1,8 +1,8 @@
 import {Router} from 'express';
 // import { authJwt, authLocal} from '../../config/passport'
 import * as UserController from './users.controller';
-const routes = new Router();
 
+const routes = new Router();
 // routes.post('/sign-up', authJwt, UserController.signUp);
 routes.post('/sign-up', UserController.signUp);
 routes.post('/verified-email/:token', UserController.verifiedEmail);
