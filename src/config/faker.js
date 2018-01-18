@@ -1,5 +1,6 @@
 /* eslint-disable no-restricted-syntax,prefer-destructuring */
 import faker from 'faker';
+import {hashSync} from 'bcrypt-nodejs';
 import models from './mysql';
 
 const Users = models.Users;
@@ -18,7 +19,7 @@ export default async () => {
       const users = await Users.create({
         name: faker.name.findName(),
         email: faker.internet.email(),
-        password: '123456',
+        password: hashSync(123456),
         token: faker.phone.phoneNumber(),
         description: faker.company.companyName(),
         verified: true,

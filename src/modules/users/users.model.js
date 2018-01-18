@@ -1,4 +1,6 @@
-import {hashSync} from 'bcrypt-nodejs';
+import {hashSync, compareSync} from 'bcrypt-nodejs';
+import jwt from 'jsonwebtoken';
+import constants from '../../config/constants';
 
 const UserModel = (sequelize, DataTypes) => {
     const Users = sequelize.define('users', {
@@ -13,7 +15,8 @@ const UserModel = (sequelize, DataTypes) => {
                     const Regex = /^(?!.*[!@#$%^&*()_+=])(?!.*[0-9])[a-zA-Z].{3,30}$/g;
                     if (!Regex.test(value)) {
                         throw new Error('Name is not match !');
-                    };
+                    }
+                    ;
                 },
             },
             allowNull: false,
@@ -33,10 +36,10 @@ const UserModel = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        password_hash: {
+        passClient: {
             type: DataTypes.VIRTUAL,
             set: function(val) {
-                this.setDataValue('password_hash', val);
+                this.setDataValue('passClient', val);
                 this.setDataValue('password', hashSync(val));
             },
             validate: {
@@ -54,6 +57,7 @@ const UserModel = (sequelize, DataTypes) => {
         },
         description: {
             type: DataTypes.TEXT('tiny'),
+            allowNull: true,
         },
     }, {
         // tableName: 'users',
@@ -64,13 +68,30 @@ const UserModel = (sequelize, DataTypes) => {
         models.Users.hasMany(models.Posts);
         models.Users.hasMany(models.Products);
     };
+
+    Users.createToken = (id) => (
+        jwt.sign(
+            {id: id},
+            constants.JWT_SECRET,
+            {expiresIn: '5m'}
+        )
+    );
+
+    Users.comparePassword = (passNew, passOld) => (compareSync(passNew, passOld));
+    Users.toAuthJSON = ({id, name, email, description}) => ({
+        id,
+        name,
+        email,
+        description,
+        token: `JWT ${Users.createToken(id)}`,
+    });
     return Users;
 };
 
-UserModel.prototype.test = () => {
-    console.log('good test !');
+// UserModel.prototype.test = () => {
+    // console.log('good test !');
     // console.log(this.name);
-};
+// };
 
 export default UserModel;
 

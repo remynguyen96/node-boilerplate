@@ -33,11 +33,6 @@ const ProductModel = (sequelize, DataTypes) => {
         },
     });
 
-    Products.testClass = function() {
-        console.log(this.price);
-        return this;
-    };
-
     Products.prototype.max = function(price) {
         return price;
     };

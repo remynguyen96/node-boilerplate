@@ -8,7 +8,7 @@ Desktop.ini
 # Node
 npm-debug.log
 node_modules
-
+.idea/workspace.xml
 # Cordova Auto-Generation
 coverage
 build

@@ -1,4 +1,4 @@
-import Auth from '../../modules/auth/auth.model';
+import Auth from '../../modules/users/auth.model';
 
 export default {
     getAuth: async (_, args) => {

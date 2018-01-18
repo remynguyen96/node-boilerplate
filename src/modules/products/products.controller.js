@@ -22,8 +22,7 @@ export const addProducts = async (req, res) => {
             dataProduct.images = null;
             if (req.file) {
                 dataProduct.images = req.file.filename;
-            }
-            ;
+            };
             await Product.create(dataProduct);
             return res.status(200).json({success: true});
         });
@@ -40,15 +39,15 @@ export const getProducts = async (req, res) => {
             // offset: 1,
             // attributes: ['description', 'name', 'price', 'images', 'userId', 'createdAt'],
             order: [
-                // ['price', 'DESC'],
-                // [models.Users, 'createdAt', 'DESC'],
+                ['id', 'DESC'],
+                // [models.Users, 'id', 'DESC'],
                 // [Products.associations.Users, 'createdAt', 'DESC'],
             ],
             include: [{
-                    model: Users,
-                    // required: true,
-                    // where: {id: {[Sequelize.Op.gt]: 18}},
-                    where: {name: {[Sequelize.Op.like]: '%ko%'}},
+                model: Users,
+                required: true,
+                where: {id: {[Sequelize.Op.gt]: 18}},
+                // where: {name: {[Sequelize.Op.like]: '%ko%'}},
             }],
         });
         // console.log(Products.testClass());

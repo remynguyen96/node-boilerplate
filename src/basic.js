@@ -21,16 +21,14 @@ const part = () => {
         return results;
     };
 
-    const recursive2 = (name) => {
-        return Allmembers
+    const recursive2 = (name) => (Allmembers
             .filter((item) => item.team === name)
             .reduce((results, item) => {
                 results[item.name] = recursive2(item.name);
                 return results;
-            }, {});
-    };
-// console.log(JSON.stringify(recursive(null), null, 2));
-// console.log(JSON.stringify(recursive2(null), null, 2));
+            }, {}));
+    const result = JSON.stringify(recursive2(null), null, 2);
+    return result;
 };
 
 const part1 = () => {
@@ -44,14 +42,15 @@ const part1 = () => {
                 balance = balance - outcome;
             },
             view() {
-                console.info(`This is ${name} with money have is ${balance} !`);
-            }
-        }
+                return `This is ${name} with money have is ${balance} !`;
+            },
+        };
     };
-// const testScope = scope('Remy', 10);
-// testScope.plus(10);
-// testScope.abstract(5);
-// testScope.view();
+    const testScope = scope('Remy', 10);
+    testScope.plus(10);
+    testScope.abstract(5);
+    testScope.view();
+    return testScope;
 };
 
 const part2 = () => {
@@ -69,16 +68,15 @@ const part2 = () => {
         'ReactJS',
     ];
     const initialValue = {};
-    const reducers = (tally, vote, key) => {
+    const reducers = (tally, vote) => {
         if (!tally[vote]) {
-            // console.log(key);
             tally[vote] = 1;
         } else {
             tally[vote] = tally[vote] + 1;
         }
         return tally;
     };
-    console.log(votes.reduce(reducers, initialValue));
+    return votes.reduce(reducers, initialValue);
 };
 
 const part3 = () => {
@@ -99,7 +97,7 @@ const part3 = () => {
         {team: 'Team 14', name: 'Remy 10'},
     ];
     const objName = {};
-    const mapData = data.map((item) => {
+    return data.map((item) => {
         const {name, team} = item;
         if (objName[name]) {
             objName[name] = objName[name].concat(team);
@@ -120,6 +118,10 @@ const part3 = () => {
             return result;
         }
     });
-    console.log(mapData);
 };
-// part3();
+
+part();
+part1();
+part2();
+part3();
+

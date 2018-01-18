@@ -6,19 +6,20 @@ import {Strategy as JwtStrategy, ExtractJwt} from 'passport-jwt';
 import models from './mysql';
 import constants from './constants';
 
-const User = models.User;
+const Users = models.Users;
 const localOpts = {
     usernameField: 'email',
 };
 const localLogin = new LocalStrategy(localOpts, async (email, password, done) => {
     try {
-        const user = await User.findOne({where: {email: email}});
+        const user = await Users.findOne({where: {email: email}});
         if (!user) {
             return done(null, false);
-        } else if (!user._comparePassword(password)) {
+        } else if (!Users.comparePassword(password, user.password)) {
             return done(null, false);
-        }
-        return done(null, user);
+          }
+        const infoUser = Users.toAuthJSON(user.toJSON());
+        return done(null, infoUser);
     } catch (err) {
         return done(err, false);
     }
@@ -31,8 +32,8 @@ const jwtOpts = {
 };
 const jwtLogin = new JwtStrategy(jwtOpts, async (payload, done) => {
     try {
-        console.log(payload);
-        const user = await User.findById(payload.id);
+        // console.log(payload);
+        const user = await Users.findById(payload.id);
         if (!user) {
             return done(null, false);
         }
