@@ -7,8 +7,8 @@ const config = {
         MONGO_URL: 'mongodb://localhost:27017/boilerplate',
 
         MYSQL_DB: 'node-boilerplate',
-        MYSQL_USERNAME: 'root',
-        MYSQL_PASSWORD: '',
+        MYSQL_USERNAME: 'homestead',
+        MYSQL_PASSWORD: 'secret',
 
         JWT_SECRET: 'understanding mediation',
         JWT_SECRET2: 'Vipassana',

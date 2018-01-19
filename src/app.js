@@ -26,17 +26,17 @@ app.get('/page', (req, res) => res.sendFile(`${views}page.html`));
 /**
  * @Description: Setup Listening Server
  */
-// fakerModels().then(() => {
-    mysql.sequelize.sync({force: false})
-        .then(() => {
-            console.log('Database Connection Has Been Established Successfully. !');
-            app.listen(constants.PORT, (err) => {
-                if (err) {
-                    throw err;
-                } else {
-                    console.log(`${process.env.NODE_ENV} running with port: ${constants.PORT}`);
-                }
-            });
-        })
-        .catch((err) => console.error('Unable to connect to the database:', err));
-// });
+
+mysql.sequelize.sync({force: false})
+    .then(async () => {
+        console.log('Database Connection Has Been Established Successfully. !');
+        app.listen(constants.PORT, (err) => {
+            if (err) {
+                throw err;
+            } else {
+                console.log(`${process.env.NODE_ENV} running with port: ${constants.PORT}`);
+            }
+        });
+        // await fakerModels();
+    })
+    .catch((err) => console.error('Unable to connect to the database:', err));

@@ -12,13 +12,13 @@ const localOpts = {
 };
 const localLogin = new LocalStrategy(localOpts, async (email, password, done) => {
     try {
-        const user = await Users.findOne({where: {email: email}});
-        if (!user) {
+        const users = await Users.findOne({where: {email}});
+        if (!users) {
             return done(null, false);
-        } else if (!Users.comparePassword(password, user.password)) {
+        } else if (!Users.comparePassword(password, users.password)) {
             return done(null, false);
           }
-        const infoUser = Users.toAuthJSON(user.toJSON());
+        const infoUser = Users.toAuthJSON(users.toJSON());
         return done(null, infoUser);
     } catch (err) {
         return done(err, false);

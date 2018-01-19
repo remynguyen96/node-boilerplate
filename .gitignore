@@ -1,4 +1,6 @@
 # Filesystem
+src/config/constants.js
+src/config/mysql.js
 .DS_Store
 .idea
 .vscode

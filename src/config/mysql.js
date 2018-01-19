@@ -2,7 +2,7 @@ import Sequelize from 'sequelize';
 import constants from './constants';
 
 const configDB = {
-    host: 'localhost',
+    host: 'phpmyadmin.test',
     dialect: 'mysql',
     port: 3306,
     protocol: null,

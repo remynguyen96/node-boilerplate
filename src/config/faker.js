@@ -14,19 +14,19 @@ export default async () => {
       await Products.destroy({where: {}}, {truncate: true});
       await Array.from({length: 5}).forEach(async () => {
       /**
-             * @Description: Users
-             */
+       * @Description: Fake Data Users
+       */
       const users = await Users.create({
         name: faker.name.findName(),
         email: faker.internet.email(),
         password: hashSync(123456),
-        token: faker.phone.phoneNumber(),
-        description: faker.company.companyName(),
+        avatar: 'Remy.jpg',
+        intro: faker.address.country(),
         verified: true,
       });
       for await (const item of [users]) {
       /**
-       * @Description: Posts
+       * @Description: Fake Data Posts
        */
        await Posts.create({
           title: faker.commerce.department(),
@@ -35,7 +35,7 @@ export default async () => {
           userId: item.id,
         });
       /**
-       * @Description: Products
+       * @Description: Fake Data Products
        */
         await Products.create({
           name: faker.commerce.productName(),

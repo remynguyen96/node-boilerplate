@@ -31,8 +31,6 @@ export const signUp = async (req, res) => {
         const infoUser = {...handleInfo.toJSON(), url, token};
         const templateMail = await mailConfirm(infoUser);
         await sendMailServer(templateMail);
-        // const sendMail = await sendMailServer(templateMail);
-        // console.log(sendMail);
         return res.status(200).json({success: true});
     } catch (err) {
         res.status(400).json(err);
@@ -49,6 +47,7 @@ export const signIn = async (req, res) => {
 
 export const verifiedEmail = async (req, res) => {
     try {
+        console.log(res.body);
         res.status(200).json(res);
     } catch (err) {
         res.status(400).json(err);

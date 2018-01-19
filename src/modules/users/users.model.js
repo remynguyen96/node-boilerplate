@@ -6,6 +6,7 @@ const UserModel = (sequelize, DataTypes) => {
     const Users = sequelize.define('users', {
         name: {
             type: DataTypes.STRING(120),
+            allowNull: false,
             validate: {
                 notEmpty: {
                     args: true,
@@ -15,16 +16,14 @@ const UserModel = (sequelize, DataTypes) => {
                     const Regex = /^(?!.*[!@#$%^&*()_+=])(?!.*[0-9])[a-zA-Z].{3,30}$/g;
                     if (!Regex.test(value)) {
                         throw new Error('Name is not match !');
-                    }
-                    ;
+                    };
                 },
             },
-            allowNull: false,
         },
         email: {
             type: DataTypes.STRING(120),
-            unique: {msg: 'Email address already in taken !'},
             allowNull: false,
+            unique: {msg: 'Email address already in taken !'},
             validate: {
                 notEmpty: true,
                 isEmail: true,
@@ -38,13 +37,18 @@ const UserModel = (sequelize, DataTypes) => {
         },
         passClient: {
             type: DataTypes.VIRTUAL,
+            allowNull: true,
             set: function(val) {
                 this.setDataValue('passClient', val);
                 this.setDataValue('password', hashSync(val));
             },
             validate: {
-                isLongEnough: (val) => {
-                    if (val.length < 5) {
+                notEmpty: {
+                    args: true,
+                    msg: 'Password is field required !',
+                },
+                isLongEnough(val) {
+                    if (`${val}`.length < 5) {
                         throw new Error('Please choose a longer password');
                     }
                 },
@@ -55,7 +59,18 @@ const UserModel = (sequelize, DataTypes) => {
             defaultValue: false,
             allowNull: false,
         },
-        description: {
+        avatar: {
+            type: DataTypes.STRING(),
+            allowNull: true,
+            validate: {
+                checkImage(img) {
+                    if (!img.match(/\.(png|jpg|jpeg|gif|svg)$/)) {
+                        throw new Error('Image is not match !');
+                    };
+                },
+            },
+        },
+        intro: {
             type: DataTypes.TEXT('tiny'),
             allowNull: true,
         },
@@ -71,18 +86,19 @@ const UserModel = (sequelize, DataTypes) => {
 
     Users.createToken = (id) => (
         jwt.sign(
-            {id: id},
+            {id},
             constants.JWT_SECRET,
             {expiresIn: '5m'}
         )
     );
 
     Users.comparePassword = (passNew, passOld) => (compareSync(passNew, passOld));
-    Users.toAuthJSON = ({id, name, email, description}) => ({
+    Users.toAuthJSON = ({id, name, email, intro, avatar}) => ({
         id,
         name,
         email,
-        description,
+        avatar,
+        intro,
         token: `JWT ${Users.createToken(id)}`,
     });
     return Users;

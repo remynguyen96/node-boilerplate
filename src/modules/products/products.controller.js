@@ -1,23 +1,13 @@
 import Sequelize from 'sequelize';
 import models from '../../config/mysql';
-import UploadFile from '../../config/upload';
+import UploadFile, {errorUpload} from '../../config/upload';
 
 const Products = models.Products;
 
 export const addProducts = async (req, res) => {
     try {
         UploadFile(req, res, async (err) => {
-            if (err) {
-                if (err.code === 'LIMIT_FILE_SIZE') {
-                    return res.status(400).json({success: false, message: 'File size is too large. Max limit is 8MB'});
-                } else if (err.code === 'filetype') {
-                    return res.status(400).json({
-                        success: false,
-                        message: 'File type is invalid. Must be .png,.jpg,.jpeg,.gif,.svg',
-                    });
-                }
-                return res.status(400).json({success: false, message: 'File was not able to be uploaded !'});
-            }
+            await errorUpload(err);
             const dataProduct = req.body;
             dataProduct.images = null;
             if (req.file) {

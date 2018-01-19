@@ -12,12 +12,15 @@ const ProductModel = (sequelize, DataTypes) => {
         },
         price: {
             type: DataTypes.INTEGER,
+            allowNull: false,
         },
         images: {
             type: DataTypes.STRING(),
+            allowNull: true,
         },
         description: {
             type: DataTypes.TEXT('tiny'),
+            allowNull: true,
         },
     }, {
         timestamps: true,

@@ -18,7 +18,7 @@ export const mailConfirm = (info) => {
             const mail = {
                 from: 'Welcome to website meditation 👻 <remynguyen@gmail.com>',
                 to: `${email}`,
-                subject: `Hello ${name} ✔ This is Mail Confirm Account !`,
+                subject: `Hello ${name} ! This is Mail Confirm Account ✔`,
                 text: 'Please confirm email to login website !',
                 html: ` <h2>Hello ${name}, welcome to website</h2>
                         <a style="display: block;font-size:27px; color: #174DCF; text-align:center" href="${url}/confirm/${token}">
@@ -78,6 +78,7 @@ export const sendMailServer = async (templateMail) => {
         if (error) {
             return error;
         }
+        return info;
         // console.log('Mail %s sent: %s', info.messageId, info.response);
     });
     return mail;
