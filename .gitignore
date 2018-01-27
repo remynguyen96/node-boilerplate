@@ -1,0 +1,6 @@
+node_modules
+src/config
+yarn.lock
+build
+.idea
+yarn-error.log
