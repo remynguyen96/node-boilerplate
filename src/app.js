@@ -1,5 +1,4 @@
 import express from 'express';
-import http from 'http';
 import path from 'path';
 import passport from 'passport';
 import constants from './config/constants';
@@ -7,17 +6,13 @@ import mysql from './config/mysql';
 import middleware from './utils/middleware';
 import Routes from './modules';
 // import fakerModels from './utils/faker';
-// import './basic';
-const app = express();
+import './basic';
 /**
  * @Description: Setup Middleware
  */
+const app = express();
 middleware(app);
 app.use(passport.initialize());
-/**
- * @Description: GraphQLd
- */
-// GraphQL(app);
 /**
  * @Description: Setup Router
  */
@@ -28,11 +23,6 @@ app.get('/page', (req, res) => res.sendFile(`${views}page.html`));
 /**
  * @Description: Setup Listening Server
  */
-
-http.createServer((req, res) => {
-    res.end('good');
-}).listen(5000);
-
 mysql.sequelize.sync({ force: false })
     .then(async () => {
         console.log('Database Connection Has Been Established Successfully. !');

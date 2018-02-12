@@ -1,50 +1,31 @@
-const part = () => {
-    const Allmembers = [
-        { name: 'DungLT', team: null },
-        { name: 'Tung', team: 'DungLT' },
-        { name: 'Tan', team: 'DungLT' },
-        { name: 'Khanh', team: 'Tung' },
-        { name: 'Chi', team: 'Khoi' },
-        { name: 'DungTC', team: 'Tan' },
-        { name: 'Khoi', team: null },
-        { name: 'Tuong', team: 'Tung' },
-        { name: 'Duoc', team: 'Khoi' },
-        { name: 'Toan', team: 'Duoc' },
-        { name: 'Thien', team: 'Toan' },
-    ];
+// @flow
 
-    const recursive = (name) => {
-        const results = {};
-        Allmembers
-            .filter((item) => item.team === name)
-            .forEach((item) => {
-                results[item.name] = recursive(item.name);
-            });
-        return results;
-    };
-
-    const recursive2 = (name) => (
-            Allmembers
-            .filter((item) => item.team === name)
-            .reduce((results, item) => {
-                results[item.name] = recursive2(item.name);
-                return results;
-            }, {}));
-    const result = JSON.stringify(recursive2(null), null, 2);
-    return result;
+interface Person {
+    name: string;
+    age: number;
+    beauty?: boolean;
+};
+const arrStr: string[] = ['aa1', 'bb2', 'cc3', 'dd4', 'ee5'];
+// const arrStr: Array<string> = ['aa1', 'bb2', 'cc3', 'dd4', 'ee5'];
+const arrNum: (?number)[] = [1, 2, 3, 4, 5];
+let person: Person;
+person = {
+    name: 'Remy',
+    age: 22,
 };
 
-const part1 = () => {
-    const scope = (name, value) => {
-        let balance = value;
+
+const part1 = (): string => {
+    const scope = (name: string, value: number): any => {
+        let balance: number = value;
         return {
-            plus(income) {
+            plus(income: number) {
                 balance += income;
             },
-            abstract(outcome) {
+            abstract(outcome: number) {
                 balance -= outcome;
             },
-            view() {
+            view(): string {
                 return `This is ${name} with money have is ${balance} !`;
             },
         };
@@ -56,7 +37,7 @@ const part1 = () => {
     return testScope;
 };
 
-const part2 = () => {
+const part2 = (): any => {
     const votes = [
         'AngularJS',
         'VueJS',
@@ -82,7 +63,7 @@ const part2 = () => {
     return votes.reduce(reducers, initialValue);
 };
 
-const part3 = () => {
+const part3 = (): any => {
     const data = [
         { team: 'Team 1', name: 'Remy 1' },
         { team: 'Team 2', name: 'Chau Nguyen' },
@@ -119,10 +100,64 @@ const part3 = () => {
     }).filter((result) => (result.team !== undefined ? result : ''));
 };
 
+const part = (): any => {
+    const Allmembers = [
+        { name: 'DungLT', team: null },
+        { name: 'Tung', team: 'DungLT' },
+        { name: 'Tan', team: 'DungLT' },
+        { name: 'Khanh', team: 'Tung' },
+        { name: 'Chi', team: 'Khoi' },
+        { name: 'DungTC', team: 'Tan' },
+        { name: 'Khoi', team: null },
+        { name: 'Tuong', team: 'Tung' },
+        { name: 'Duoc', team: 'Khoi' },
+        { name: 'Toan', team: 'Duoc' },
+        { name: 'Thien', team: 'Toan' },
+    ];
+
+    const recursive = (name) => {
+        const results = {};
+        Allmembers
+            .filter((item) => item.team === name)
+            .forEach((item) => {
+                results[item.name] = recursive(item.name);
+            });
+        return results;
+    };
+
+    const recursive2 = (name) => (
+        Allmembers
+            .filter((item) => item.team === name)
+            .reduce((results, item) => {
+                results[item.name] = recursive2(item.name);
+                return results;
+            }, {}));
+    const result = JSON.stringify(recursive2(null), null, 2);
+    return result;
+};
+
+const part4 = (): any => {
+  const languages = ['Javascript', 'Ruby', 'Golang', 'Java', 'Kotlin', 'Python'];
+  const normalize = (lang) => lang.trim().toLowerCase();
+  const objLang = Object.create(null);
+  languages.forEach((lang) => {
+      objLang[normalize(lang)] = 1;
+  });
+  const getLanguages = (input) => (
+      input.reduce((arrLang, lang) => {
+          const key = normalize(lang);
+          if (objLang[key]) {
+              arrLang.push(key);
+          }
+          return arrLang;
+      }, [])
+  );
+  return getLanguages(['JAVASCRIPT', 'C++', 'PYthon', 'PHP']);
+};
+
 part();
 part1();
 part2();
 part3();
-// console.log(part2());
-// console.log(part3());
+part4();
 
