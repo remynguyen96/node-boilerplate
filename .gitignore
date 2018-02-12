@@ -14,6 +14,7 @@ src/config/mysql.js
 coverage
 build
 node_modules
+lib
 npm-debug.log
 cordova/platforms
 cordova/plugins
