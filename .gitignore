@@ -34,6 +34,7 @@ www
 .DS_Store
 npm-debug.log
 .idea
+.idea/
 /.vscode
 src/config/constants.js
 src/config/mysql.js
