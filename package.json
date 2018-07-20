@@ -1,21 +1,18 @@
 {
   "name": "boilerplate",
   "version": "1.0.0",
-  "description": "Nodejs ES6 Boilerplate",
+  "description": "Nodejs ES6 Boilerplate Course",
   "main": "app.js",
   "author": "Remy Nguyen",
   "license": "MIT",
   "scripts": {
-    "lint": "npm run lint:js",
     "eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
     "lint:js": "npm run eslint -- . ",
-    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/app.js",
-    "prettier": "prettier --single-quote --print-width 80 --trailing-comma all --write 'src/**/*.js'",
-    "prepublish": "babel src/ -d lib/",
+    "lint": "npm run lint:js",
+    "start": "cross-env NODE_ENV=development nodemon --exec babel-node src/app.js",
     "build": "cross-env NODE_ENV=production nodemon --exec babel-node src/app.js"
   },
   "dependencies": {
-    "accesscontrol": "^2.2.0",
     "bcrypt-nodejs": "^0.0.3",
     "bluebird": "^3.5.1",
     "crypto-js": "^3.1.9-1",
@@ -28,8 +25,6 @@
     "mysql2": "^1.5.1",
     "nodemailer": "^4.2.0",
     "passport": "^0.4.0",
-    "passport-facebook": "^2.1.1",
-    "passport-google-oauth20": "^1.0.0",
     "passport-jwt": "^3.0.0",
     "passport-local": "^1.0.0",
     "sequelize": "^4.22.15",
@@ -40,7 +35,6 @@
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.1",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-2": "^6.24.1",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
@@ -49,12 +43,9 @@
     "eslint": "^4.15.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-babel": "^4.1.2",
-    "eslint-plugin-flowtype": "^2.43.0",
     "eslint-plugin-import": "^2.8.0",
-    "flow-bin": "^0.65.0",
     "helmet": "^3.9.0",
     "morgan": "^1.9.0",
-    "nodemon": "^1.12.1",
-    "prettier": "^1.8.2"
+    "nodemon": "^1.12.1"
   }
 }

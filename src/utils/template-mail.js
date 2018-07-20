@@ -53,52 +53,16 @@ p {
 </div>
 `);
 
-export const ConfirmAccount = (name, url, refreshToken) => {
-    const description = `
+export const ConfirmAccount = (name, url, token) => {
+  const description = `
         <h2>Hi ${name} !</h2>
         <p>Before you go out and play on Website, please verify your email address.</p>
         <p>Why, you ask? Connecting with other readers and writers is a big part of the Website experience. We'll email you about interactions with other people on Website</p>
         <p>If you did not create a Website account using this address, please contact us at remy@gmail.com</p>
-        <a href="${url}/${refreshToken}" class="btn">Verify your account</a>
+        <a href="${url}/${token}" class="btn">Verify your account</a>
         <p class="notice">This link will be valid the next 7 days</p>
     `;
-    return `
+  return `
         ${generalSectionTemplate(description)}
-    `;
-};
-
-export const ResetPassword = (name, url, refreshToken) => {
-    const description = `
-        <h2>Hi ${name} !</h2>
-        <p>It looks like you requested a new password</p>
-        <p>If that sounds right, you can enter new password by clicking on the button below</p>
-        <a href="${url}/${refreshToken}" class="btn">Reset password</a>
-        <p class="notice">This link will be valid the next 4 hours</p>
-    `;
-    return `
-        ${generalSectionTemplate(description)}
-        <style>
-            .btn {
-                background: #646ef1;
-                border-radius: 2px;
-            }
-        </style>
-    `;
-};
-
-export const EditPassword = (name, url) => {
-    const description = `
-        <h2>Congratulation ${name} !</h2>
-        <p>You had update password successful !</p>
-        <a href="${url}" class="btn">Comeback to website</a>
-    `;
-    return `
-        ${generalSectionTemplate(description)}
-        <style>
-            .btn {
-                background: #2490ff;
-                border-radius: 2px;
-            }
-        </style>
     `;
 };

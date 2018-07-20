@@ -1,52 +1,44 @@
-const PostModel = (sequelize, DataTypes) => {
-    const Posts = sequelize.define('post', {
-        id: {
-            type: DataTypes.UUID,
-            primaryKey: true,
-            defaultValue: DataTypes.UUIDV4,
-            allowNull: false,
-        },
-        title: {
-            type: DataTypes.STRING(150),
-            allowNull: false,
-        },
-        slug: {
-            type: DataTypes.STRING(180),
-            allowNull: false,
-        },
-        description: DataTypes.TEXT,
-        user_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-    }, {
-        timestamps: true,
-        validate: {
-            bothCoordsOrNone() {
-                // const regx = /^[^(!@#$%^&*()_.,<>?'";)]{5,60}$/g;
-                // regx.test(title);
-                if ((this.title === null) || (this.slug === null)) {
-                    throw new Error('Require either both latitude and longitude or neither');
-                }
-            },
-        },
-        getterMethods: {
-            fullName() {
-                return `${this.title}---${this.slug}`;
-            },
-        },
+const PostModels = (sequelize, DataTypes) => {
+  const Posts = sequelize.define('post', {
+    title: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      set(val) {
+        this.setDataValue('title', val);
+      },
+      get() {
+        return this.getDataValue('title');
+      },
+    },
+    slug: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      set(val) {
+        this.setDataValue('slug', val.toLowerCase());
+      },
+    },
+    images: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
+    description: {
+      type: DataTypes.TEXT('tiny'),
+      allowNull: true,
+    },
+  }, {
+    timestamps: true,
+  });
+
+  Posts.associate = (models) => {
+    models.Posts.belongsTo(models.Users, {
+      foreignKey: {
+        allowNull: false,
+      },
     });
+  };
 
-    Posts.associate = (models) => {
-        models.Posts.belongsTo(models.Users, {
-            foreignKey: {
-                allowNull: false,
-                constraints: false,
-            },
-        });
-    };
-
-    return Posts;
+  return Posts;
 };
 
-export default PostModel;
+
+export default PostModels;

@@ -1,69 +1,49 @@
 import Sequelize from 'sequelize';
-import constants from './constants';
+import { constants } from './constants';
 
 const configDB = {
-    host: 'phpmyadmin.test',
-    dialect: 'mysql',
-    port: 3306,
-    protocol: null,
-    logging: false,
-    // disable inserting undefined values as NULL
-    omitNull: false,
-    operatorsAliases: false,
-    // similar for sync: you can define this to always force sync for models
-    sync: { force: true },
-    define: {
-        // don't use camelcase for automatically
-        underscored: true,
-        // disable the modification of table names;
-        freezeTableName: false,
-        charset: 'utf8',
-        dialectOptions: {
-            collate: 'utf8_general_ci',
-        },
-        timestamps: false,
+  host: 'localhost',
+  dialect: 'mysql',
+  port: 3306,
+  protocol: null,
+  logging: false,
+  omitNull: false,
+  operatorsAliases: false,
+  sync: { force: true },
+  define: {
+    underscored: true,
+    freezeTableName: false,
+    charset: 'utf8',
+    dialectOptions: {
+      collate: 'utf8_general_ci',
     },
-    pool: {
-        max: 5,
-        min: 0,
-        acquire: 60000,
-        idle: 30000,
-    },
+    timestamps: false,
+  },
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 60000,
+    idle: 30000,
+  },
 };
 
 const sequelize = new Sequelize(
-    constants.MYSQL_DB,
-    constants.MYSQL_USERNAME,
-    constants.MYSQL_PASSWORD,
-    configDB,
+  constants.MYSQL_DB,
+  constants.MYSQL_USERNAME,
+  constants.MYSQL_PASSWORD,
+  { ...configDB },
 );
+
 const db = {
-    Users: sequelize.import('../modules/users/users.model'),
-
-    Roles: sequelize.import('../modules/roles/roles.model'),
-
-    UsersRoles: sequelize.import('../modules/users-roles/users-roles.model'),
-
-    Posts: sequelize.import('../modules/posts/posts.model'),
-
-    Products: sequelize.import('../modules/products/products.model'),
+  Users: sequelize.import('../modules/users/users.model'),
+  Posts: sequelize.import('../modules/posts/posts.model'),
 };
 
 Object.keys(db).forEach((modelName) => {
-    if (db[modelName].associate) {
-        db[modelName].associate(db);
-    }
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
 });
 
-
 db.sequelize = sequelize;
-// db.sequelize
-//     .authenticate()
-//     .then(() => {
-//         console.log('Connection has been established successfully.');
-//     })
-//     .catch(err => {
-//         console.error('Unable to connect to the database:', err);
-//     });
-
 export default db;

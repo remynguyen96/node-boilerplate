@@ -3,72 +3,44 @@ import faker from 'faker';
 import { hashSync } from 'bcrypt-nodejs';
 import models from '../config/mysql';
 
-const { Users, Posts, Products, Roles } = models;
+const { Users, Posts } = models;
 
 const deleteData = async (model) => {
-    const resetModel = await model.destroy({ where: {} }, { truncate: true });
-    return resetModel;
-};
-
-const createRole = async (name, description) => {
-    const role = await Roles.create({ name, description });
-    return role;
+  const resetModel = await model.destroy({ where: {} }, { truncate: true });
+  return resetModel;
 };
 
 export default async () => {
   try {
-      await deleteData(Users);
-      await deleteData(Roles);
-      await deleteData(Products);
-      await deleteData(Posts);
+    await deleteData(Users);
+    await deleteData(Posts);
+    /**
+     * @Description: Fake Data Roles
+     */
+    await Array.from({ length: 5 }).forEach(async (_) => {
       /**
-       * @Description: Fake Data Roles
+       * @Description: Fake Data Users
        */
-      const admin = await createRole('Admin', '*');
-      const author = await createRole('Author', 'Editor');
-      const member = await createRole('Member', 'Subscriber');
-
-      await Array.from({ length: 5 }).forEach(async (_, key) => {
-          /**
-           * @Description: Fake Data Users
-           */
-          const users = await Users.create({
-              name: faker.name.findName(),
-              email: faker.internet.email(),
-              password: hashSync(123456),
-              avatar: 'Remy.jpg',
-              intro: faker.address.country(),
-              verified: true,
-          });
-          if (key === 1) {
-              await users.setRoles([admin]);
-          } else if (key === 2) {
-              await users.setRoles([author]);
-          } else {
-              await users.setRoles([member]);
-          }
-
-          for await (const item of [users]) {
-              /**
-               * @Description: Fake Data Posts
-               */
-              Posts.create({
-                  title: faker.commerce.department(),
-                  slug: faker.commerce.productMaterial(),
-                  description: faker.company.companyName(),
-                  user_id: item.id,
-              });
-              /**
-               * @Description: Fake Data Products
-               */
-              Products.create({
-                  name: faker.commerce.productName(),
-                  price: faker.commerce.price(),
-                  description: faker.commerce.product(),
-                  images: faker.image.image(),
-                  user_id: item.id,
-              });
-          }
+      const users = await Users.create({
+        name: faker.name.findName(),
+        email: faker.internet.email(),
+        password: hashSync(123456),
+        avatar: 'Remy.jpg',
+        intro: faker.address.country(),
+        verified: true,
+      });
+      /**
+       * @Description: Fake Data Posts
+       */
+      for await (const item of [users]) {
+        Posts.create({
+          title: faker.name.title(),
+          slug: faker.commerce.department(),
+          description: faker.company.catchPhraseDescriptor(),
+          images: faker.image.food(),
+          user_id: item.id,
+        });
+      }
     });
   } catch (err) {
     throw err;

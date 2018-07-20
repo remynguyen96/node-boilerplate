@@ -1,12 +1,13 @@
 import { Router } from 'express';
-import * as PostController from './posts.controller';
 import { authJwt } from '../../utils/passport';
+import * as PostsController from './posts.controller';
+
 const routes = new Router();
 
-routes.get('/', authJwt, PostController.getProducts);
-// routes.get('/:id', authJwt, PostController.getProduct);
-// routes.post('/add', authJwt, PostController.addProducts);
-// routes.put('/edit/:id', authJwt, PostController.editProducts);
-// routes.delete('/delete/:id', authJwt, PostController.removeProducts);
+routes.get('/', authJwt, PostsController.getPosts);
+routes.get('/:id', authJwt, PostsController.getPost);
+routes.post('/add', authJwt, PostsController.addPosts);
+routes.put('/edit/:id', authJwt, PostsController.editPosts);
+routes.delete('/delete/:id', authJwt, PostsController.removePosts);
 
 export default routes;
