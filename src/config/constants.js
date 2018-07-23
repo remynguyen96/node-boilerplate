@@ -6,7 +6,7 @@ const config = {
   development: {
     MYSQL_DB: 'node-course',
     MYSQL_USERNAME: 'root',
-    MYSQL_PASSWORD: 'secret',
+    MYSQL_PASSWORD: '',
 
     JWT_SECRET: 'bikini',
     PASSPORTCODE: 'Auth',

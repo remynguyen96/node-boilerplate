@@ -3,14 +3,15 @@ import faker from 'faker';
 import { hashSync } from 'bcrypt-nodejs';
 import models from '../config/mysql';
 
+console.log(models, 'models');
 const { Users, Posts } = models;
 
-const deleteData = async (model) => {
+export const deleteData = async (model) => {
   const resetModel = await model.destroy({ where: {} }, { truncate: true });
   return resetModel;
 };
 
-export default async () => {
+export const seedsData = async () => {
   try {
     await deleteData(Users);
     await deleteData(Posts);
