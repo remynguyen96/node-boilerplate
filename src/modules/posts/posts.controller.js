@@ -42,8 +42,8 @@ const getPosts = async (req, res) => {
 
 const getPost = async (req, res) => {
   try {
-    const { id } = req.params;
-    const product = await Posts.findById(id);
+    const { slug } = req.params;
+    const product = await Posts.findOne({ where: { slug } });
     return res.status(200).json(product);
   } catch (err) {
     return res.status(400).json(err);

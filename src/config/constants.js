@@ -14,7 +14,7 @@ const config = {
     EXP_TOKEN_REFRESH: '7 days',
 
     MAIL_HOST: 'smtp.mailtrap.io',
-    MAIL_PORT: 2525,
+    MAIL_PORT: 25,
     MAIL_USERNAME: 'a1285327665551',
     MAIL_PASSWORD: '0875bbf87059c7',
   },

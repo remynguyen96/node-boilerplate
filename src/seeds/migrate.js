@@ -6,6 +6,8 @@ import { deleteData, seedsData } from './faker';
 const app = express();
 mysql.sequelize.sync({ force: true })
   .then(async () => {
+    await deleteData();
+    await seedsData();
     app.listen(constants.PORT, (err) => {
       if (err) {
         throw err;
@@ -13,7 +15,5 @@ mysql.sequelize.sync({ force: true })
         console.log('Migrate data successful !');
       }
     });
-    await deleteData();
-    await seedsData();
   })
   .catch((err) => console.error('Unable to connect to the database:', err));

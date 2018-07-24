@@ -26,7 +26,7 @@ npm manifest:
       "lint:js": "npm run eslint -- . ",
       "lint": "npm run lint:js",
       "start": "cross-env NODE_ENV=development nodemon --exec babel-node src/app.js",
-      "migrate": "cross-env NODE_ENV=development node babel-node src/app.js",
+      "migrate": "cross-env NODE_ENV=development babel-node src/config/migrate.js",
       "build": "cross-env NODE_ENV=production nodemon --exec babel-node src/app.js"
     },
     "dependencies": {
@@ -4474,7 +4474,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: C:\WINDOWS\system32\cmd.exe
-  Arguments: /d /s /c cross-env NODE_ENV=development node babel-node src/app.js
+  Arguments: /d /s /c cross-env NODE_ENV=development babel-node src/config/migrate.js
   Directory: E:\node-boilerplate
   Output:
   

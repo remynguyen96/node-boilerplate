@@ -62,6 +62,7 @@ const UserModel = (sequelize, DataTypes) => {
     avatar: {
       type: DataTypes.STRING(),
       allowNull: true,
+      defaultValue: 'Remy.jpg',
       validate: {
         checkImage(img) {
           if (!img.match(/\.(png|jpg|jpeg|gif|svg)$/)) {

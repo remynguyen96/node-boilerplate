@@ -34,7 +34,7 @@ export const signUp = async (req, res) => {
     const templateMail = await MailConfirmAccount({
       ...userInfo,
       token,
-      url: URL_SERVER(req, 'users/verified-email/'),
+      url: URL_SERVER(req, 'users/verified-email'),
     });
     await SendMailServer(templateMail);
     return res.status(201).json({ ...userInfo, token });
@@ -51,17 +51,29 @@ export const signIn = async (req, res) => {
   }
 };
 
+export const listUser = async (req, res) => {
+  try {
+    const listUsers = await Users.findAll({
+      order: [
+        ['id', 'DESC'],
+      ],
+    });
+    return res.status(200).json(listUsers);
+  } catch (err) {
+    return res.status(400).json({ error: String(err) });
+  }
+};
+
 export const verifiedEmail = async (req, res) => {
   try {
-    let success = false;
     const { token } = req.params;
-    const verify = Users.verifyRefreshToken(token);
+    const verify = Users.verifyAccessToken(token);
     const users = await Users.findById(verify.id);
     if (users) {
-      success = true;
       await users.update({ verified: true });
+      res.redirect('/');
     }
-    return res.status(200).json({ success });
+    return null;
   } catch (err) {
     return res.status(400).json(err);
   }

@@ -12,26 +12,31 @@ const app = express();
 middleware(app);
 app.use(passport.initialize());
 /**
- * @Description: Setup Router
+ * @Description: Setup Router Backend
  */
-app.use('/', express.static('src/public'));
 app.use('/api', Routes);
-const views = path.join(__dirname, './views');
-app.get('/page', (req, res) => res.sendFile(`${views}/page.html`));
+/**
+ * @Description: Setup Router Frontend
+ */
+const views = path.join(__dirname, 'views');
+app.use('/', express.static(views));
+app.get('/', (req, res) => res.sendFile(`${views}/html/index.html`));
+app.get('/login', (req, res) => res.sendFile(`${views}/html/login.html`));
+app.get('/sign-up', (req, res) => res.sendFile(`${views}/html/sign-up.html`));
+app.get('/page', (req, res) => res.sendFile(`${views}/html/page.html`));
+
 /**
  * @Description: Setup Listening Server
  */
 mysql.sequelize.sync({ force: false })
-  .then(async () => {
-    console.log('Database Connection Has Been Established Successfully. !');
+  .then(() => {
     app.listen(constants.PORT, (err) => {
       if (err) {
         throw err;
       } else {
+        console.log('Database Connection Has Been Established Successfully. !');
         console.log(`${process.env.NODE_ENV} running with port: ${constants.PORT}`);
       }
     });
-    // console.log(process.env.NODE_SEED, 'process.env');
-    // await fakerModels();
   })
   .catch((err) => console.error('Unable to connect to the database:', err));

@@ -3,22 +3,20 @@ import faker from 'faker';
 import { hashSync } from 'bcrypt-nodejs';
 import models from '../config/mysql';
 
-console.log(models, 'models');
-const { Users, Posts } = models;
+const { Posts, Users } = models;
 
-export const deleteData = async (model) => {
-  const resetModel = await model.destroy({ where: {} }, { truncate: true });
-  return resetModel;
+export const deleteData = () => {
+  Object.keys(models).forEach(async (model) => {
+    await model.destroy({ where: {} }, { truncate: true });
+  });
 };
 
 export const seedsData = async () => {
   try {
-    await deleteData(Users);
-    await deleteData(Posts);
     /**
      * @Description: Fake Data Roles
      */
-    await Array.from({ length: 5 }).forEach(async (_) => {
+    await Array.from({ length: 5 }).forEach(async (_, key) => {
       /**
        * @Description: Fake Data Users
        */
@@ -38,7 +36,7 @@ export const seedsData = async () => {
           title: faker.name.title(),
           slug: faker.commerce.department(),
           description: faker.company.catchPhraseDescriptor(),
-          images: faker.image.food(),
+          images: `product${key + 1}.jpg`,
           user_id: item.id,
         });
       }

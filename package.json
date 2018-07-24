@@ -9,8 +9,8 @@
     "eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
     "lint:js": "npm run eslint -- . ",
     "lint": "npm run lint:js",
+    "migrate": "cross-env NODE_ENV=development babel-node src/seeds/migrate.js",
     "start": "cross-env NODE_ENV=development nodemon --exec babel-node src/app.js",
-    "migrate": "cross-env NODE_ENV=development babel-node src/config/migrate.js",
     "build": "cross-env NODE_ENV=production nodemon --exec babel-node src/app.js"
   },
   "dependencies": {
