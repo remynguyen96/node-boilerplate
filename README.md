@@ -1,27 +1,16 @@
-## KoaJS Starter Kit — <a href="https://github.com/remynguyen96/node-boilerplate/tree/koajs"><img src="https://img.shields.io/github/stars/badges/shields.svg?style=social&label=Stars&maxAge=3600" height="20"></a>
+# Server-Typescript-Boilerplate
 
-Simple NodeJS for using KoaJS to build a web application.
+* Register - Send confirmation email
+* Login
+* Forgot Password
+* Logout  
+* Cookies and Http Header
+* Authentication middleware
+* Rate limiting
+* Locking accounts
+* Testing (probably Jest)
 
-## Getting Started
+## Watch how it was made
 
-Just clone and explore it!
-
-## Commands
-
-```
-yarn start
-```
-
-Start your web application at `localhost:3500`.
-
-```
-yarn test
-```
-
-If you want to run the test suite. I use Jest for testing.
-
-## License
-
-MIT
-
+Playlist: https://www.youtube.com/playlist?list=PLN3n1USn4xlky9uj6wOhfsPez7KZOqm2V
 

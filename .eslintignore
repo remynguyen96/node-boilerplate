@@ -1,8 +1,0 @@
-coverage
-lib/types/unused
-transpiledLib
-gulp
-gulpfile.js
-node_modules
-ressources
-build

@@ -1,6 +1,10 @@
-node_modules
-src/config
-yarn.lock
-build
-.idea
 yarn-error.log
+.idea/
+.vscode/
+node_modules/
+build/
+temp/
+*.log
+dump.rdb
+.env
+dist
