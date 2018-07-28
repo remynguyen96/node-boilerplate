@@ -2,7 +2,7 @@ const defaultConfig = {
   PORT: process.env.PORT || 4500
 };
 
-const config = {
+const options = {
   development: {
     MONGO_URL: 'mongodb://mongodb/boilerplate',
 
@@ -23,7 +23,7 @@ const config = {
 };
 
 function getENV(env) {
-  return config[env];
+  return options[env];
 }
 
 export default {
