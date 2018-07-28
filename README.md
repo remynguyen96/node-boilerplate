@@ -1,24 +1,69 @@
-## ExpressJS Boilerplate<a href="https://github.com/remynguyen96/node-boilerplate/" ><img src="https://pluralsight.imgix.net/paths/path-icons/nodejs-601628d09d.png" height="55"></a>
+# node-boilerplate made by Remy Nguyen
+<p align="center"><img src="https://www.eddisrupt.com/img/nodejs.png" width="100" /></p>
 
+# nodejs-boilerplate with Mysql
 
-Simple nodeJS for using ExpressJS to build a web application written in ES6.
+## Overview
 
-## Getting Started
+* **Easiest way to run a node server:** Sensible defaults & includes everything you need with minimal setup.
+* **Compatible:** Works with all clients (React, Vue, Angular4...) and fits seamless in your SPA workflow.
 
-Just clone and explore it!
-With database i use library Sequelize to connect with MySQL.
-You also can use PostgreSQL instead of MySQL.
+`nodejs-boilerplate` is based on the following libraries & tools:
 
-## Commands
+* [`express`](https://github.com/expressjs/express)/[`mysql`](http://docs.sequelizejs.com): Performant, extensible web server framework
+
+## Features
+
+* Docker setup
+* File upload
+* MySQL database
+* ES6 typings
+* Extensible via Express middlewares
+* Accepts `application/json` content-types
+* Runs everywhere: Can be deployed via `now`, `up`, AWS Lambda, Heroku etc.
+* Supports middleware out of the box.
+
+## Install
+
+## Usage
+
+### API
+
+```js
+const options = {
+ development: {
+     MYSQL_DB: 'node-course',
+     MYSQL_USERNAME: 'root',
+     MYSQL_PASSWORD: 'secret',
+     JWT_SECRET: 'examble',
+     MAIL_HOST: 'smtp.mailtrap.io',
+     MAIL_PORT: '25',
+     MAIL_USERNAME: 'examble',
+     MAIL_PASSWORD: 'password',
+   },
+   production: {}
+}
 
 ```
-yarn dev
-```
 
-Start your web application at `localhost:3000`. You can also specify the port by `PORT=8080 yarn dev`.
+## Deployment
 
-## License
+### Heroku
 
-MIT
+To deploy your application server with [Heroku](https://heroku.com), follow these instructions:
 
+1.  Download and install the [Heroku Command Line Interface](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) (previously Heroku Toolbelt)
+2.  Log in to the Heroku CLI with `heroku login`
+3.  Navigate to the root directory of your `app` server
+4.  Create the Heroku instance by executing `heroku create`
+5.  Deploy your app server by executing `git push heroku master`
 
+### `up` (Coming soon 🔜 )
+
+### AWS Lambda (Coming soon 🔜 )
+
+## Help & Community
+
+Join me. if you run into issues or have questions. I love talking to you!
+
+<p align="center"><a href="https://oss.prisma.io"><img src="https://imgur.com/IMU2ERq.png" alt="Prisma" height="170px"></a></p>
