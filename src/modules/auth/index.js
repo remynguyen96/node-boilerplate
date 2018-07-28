@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import * as AuthController from './auth.controller';
-import { authJwt, authLocal} from './passport'
+import { authJwt, authLocal } from './passport';
+
 const routes = new Router();
 
 // routes.post('/sign-up', authJwt, BlogController.uploadImage);
@@ -13,7 +14,5 @@ routes.post('/reset-password', AuthController.resetPassword);
 routes.post('/update-password/:token', AuthController.updatePassword);
 
 routes.post('/sign-in', authLocal, AuthController.signIn);
-
-routes.post('/refresh-token', authLocal, AuthController.refreshToken);
 
 export default routes;

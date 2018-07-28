@@ -1,22 +1,17 @@
 {
-  "name": "boilerplate",
+  "name": "node-boilerplate",
   "version": "1.0.0",
-  "description": "Nodejs ES6 Boilerplate",
+  "description": "Nodejs ES6 Boilerplate With MongoDB",
   "main": "app.js",
   "author": "Remy Nguyen",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/app.js",
+    "start": "cross-env NODE_ENV=development nodemon --exec babel-node src/app.js",
     "build": "cross-env NODE_ENV=production nodemon --exec babel-node src/app.js"
   },
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",
     "bluebird": "^3.5.1",
-    "body-parser": "^1.18.2",
-    "compression": "^1.7.1",
-    "cors": "^2.8.4",
-    "cross-env": "^5.1.0",
-    "crypto-js": "^3.1.9-1",
     "express": "^4.16.2",
     "express-validator": "^4.2.1",
     "helmet": "^3.9.0",
@@ -37,6 +32,10 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "morgan": "^1.9.0",
+    "compression": "^1.7.1",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "cross-env": "^5.1.0",
     "nodemon": "^1.12.1"
   }
 }

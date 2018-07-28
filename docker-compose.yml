@@ -1,0 +1,21 @@
+version: '3.1'
+services:
+  dbMongoDB:
+    image: mongo
+    restart: always
+    ports:
+    - 27017:27017
+    volumes:
+    - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: secret
+
+  adminMongoDB:
+    image: mrvautin/adminmongo
+    restart: always
+    ports:
+    - 1234:1234
+
+volumes:
+  mongodb_data:
