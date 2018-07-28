@@ -1,10 +1,10 @@
-
-stgres",
+{
+  "type": "mysql",
   "host": "localhost",
-  "port": 5432,
-  "username": "postgres",
-  "password": "",
-  "database": "grapqhl-ts-server-boilerplate",
+  "port": 3306,
+  "username": "root",
+  "password": "secret",
+  "database": "ts-boilerplate",
   "synchronize": true,
   "logging": false,
   "entities": ["src/entity/**/*.ts"],

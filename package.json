@@ -6,9 +6,9 @@
   "repository": "https://github.com/remynguyen96/node-boilerplate",
   "author": "Chau Nguyen <remynguyen96@gmail.com>",
   "license": "MIT",
-  "scripts": "
-    "start": "nodemon --exec ts-node src/index.ts",
-  ",
+  "scripts": {
+    "start": "nodemon --exec ts-node src/index.ts"
+  },
   "devDependencies": {
     "@types/node": "^10.5.3",
     "nodemon": "^1.18.3",
@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "graphql-yoga": "^1.14.12",
-    "pg": "^7.4.3",
+    "mysql": "^2.16.0",
     "reflect-metadata": "^0.1.12",
     "typeorm": "^0.2.7"
   }

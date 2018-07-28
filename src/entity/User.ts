@@ -1,17 +1,23 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
-export class User {
- 	
-	@PrimaryGeneratedColumn()
-	id: number;
+export class Users {
 
-	@Column()
-	firstName: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-	@Column()
-	lastName: string;
+  @Column({ type: 'varchar', unique: true })
+  email: string;
 
-	@Column()
-	age: number;
+  @Column({ nullable: false, default: false })
+  confirmed: boolean;
+
+  @Column({ type: 'varchar', length: '120' })
+  firstName: string;
+
+  @Column('text')
+  lastName: string;
+
+  @Column()
+  age: number;
 }
