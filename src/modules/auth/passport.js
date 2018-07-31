@@ -3,7 +3,7 @@ import LocalStrategy from 'passport-local';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 
 import AuthModel, { compareStr } from './auth.model';
-import constants from '../../config/constants';
+import { constants } from '../../config/constants';
 
 const localOpts = {
   usernameField: 'email',

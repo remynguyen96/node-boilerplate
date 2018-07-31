@@ -1,5 +1,5 @@
 import express from 'express';
-import constants from './config/constants';
+import { constants } from './config/constants';
 import './config/database';
 import middleware from './config/middleware';
 import Routes from './modules';

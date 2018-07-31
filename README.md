@@ -1,5 +1,5 @@
 # node-boilerplate made by Remy Nguyen
-<p align="center"><img src="https://www.eddisrupt.com/img/nodejs.png" width="100" /></p>
+<p align="center"><img src="https://www.eddisrupt.com/img/nodejs.png" width="250" /></p>
 
 # nodejs-boilerplate with mongodb
 
@@ -32,7 +32,7 @@
 ```js
 const options = {
  development: {
-     MONGO_URL: 'mongodb://localhost:27017/mongodb_name'
+     MONGO_URL: 'mongodb://localhost:27017/mongodb_name',
      JWT_SECRET: 'examble',
      MAIL_HOST: 'smtp.mailtrap.io',
      MAIL_PORT: '25',
