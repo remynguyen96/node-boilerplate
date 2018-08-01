@@ -3,4 +3,5 @@ node_modules/
 src/config
 src/config/constants.js
 yarn.lock
-.idea/workspace.xml
+.idea/
+.vscode/
