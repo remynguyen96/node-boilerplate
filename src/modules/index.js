@@ -1,4 +1,4 @@
-import {Router} from 'express';
+import { Router } from 'express';
 import Auth from './auth';
 import Posts from './posts';
 import Category from './categories';

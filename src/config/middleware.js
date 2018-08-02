@@ -4,11 +4,13 @@ import cors from 'cors';
 import compression from 'compression';
 import helmet from 'helmet';
 
-export default app => {
-    app.use(morgan('dev'));
-    app.use(cors());
-    app.use(compression());
-    app.use(helmet());
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: true }));
+export const middleware = (app) => {
+  app.use(morgan('dev'));
+  app.use(cors());
+  app.use(compression());
+  app.use(helmet());
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({
+    extended: true
+  }));
 }
