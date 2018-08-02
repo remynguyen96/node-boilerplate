@@ -20,6 +20,7 @@ const startServer = async () => {
      * @Description: GraphQL
      */
     GraphQL(app);
+
     /**
      * @Description: Setup Router
      */
@@ -41,7 +42,6 @@ const startServer = async () => {
         }
     });
 };
-
 startServer();
 
 

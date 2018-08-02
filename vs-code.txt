@@ -3,13 +3,13 @@ Auto Close Tag
 Auto Rename Tag
 Beautify
 Color Picker
-Debugger for Chrome
 ESLint
 Flow Language Support
 HTML CSS Support
 HTML Snippets
-IntelliSense for CSS class names in HTML
-JavaScript (ES6) code snippets
+IntelliSense
+for CSS class names in HTML
+JavaScript(ES6) code snippets
 Latest TypeScript and Javascript Grammar
 Node.js Modules Intellisense
 One Dark Pro
@@ -23,9 +23,10 @@ StandardJS - JavaScript Standard Style
 
 
 Custom Keymap:
-Shift+Alt+A Toggle block comment => Ctrl+Shift+/
-editor.action.joinLines => Ctrl+Alt+leftArrow
-beautify selection => Ctrl+Alt+B
+Shift + Alt + A Toggle block comment => Ctrl + Shift + /
+editor.action.joinLines => Alt + leftArrow
+beautify selection => Ctrl + Alt + B
+Copy line up => Ctrl + D
 
 Config
 
@@ -38,19 +39,21 @@ Config
     "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
     "workbench.colorTheme": "One Dark Pro Vivid",
     "editor.multiCursorModifier": "ctrlCmd",
-    "window.zoomLevel": 1,
     "javascript.validate.enable": false,
     "eslint.autoFixOnSave": false,
     "html.format.wrapLineLength": 0,
+    "standard.autoFixOnSave": true,
+    "prettier.useTabs": true,
+    "editor.detectIndentation": false,
 }
 
 Snipper
-"Description about code": {
-"prefix": "notice",
-"body": [
-"/**",
-    " * @Description: $1",
-    " */"
-],
-"description": "Infomation about date, author, result"
-}
+    "Description about code": {
+        "prefix": "notice",
+        "body": [
+            "/**",
+            " * @Description: $1",
+            " */"
+        ],
+        "description": "Infomation about date, author, result"
+    }
