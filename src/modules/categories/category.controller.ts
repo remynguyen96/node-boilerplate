@@ -1,5 +1,5 @@
 import Categories from './category.model';
-import constants from '../../config/constants';
+import { constants } from '../../config/constants';
 import Promise from 'bluebird';
 
 

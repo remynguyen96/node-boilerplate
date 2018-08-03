@@ -5,3 +5,7 @@ src/config/constants.js
 yarn.lock
 .idea/
 .vscode/
+build/
+build/
+tmp/
+temp/

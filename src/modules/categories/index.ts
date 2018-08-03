@@ -14,5 +14,3 @@ routes.put('/edit', CategoryController.editCategory);
 routes.delete('/remove', CategoryController.deleteCategory);
 
 export default routes;
-
-

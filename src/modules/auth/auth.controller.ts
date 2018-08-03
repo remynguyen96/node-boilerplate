@@ -1,15 +1,10 @@
-import Auth, {
-  hashStr
-} from './auth.model';
-import constants from '../../config/constants';
-import CryptoJS from 'crypto-js';
-import jwt from 'jsonwebtoken';
+import Auth, { hashStr } from './auth.model';
 
-//Sign Up
+// Sign Up
 function handingRegister({
   name,
   email,
-  password
+  password,
 }) {
   if (!name) {
     throw new Error('Name is required !');
@@ -24,7 +19,7 @@ function handingRegister({
       name,
       email,
       password,
-      token
+      token,
     });
   } catch (err) {
     throw err;
@@ -37,29 +32,29 @@ export const signUp = async (req, res) => {
     return res.status(201).json(user);
   } catch (err) {
     return res.status(400).json({
-      error: String(err)
-    })
+      error: String(err),
+    });
   }
 };
-//Sign In
+// Sign In
 export const signIn = async (req, res, next) => {
   req.status(200).json(req.user.toAuthJson());
   return next();
 };
-//Confirm Email
+// Confirm Email
 export const verifiedEmail = async (req, res) => {
-  let fullUrl = `${req.protocol}://${req.get('host')} ${req.originalUrl}`;
+  const fullUrl = `${req.protocol}://${req.get('host')} ${req.originalUrl}`;
   console.log(fullUrl);
 };
-//Reset Password
+// Reset Password
 export const resetPassword = async (req, res) => {
-
-}
-//Update Password
+  
+};
+// Update Password
 export const updatePassword = async (req, res) => {
 
 };
-//Refresh Token
+// Refresh Token
 export const refreshToken = async (req, res) => {
 
 };

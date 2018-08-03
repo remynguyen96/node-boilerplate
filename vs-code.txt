@@ -20,6 +20,7 @@ Reactjs code snippets
 TSLint
 VSCode Great Icons
 StandardJS - JavaScript Standard Style
+Better Comments
 
 
 Custom Keymap:
@@ -45,6 +46,8 @@ Config
     "standard.autoFixOnSave": true,
     "prettier.useTabs": true,
     "editor.detectIndentation": false,
+    "editor.fontFamily": "'Fira Code'",
+    "editor.fontLigatures": true,
 }
 
 Snipper
