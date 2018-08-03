@@ -1,3 +1,6 @@
 import { Router } from 'express';
 import * as PostController from './posts.controller';
-export const router = new Router();
+
+const router: any = new Router();
+
+export default router;

@@ -1,7 +1,7 @@
 import * as express from 'express';
 import { constants } from './config/constants';
 import { middleware } from './config/middleware';
-import { router } from './modules/posts';
+import { router } from './modules';
 const app = express();
 /**
  * @Description: Setup Middleware
@@ -14,7 +14,7 @@ app.use('/api', router);
 /**
  * @Description: Setup Listening Server
  */
-app.listen(constants.PORT, err => {
+app.listen(constants.PORT, (err: any) => {
   if (err) {
     throw err;
   } else {

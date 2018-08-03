@@ -60,3 +60,84 @@ Snipper
         ],
         "description": "Infomation about date, author, result"
     }
+
+
+
+
+
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+var input = "";
+process.stdin.on("data", function (chunk) {
+    input += chunk;
+});
+
+const validate = (arr) => {
+  let isNumber = true;
+  const convertToInt = arr.map((item) => {
+      if (isNaN(parseInt(item))) {
+          isNumber = false;
+          return null;
+      }
+      return parseInt(item);
+  });
+  return {money: convertToInt, isNumber};
+}
+
+process.stdin.on("end", function () {
+  let results;
+  const days = input.split(',');
+  const { money, isNumber } = validate(days);
+  if (!isNumber) {
+      results = 0;
+  } else {
+      results = money.reduce((total, item) => {
+        const checkMoney = total + item;
+        if (Math.sign(item) === -1 && Math.sign(checkMoney) === -1) {
+          return 0;
+      }
+      return total + item;
+      }, 0);
+  }
+  process.stdout.write(""+results+"\n");
+});
+
+
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+var input = "";
+process.stdin.on("data", function (chunk) {
+    input += chunk;
+});
+process.stdin.on("end", function () {
+    // now we can read/parse input
+     const arr = input.split('\n');
+     const k = parseInt(arr.splice(arr.length - 1, 1)[0]);
+     const arrStore = arr.reduce((array, item) => {
+            const store = item.split(',');
+            return [...array, ...store];
+    }, []);
+     const sortArr = arrStore.map((store) => {
+      return parseInt(store.split(':')[0]);
+    });
+    const position = bubbleSort(sortArr).find((_, index) => index === k);
+    const results = arrStore.find((store) => {
+        const number = parseInt(store.split(':')[0]); 
+        return number === position;
+    });
+     process.stdout.write(""+results+"\n");
+});
+
+function bubbleSort(arr){
+   var len = arr.length;
+   for (var i = len-1; i>=0; i--){
+     for(var j = 1; j<=i; j++){
+       if(arr[j-1]>arr[j]){
+           var temp = arr[j-1];
+           arr[j-1] = arr[j];
+           arr[j] = temp;
+        }
+     }
+   }
+   return arr;
+}

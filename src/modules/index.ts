@@ -1,10 +1,11 @@
-import { Router } from 'express';
+import { Router } from '@type/express';
 import Auth from './auth';
 import Posts from './posts';
 import Category from './categories';
 
-const routes = new Router();
-routes.use((req, res, next) => {
+const routes: any = new Router();
+
+routes.use((req: any, res: any, next: any) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
@@ -14,4 +15,6 @@ routes.use('/auth', Auth);
 routes.use('/posts', Posts);
 routes.use('/categories', Category);
 
-export default routes;
+export {
+  routes
+};
