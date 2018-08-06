@@ -1,12 +1,7 @@
-import mongoose, {
-  Schema,
-} from 'mongoose';
+import { Schema, model } from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
-import {
-  hashSync,
-  compareSync,
-} from 'bcrypt-nodejs';
-import jwt from 'jsonwebtoken';
+import { hashSync, compareSync } from 'bcrypt-nodejs';
+import * as jwt from 'jsonwebtoken';
 import { constants } from '../../config/constants';
 
 const AuthSchema = new Schema({
@@ -15,7 +10,7 @@ const AuthSchema = new Schema({
     required: true,
     trim: true,
     validate: {
-      validator(name) {
+      validator(name: string) {
         const Regex = /^(?!.*[!@#$%^&*()_+=])(?!.*[0-9])[a-zA-Z].{3,30}$/g;
         return Regex.test(name);
       },
@@ -27,7 +22,7 @@ const AuthSchema = new Schema({
     unique: true,
     required: true,
     validate: {
-      validator(email) {
+      validator(email: string) {
         const Regex = /^[-a-z0-9%S_+]+(\.[-a-z0-9%S_+]+)*@(?:[a-z0-9-]{1,63}\.){1,125}[a-z]{2,63}$/i;
         return Regex.test(email);
       },
@@ -38,7 +33,7 @@ const AuthSchema = new Schema({
     type: String,
     required: true,
     validate: {
-      validator(password) {
+      validator(password: string): any {
         return password.length >= 4 && password.match(/\d+/g);
         // /^(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*].{5,35}$/g
       },
@@ -69,24 +64,23 @@ AuthSchema.pre('save', function (next) {
   return next();
 });
 
-AuthSchema.statics.findByName = function (name, cb) {
+AuthSchema.statics.findByName = function (name: string, cb: any) {
   console.log(this);
   this.find({
     name: new RegExp(name, 'i'),
   }, cb);
 };
-console.log(this);
+
 AuthSchema.methods = {
   // _hashPassword(password) {
   //     return hashSync(password);
   // },
-  _comparePassword(password) {
+  _comparePassword(password: string) {
     return compareSync(password, this.password);
   },
   createToken() {
-    const { _id: id } = this;
     return jwt.sign({
-        _id: id,
+        _id: this._id,
       },
       constants.JWT_SECRET, {
         expiresIn: '5m',
@@ -109,12 +103,18 @@ AuthSchema.methods = {
   },
 };
 
-export function hashStr(str) {
+function hashStr(str: string): string {
   return hashSync(str);
 }
 
-export function compareStr(str, strCompare) {
+function compareStr(str: string, strCompare: string): boolean {
   return compareSync(str, strCompare);
 }
 
-export default mongoose.model('auth', AuthSchema);
+const Auth = model('auth', AuthSchema); 
+
+export {
+  Auth,
+  hashStr,
+  compareStr,
+};

@@ -1,27 +1,33 @@
-import passport from 'passport';
+import * as passport from 'passport';
 import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt';
-import LocalStrategy from 'passport-local';
+import passportLocal from 'passport-local';
 import { constants } from '../../config/constants';
-import AuthModel from './auth.model';
+import { Auth } from '../auth/auth.model';
 
+
+const LocalStrategy = passportLocal.Strategy;
 
 const localOpts = {
     usernameField: 'email',
 };
 
-const localLogin = new LocalStrategy(localOpts, async (email, password, done) => {
-    try {
-        const user = await AuthModel.findOne({ email });
-        if (!user) {
-            return done(null, false);
-        } else if (!user._comparePassword(password)) {
-            return done(null, false);
-        }
-        return done(null, user);
-    } catch (err) {
-        return done(err, false);
+const localLogin = new LocalStrategy(localOpts, 
+  async (email: string, password: string, done: any): Promise<object> => {
+  try {
+    const user = await Auth.findOne({
+      email
+    });
+    if (!user) {
+      return done(null, false);
+    } else if (!user._comparePassword(password)) {
+      return done(null, false);
     }
+    return done(null, user);
+  } catch (err) {
+    return done(err, false);
+  }
 });
+
 
 const jwtOpts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'),
@@ -30,7 +36,7 @@ const jwtOpts = {
 const jwtLogin = new JwtStrategy(jwtOpts, async (payload, done) => {
     try {
         const { _id: id } = payload;
-        const user = await AuthModel.findById(id);
+        const user = await Auth.findById(id);
         if (!user) {
             return done(null, false);
         }

@@ -6,4 +6,6 @@ yarn.lock
 build/
 build/
 tmp/
+.history/
 temp/
+.env

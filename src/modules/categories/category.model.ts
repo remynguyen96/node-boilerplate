@@ -1,6 +1,5 @@
-import mongoose, { Schema } from 'mongoose';
-import uniqueValidator from 'mongoose-unique-validator'
-import { constants } from '../../config/constants';
+import { Schema, model } from 'mongoose';
+import * as uniqueValidator from 'mongoose-unique-validator';
 
 const CategorySchema = new Schema({
   title: {
@@ -8,7 +7,7 @@ const CategorySchema = new Schema({
     required: true,
     trim: true,
     validate: {
-      validator(title) {
+      validator(title: string) {
         const regx = /^[^(!@#$%^&*()_.,<>?'";)]{5,60}$/g;
         return regx.test(title);
       },
@@ -20,7 +19,7 @@ const CategorySchema = new Schema({
     required: true,
     trim: true,
     validate: {
-      validator(slug) {
+      validator(slug: string) {
         const regx = /^[^(!@#$%^&*()_.,<>?'";)]{5,60}$/g;
         return regx.test(slug);
       },
@@ -30,7 +29,7 @@ const CategorySchema = new Schema({
   description: {
     type: String,
     validate: {
-      validator(desc) {
+      validator(desc: string) {
         if (desc.length > 1000) {
           return false;
         }
@@ -59,4 +58,8 @@ CategorySchema.methods = {
   }
 };
 
-export default mongoose.model('categories', CategorySchema);
+const Categories = model('categories', CategorySchema); 
+
+export {
+  Categories
+};

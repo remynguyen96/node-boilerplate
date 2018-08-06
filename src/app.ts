@@ -1,7 +1,7 @@
 import * as express from 'express';
 import { constants } from './config/constants';
-import { middleware } from './config/middleware';
-import { router } from './modules';
+import middleware from './config/middleware';
+import { routes } from './modules';
 const app = express();
 /**
  * @Description: Setup Middleware
@@ -10,7 +10,7 @@ middleware(app);
 /**
  * @Description: Setup Router
  */
-app.use('/api', router);
+app.use('/api', routes);
 /**
  * @Description: Setup Listening Server
  */

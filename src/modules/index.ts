@@ -1,9 +1,9 @@
-import { Router } from '@type/express';
+import { Router } from 'express';
 import Auth from './auth';
-import Posts from './posts';
+// import Posts from './posts';
 import Category from './categories';
 
-const routes: any = new Router();
+const routes: Router = Router();
 
 routes.use((req: any, res: any, next: any) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -12,7 +12,7 @@ routes.use((req: any, res: any, next: any) => {
     next();
 });
 routes.use('/auth', Auth);
-routes.use('/posts', Posts);
+// routes.use('/posts', Posts);
 routes.use('/categories', Category);
 
 export {

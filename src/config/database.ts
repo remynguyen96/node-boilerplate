@@ -1,4 +1,4 @@
-import mongoose from '@types/mongoose';
+import * as mongoose from 'mongoose';
 import { constants } from './constants';
 
 mongoose.Promise = global.Promise;

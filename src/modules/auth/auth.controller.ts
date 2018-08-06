@@ -1,11 +1,13 @@
-import Auth, { hashStr } from './auth.model';
+import { hashStr, Auth } from './auth.model';
+
+interface UserRegister {
+  name: string,
+  email: string,
+  password: string,
+}
 
 // Sign Up
-function handingRegister({
-  name,
-  email,
-  password,
-}) {
+function handingRegister({ name, email, password }: UserRegister) {
   if (!name) {
     throw new Error('Name is required !');
   } else if (!email) {
@@ -13,6 +15,7 @@ function handingRegister({
   } else if (!password) {
     throw new Error('Password is required !');
   }
+
   try {
     const token = hashStr(email);
     return Auth.create({
@@ -26,7 +29,7 @@ function handingRegister({
   }
 }
 
-export const signUp = async (req, res) => {
+export const signUp = async (req: any, res: any) => {
   try {
     const user = await handingRegister(req.body);
     return res.status(201).json(user);
@@ -37,24 +40,18 @@ export const signUp = async (req, res) => {
   }
 };
 // Sign In
-export const signIn = async (req, res, next) => {
+export const signIn = async (req: any, res: any, next: any) => {
   req.status(200).json(req.user.toAuthJson());
   return next();
 };
 // Confirm Email
-export const verifiedEmail = async (req, res) => {
+export const verifiedEmail = async (req: any, res: any) => {
   const fullUrl = `${req.protocol}://${req.get('host')} ${req.originalUrl}`;
   console.log(fullUrl);
 };
 // Reset Password
-export const resetPassword = async (req, res) => {
-  
-};
+// export const resetPassword = async (req, res) => {};
 // Update Password
-export const updatePassword = async (req, res) => {
-
-};
+// export const updatePassword = async (req, res) => {};
 // Refresh Token
-export const refreshToken = async (req, res) => {
-
-};
+// export const refreshToken = async (req, res) => {};
