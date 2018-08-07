@@ -8,3 +8,4 @@ temp/
 dump.rdb
 .env
 dist
+.history/
