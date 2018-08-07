@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import * as uniqueValidator from 'mongoose-unique-validator';
+import uniqueValidator from 'mongoose-unique-validator';
 
 const CategorySchema = new Schema({
   title: {

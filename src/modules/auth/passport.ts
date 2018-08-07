@@ -1,4 +1,4 @@
-import * as passport from 'passport';
+import passport from 'passport';
 import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt';
 import passportLocal from 'passport-local';
 import { constants } from '../../config/constants';
@@ -27,7 +27,6 @@ const localLogin = new LocalStrategy(localOpts,
     return done(err, false);
   }
 });
-
 
 const jwtOpts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'),

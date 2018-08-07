@@ -1,10 +1,10 @@
-const defaultConfig = {
-  PORT: process.env.PORT || 4500
-};
+const defaultConfig = {};
 
-const options: object = {
+const options: { [key: string]: object }  = {
   development: {
+    PORT: process.env.PORT || 4500,
     MONGO_URL: 'mongodb://localhost:27017/boilerplate',
+
 
     JWT_SECRET: 'secret',
     PASSPORTCODE: 'lifestyle',
@@ -26,5 +26,5 @@ function getENV(env: string): object {
 
 export const constants = {
   ...defaultConfig,
-  ...getENV(process.env.NODE_ENV),
+  ...getENV(process.env.NODE_ENV || 'development'),
 };
