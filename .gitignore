@@ -41,4 +41,5 @@ yarn.lock
 package-lock.json
 .idea/workspace.xml
 application/cache
+.history/
 
