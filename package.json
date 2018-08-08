@@ -9,7 +9,8 @@
     "lint": "npm run lint:js",
     "eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
     "lint:js": "npm run eslint -- . ",
-    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/app.js",
+    "start": "cross-env NODE_ENV=development nodemon --exec babel-node src/app.js",
+    "dev": "nodemon --exec babel-node src/basic.js",
     "prettier": "prettier --single-quote --print-width 80 --trailing-comma all --write 'src/**/*.js'",
     "prepublish": "babel src/ -d lib/",
     "build": "cross-env NODE_ENV=production nodemon --exec babel-node src/app.js"

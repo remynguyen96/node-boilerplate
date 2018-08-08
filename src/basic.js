@@ -349,21 +349,14 @@ const Fibonacci = memoize((n) => {
 //   return `good boy ${name}, I'm ${age} years old`;
 // });
 
-const testFunc = (func) => {
+/* const testFunc = (func) => {
   const self = this;
-  return (...args) => {
-    console.log(args);
-    const val = func.apply(self, args);
-    // console.log(val);
-    return val;
-  }
+  return (...args) => func.apply(self, args);
 };
 const func = testFunc((name, age, major) => {
-  return `good boy ${name}, I'm ${age} years old`;
+  return `good boy ${name}, I'm ${age} years old any my major is an IT`;
 });
-
-func('Remy Nguyen', 22, 'IT');
-
+console.log(func('Remy Nguyen', 22, 'IT')); */
 
 // export class Logger extends EventEmitter {
 //   log(message) {
