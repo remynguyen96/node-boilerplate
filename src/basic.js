@@ -80,25 +80,37 @@ const part3 = (): any => {
     { team: "Team 13", name: "Remy Nguyen" },
     { team: "Team 14", name: "Remy 10" }
   ];
-  const objName = {};
-  return data.map((item) => {
-    const { name, team } = item;
-    if (objName[name]) {
-      objName[name] = objName[name].concat(team);
-    } else {
-      objName[name] = [team];
-    }
-    return { team: objName[name], name };
-  }).map((infoData) => {
-    const { name } = infoData;
-    let resultTeam;
-    if (objName[name]) {
-      resultTeam = objName[name];
-      delete objName[name];
-    }
-    return { team: resultTeam, name };
-  }).filter((result) => (result.team !== undefined ? result : ""));
+
+  function method1() {
+
+  }
+
+  function method2() {
+    const objName = {};
+    return data.map((item) => {
+      const { name, team } = item;
+      if (objName[name]) {
+        objName[name] = objName[name].concat(team);
+      } else {
+        objName[name] = [team];
+      }
+      return { team: objName[name], name };
+    }).map((infoData) => {
+      const { name } = infoData;
+      let resultTeam;
+      if (objName[name]) {
+        resultTeam = objName[name];
+        delete objName[name];
+      }
+      return { team: resultTeam, name };
+    }).filter((result) => (result.team !== undefined ? result : ""));
+  }
+
+  return method1();
+  // return method2();
+  
 };
+console.log(part3());
 
 const part = (): * => {
   const Allmembers = [
@@ -309,9 +321,54 @@ const buildTree = (nodes) => {
   }, [])
 };
 
-const result = buildTree(JSONMenu);
+// const result = buildTree(JSONMenu);
 // console.log(JSON.stringify(result, null, '  '));
 
+const memoize = (func) => {
+  const cache = {};
+  const that = this;
+  return (...args) => {
+    const key = JSON.stringify(args);
+    if(cache[key]) {
+      return cache[key];
+    }
+    else {
+      const val = func.apply(that, args);
+      cache[key] = val;
+      return val;
+    }
+  }
+};
+
+const Fibonacci = memoize((n) => {
+  if (n === 0) return 0;
+  if (n === 1) return 1;
+  return Fibonacci(n - 1) + Fibonacci(n - 2);
+});
+// console.log(Fibonacci(5));
+
+
+// const testFunc = (func) => {
+//   const self = this;
+//   return (...args) => {
+//     // console.log(args);
+//     const val = func.apply(self, args);
+//     // console.log(val);
+//     return val;                             SEVENTY FINANCIAL
+//   }
+// };
+// const func = testFunc((name, age) => {
+//   return `good boy ${name}, I'm ${age} years old`;
+// });
+
+/* const testFunc = (func) => {
+  const self = this;
+  return (...args) => func.apply(self, args);
+};
+const func = testFunc((name, age, major) => {
+  return `good boy ${name}, I'm ${age} years old any my major is an IT`;
+});
+console.log(func('Remy Nguyen', 22, 'IT')); */
 
 // export class Logger extends EventEmitter {
 //   log(message) {

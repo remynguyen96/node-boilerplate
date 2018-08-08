@@ -9,6 +9,8 @@ import Routes from './modules';
 import './basic';
 /**
  * @Description: Setup Middleware
+ * @Description: Setup Middleware
+ * @Description: Setup Middleware
  */
 const app = express();
 middleware(app);
@@ -23,9 +25,9 @@ app.get('/page', (req, res) => res.sendFile(`${views}page.html`));
 /**
  * @Description: Setup Listening Server
  */
-// mysql.sequelize.sync({ force: false })
-//     .then(async () => {
-//         console.log('Database Connection Has Been Established Successfully. !');
+mysql.sequelize.sync({ force: false })
+    .then(async () => {
+        console.log('Database Connection Has Been Established Successfully. !');
         app.listen(constants.PORT, (err) => {
             if (err) {
                 throw err;
@@ -34,5 +36,5 @@ app.get('/page', (req, res) => res.sendFile(`${views}page.html`));
             }
         });
         // await fakerModels();
-    // })
-    // .catch((err) => console.error('Unable to connect to the database:', err));
+    })
+    .catch((err) => console.error('Unable to connect to the database:', err));
