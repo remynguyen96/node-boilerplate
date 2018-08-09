@@ -1,5 +1,14 @@
 const defaultConfig = {
   PORT: process.env.PORT || 4500,
+  JWT_SECRET: 'jwt-secret',
+
+  PASSPORTCODE: 'Auth',
+  EXP_TOKEN_ACCESS: '1h',
+
+  MAIL_HOST: 'smtp.mailtrap.io',
+  MAIL_PORT: 25,
+  MAIL_USERNAME: 'a1285327665551',
+  MAIL_PASSWORD: '0875bbf87059c7',
 };
 
 const config = {
@@ -7,20 +16,10 @@ const config = {
     MYSQL_DB: 'node-course',
     MYSQL_USERNAME: 'root',
     MYSQL_PASSWORD: '',
-
-    JWT_SECRET: 'bikini',
-    PASSPORTCODE: 'Auth',
-    EXP_TOKEN_ACCESS: '15m',
-    EXP_TOKEN_REFRESH: '7 days',
-
-    MAIL_HOST: 'smtp.mailtrap.io',
-    MAIL_PORT: 25,
-    MAIL_USERNAME: 'a1285327665551',
-    MAIL_PASSWORD: '0875bbf87059c7',
   },
   production: {
-    MYSQL_DB: '',
-    MYSQL_USERNAME: '',
+    MYSQL_DB: 'node-course',
+    MYSQL_USERNAME: 'root',
     MYSQL_PASSWORD: '',
   },
 };

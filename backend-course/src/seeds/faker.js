@@ -16,7 +16,7 @@ export const seedsData = async () => {
     /**
      * @Description: Fake Data Roles
      */
-    await Array.from({ length: 5 }).forEach(async (_, key) => {
+    await Array.from({ length: 10 }).forEach(async (_, key) => {
       /**
        * @Description: Fake Data Users
        */
