@@ -5,9 +5,14 @@ import models from '../config/mysql';
 
 const { Posts, Users } = models;
 
+export const promiseSequence = (promiseA, promiseB) => {
+  const arr = [promiseA, promiseB];
+  return arr.reduce((promiseHandle, itemPromise) => promiseHandle.then(itemPromise), Promise.resolve());
+};
+
 export const deleteData = () => {
   Object.keys(models).forEach(async (model) => {
-    await model.destroy({ where: {} }, { truncate: true });
+    await model.destroy({ where: {}, truncate: true });
   });
 };
 

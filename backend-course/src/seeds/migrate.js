@@ -1,12 +1,12 @@
 import express from 'express';
 import { constants } from '../config/constants';
 import mysql from '../config/mysql';
-import { deleteData, seedsData } from './faker';
+import { seedsData } from './faker';
 
 const app = express();
+
 mysql.sequelize.sync({ force: true })
   .then(async () => {
-    await deleteData();
     await seedsData();
     app.listen(constants.PORT, (err) => {
       if (err) {
