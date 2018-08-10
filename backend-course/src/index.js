@@ -20,12 +20,6 @@ app.use('/api', Routes);
  */
 const views = path.join(__dirname, 'views');
 app.use('/', express.static(views));
-/* app.get('/', (req, res) => res.sendFile(`${views}/html/index.html`));
-app.get('/login', (req, res) => res.sendFile(`${views}/html/login.html`));
-app.get('/sign-up', (req, res) => res.sendFile(`${views}/html/sign-up.html`));
-app.get('/page', (req, res) => res.sendFile(`${views}/html/page.html`));
- */
-
 /**
  * @Description: Setup Listening Server
  */

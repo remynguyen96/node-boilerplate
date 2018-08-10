@@ -2,7 +2,7 @@
   "name": "boilerplate",
   "version": "1.0.0",
   "description": "Nodejs ES6 Boilerplate Course",
-  "main": "app.js",
+  "main": "index.js",
   "author": "Remy Nguyen",
   "license": "MIT",
   "scripts": {
@@ -10,9 +10,10 @@
     "lint:js": "npm run eslint -- . ",
     "lint": "npm run lint:js",
     "seed": "cross-env NODE_ENV=development babel-node src/seeds/migrate.js",
-    "start": "cross-env NODE_ENV=development nodemon --exec babel-node src/app.js",
-    "dev": "babel src -d lib",
-    "build": "cross-env NODE_ENV=production nodemon --exec babel-node src/app.js"
+    "start": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",
+    "production": "cross-env NODE_ENV=production nodemon --exec babel-node src/index.js",
+    "dev": "backpack dev",
+    "build": "backpack build"
   },
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",
@@ -38,6 +39,7 @@
     "babel-eslint": "^8.2.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
+    "backpack-core": "^0.7.0",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
     "cors": "^2.8.4",

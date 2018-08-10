@@ -21,7 +21,7 @@ export const seedsData = async () => {
     /**
      * @Description: Fake Data Roles
      */
-    await Array.from({ length: 10 }).forEach(async (_, key) => {
+    await Array.from({ length: 10 }).forEach(async () => {
       /**
        * @Description: Fake Data Users
        */
@@ -37,11 +37,12 @@ export const seedsData = async () => {
        * @Description: Fake Data Posts
        */
       for await (const item of [users]) {
+        const rollDice = Math.floor(Math.random() * 6) + 1;
         Posts.create({
           title: faker.name.title(),
           slug: faker.commerce.department(),
           description: faker.company.catchPhraseDescriptor(),
-          images: `product${key + 1}.jpg`,
+          images: `product${rollDice}.jpg`,
           user_id: item.id,
         });
       }
