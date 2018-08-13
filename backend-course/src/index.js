@@ -18,8 +18,8 @@ app.use('/api', Routes);
 /**
  * @Description: Setup Router Frontend
  */
-const views = path.join(__dirname, 'views');
-app.use('/', express.static(views));
+const images = path.join(__dirname, 'public');
+app.use('/', express.static(images));
 /**
  * @Description: Setup Listening Server
  */

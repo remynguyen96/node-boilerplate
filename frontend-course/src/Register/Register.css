@@ -1,0 +1,33 @@
+.form-register {
+  width: 600px; 
+  position: absolute;
+  top: 35%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+}
+.ant-btn.btn-register {
+  padding: 14px 35px;
+}
+.btn-register span {
+  margin-top: -10px;
+  display: block;
+}
+
+.title-page.register-title {
+  margin-left: 150px;
+}
+
+@media only screen and (max-width: 768px) {
+  .form-register {
+    width: 100%; 
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: translate(0, 0);
+  }
+  .title-page.register-title {
+    margin-top: 10px;
+    margin-left: 0;
+    padding: 35px 0;
+  }
+}

@@ -31,21 +31,38 @@ const UserModel = (sequelize, DataTypes) => {
         min: 8,
       },
     },
+    phone: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: { msg: 'Phone number already in taken !' },
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Phone is field required !',
+        },
+      },
+    },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Password is field required !',
+        },
+      },
     },
-    passClient: {
+    confirm: {
       type: DataTypes.VIRTUAL,
       allowNull: true,
       set(val) {
-        this.setDataValue('passClient', val);
+        this.setDataValue('confirm', val);
         this.setDataValue('password', hashSync(val));
       },
       validate: {
         notEmpty: {
           args: true,
-          msg: 'Password is field required !',
+          msg: 'Confirm Password is field required !',
         },
         isLongEnough(val) {
           if (`${val}`.length < 5) {
@@ -62,7 +79,7 @@ const UserModel = (sequelize, DataTypes) => {
     avatar: {
       type: DataTypes.STRING(),
       allowNull: true,
-      defaultValue: 'Remy.jpg',
+      defaultValue: 'avatar.png',
       validate: {
         checkImage(img) {
           if (!img.match(/\.(png|jpg|jpeg|gif|svg)$/)) {
@@ -105,8 +122,8 @@ const UserModel = (sequelize, DataTypes) => {
     })
   );
 
-  Users.getJSON = ({ id, name, email, intro, avatar, created_at, updated_at }) => (
-    { id, name, email, intro, avatar, created_at, updated_at }
+  Users.getJSON = ({ id, name, email, phone, intro, avatar, created_at, updated_at }) => (
+    { id, name, email, phone, intro, avatar, created_at, updated_at }
   );
 
   return Users;

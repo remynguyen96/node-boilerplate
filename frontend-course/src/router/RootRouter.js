@@ -1,8 +1,8 @@
 import { Icon, Layout, Menu } from 'antd';
 import React, { PureComponent } from 'react';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
-import { Homepage } from './Homepage';
-import { Posts } from './Posts';
+import Homepage from '../Homepage/';
+import Posts from '../Posts/';
 import './RootRouter.css';
 
 class RootRouter extends PureComponent {
@@ -14,8 +14,8 @@ class RootRouter extends PureComponent {
     return (
       <Router>
         <Layout>
-          <Layout style={{ height: '100vh' }}>
-            <Sider width={200} style={{ background: '#fff' }}>
+          <Layout className="homepage-app">
+            <Sider width={200} className="menu-app">
               <Menu
                 mode="inline"
                 defaultSelectedKeys={['1']}
@@ -30,8 +30,7 @@ class RootRouter extends PureComponent {
             </Sider>
 
             <Layout style={{ padding: '0 24px 24px' }}>
-              <h4 style={{ textAlign: 'center', padding: 24, fontSize: '18px' }}>Title page</h4>
-              <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
+              <Content>
                 <Route exact path='/' component={Homepage} />  
                 <Route path='/posts' component={Posts} />  
               </Content>
@@ -39,7 +38,7 @@ class RootRouter extends PureComponent {
           </Layout>
 
           <Footer className="footer" >
-            <p style={{ textAlign: 'center', fontSize: '14px', display: 'inline' }}>Copyright © 2018. Made with ❤ by Chau Nguyen</p>
+            <p>Copyright © 2018. Made with ❤ by Chau Nguyen</p>
           </Footer>  
         </Layout>
       </Router>  

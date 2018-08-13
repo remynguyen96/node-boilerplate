@@ -16,20 +16,33 @@ export const deleteData = () => {
   });
 };
 
+const randomPhone = () => {
+  let phone = Math.floor(Math.random() * 9) + 1;
+  const prefix = 84;
+  let i = 0;
+  while (i < 6) {
+    const rollDice = Math.floor(Math.random() * 9) + 1;
+    phone += `${rollDice}`;
+    i++;
+  }
+  return parseInt(`${prefix}${phone}`, 10);
+};
+
 export const seedsData = async () => {
   try {
     /**
      * @Description: Fake Data Roles
      */
-    await Array.from({ length: 10 }).forEach(async () => {
+    await Array.from({ length: 10 }).forEach(async (_, key) => {
       /**
        * @Description: Fake Data Users
        */
       const users = await Users.create({
         name: faker.name.findName(),
         email: faker.internet.email(),
+        phone: randomPhone(),
         password: hashSync(123456),
-        avatar: 'Remy.jpg',
+        avatar: 'avatar.png',
         intro: faker.address.country(),
         verified: true,
       });
@@ -37,12 +50,11 @@ export const seedsData = async () => {
        * @Description: Fake Data Posts
        */
       for await (const item of [users]) {
-        const rollDice = Math.floor(Math.random() * 6) + 1;
         Posts.create({
           title: faker.name.title(),
           slug: faker.commerce.department(),
           description: faker.company.catchPhraseDescriptor(),
-          images: `product${rollDice}.jpg`,
+          images: `product${key + 1}.jpg`,
           user_id: item.id,
         });
       }

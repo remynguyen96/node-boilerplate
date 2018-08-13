@@ -6,15 +6,17 @@ import { MailConfirmAccount, SendMailServer } from '../../config/mail';
 const { Users } = models;
 
 const verifiedAccount = (info) => {
-  const { name, email, passClient } = info;
+  const { name, email, phone, confirm } = info;
   return new Promise(async (resolve, reject) => {
     try {
       if (!name) {
         reject(new Error('Name is required !'));
       } else if (!email) {
         reject(new Error('Email is required !'));
-      } else if (!passClient) {
+      } else if (!confirm) {
         reject(new Error('Password is required !'));
+      } else if (!phone) {
+      reject(new Error('Phone is required !'));
       }
       const user = await Users.create(info);
       resolve(user);

@@ -1,0 +1,70 @@
+.footer.ant-layout-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.footer.ant-layout-footer p {
+  text-align: center;
+  font-size: 14px;
+  display: inline;
+}
+
+.title-page {
+  text-align: center;
+  font-size: 40px;
+  padding: 25px 40px;
+  color: #fff;
+  font-family: Arvo;
+  font-weight: bold;
+  text-shadow: -3px -3px 0 #222, 3px -3px 0 #222, -3px 3px 0 #222, 3px 3px 0 #222, 4px 4px 0 #fff, 5px 5px 0 #fff, 6px 6px 0 #fff, 7px 7px 0 #fff;
+  line-height: 0.8em;
+  letter-spacing: 0.1em;
+  transform: scaleY(0.7) skewY(-5deg);
+  margin: 0;
+  text-align: center;
+}
+.homepage-app {
+  height: 100vh;
+}
+.menu-app {
+  background-color: #ffffff;
+}
+.logo-app {
+  height: 60px;
+  max-width: 100%;
+}
+.ant-menu.navigate-app {
+  line-height: 64px; 
+  float: right;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .footer.ant-layout-footer p {
+    font-size: 12px;
+  }
+  .menu-app {
+    display: none;
+  }
+  .header.ant-layout-header {
+    padding: 0px 10px;
+    height: 45px;
+    line-height: 45px;
+  }
+  .logo-app {
+    height: 40px;
+  }
+  .ant-menu.navigate-app {
+    line-height: 45px; 
+  }
+  .ant-menu-item.navigate-item {
+    padding: 0 10px;
+  }
+  .ant-menu-item.navigate-item.ant-menu-item-selected {
+    background-color: transparent;
+  }
+}

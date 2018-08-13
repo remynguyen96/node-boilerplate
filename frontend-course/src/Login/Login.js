@@ -1,0 +1,77 @@
+import React, { PureComponent } from 'react';
+import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
+import { loginForm, isAuth } from '../redux/service';
+import './Login.css';
+
+const FormItem = Form.Item;
+
+class WrappedLogin extends PureComponent {
+
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        this.props.authLogin(values);
+      }
+    });
+  }
+
+  render() {
+    if (isAuth()) {
+      <Redirect to='/' />  
+    }
+    const { form: { getFieldDecorator }, error  } = this.props;
+    return (
+      <Form onSubmit={this.handleSubmit} className="login-form">
+        <h2 className="title-page">Login</h2>
+        <FormItem>
+          {getFieldDecorator('email', {
+            rules: [
+              { type: 'email', message: 'The input is not valid E-mail!',},
+              { required: true, message: 'Please input your email!' },
+            ],
+          })(
+            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
+          )}
+        </FormItem>
+        <FormItem>
+          {getFieldDecorator('password', {
+            rules: [{ required: true, message: 'Please input your Password!' }],
+          })(
+            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+          )}
+        </FormItem>
+        <FormItem>
+          {getFieldDecorator('remember', {
+            valuePropName: 'checked',
+            initialValue: false,
+          })(
+            <Checkbox>Remember me</Checkbox>
+          )}
+          <Link className="login-form-forgot" to="/forgot-password">Forgot password</Link>
+          <Button type="primary" htmlType="submit" className="login-form-button">
+            Log in
+          </Button>
+          Or <Link to="/register">register now!</Link>
+          {error && <p className="error">{error}</p>}
+          </FormItem>
+      </Form>
+    );
+  }
+}
+
+const Login = Form.create()(WrappedLogin);
+
+const mapStateToProps = state => ({
+  error: state.application.error_login
+});
+
+
+const mapDispatchToProps = dispatch => ({
+  authLogin: (info) => dispatch(loginForm(info))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
