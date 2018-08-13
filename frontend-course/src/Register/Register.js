@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { AutoComplete, Button, Form, Icon, Input, Select, Tooltip } from 'antd';
 import { Redirect } from 'react-router-dom';
-import { isAuth, registerForm } from '../redux/service';
+import { registerForm } from '../redux/service';
 import './Register.css';
   
 const FormItem = Form.Item;
@@ -64,10 +64,12 @@ class WrappedRegister extends PureComponent {
   }
 
   render() {
-    if (isAuth()) {
-      <Redirect to='/' />  
+    const { form: { getFieldDecorator }, error, isAuth  } = this.props;
+    if (isAuth) {
+      return (
+        <Redirect to='/' />
+      ) 
     }
-    const { form: { getFieldDecorator }, error  } = this.props;
     const { autoCompleteResult } = this.state;
 
     const formItemLayout = {
@@ -211,7 +213,8 @@ class WrappedRegister extends PureComponent {
 const Register = Form.create()(WrappedRegister);
 
 const mapStateToProps = state => ({
-  error: state.application.error_register
+  error: state.application.error_register,
+  isAuth: state.application.isAuth
 });
 
 const mapDispatchToProps = dispatch => ({

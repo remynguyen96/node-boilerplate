@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { loginForm, isAuth } from '../redux/service';
+import { loginForm } from '../redux/service';
 import './Login.css';
 
 const FormItem = Form.Item;
@@ -20,10 +20,12 @@ class WrappedLogin extends PureComponent {
   }
 
   render() {
-    if (isAuth()) {
-      <Redirect to='/' />  
+    const { form: { getFieldDecorator }, error, isAuth } = this.props;
+    if (isAuth) {
+      return (
+        <Redirect to='/' />
+      ) 
     }
-    const { form: { getFieldDecorator }, error  } = this.props;
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
         <h2 className="title-page">Login</h2>
@@ -66,12 +68,13 @@ class WrappedLogin extends PureComponent {
 const Login = Form.create()(WrappedLogin);
 
 const mapStateToProps = state => ({
-  error: state.application.error_login
+  error: state.application.error_login,
+  isAuth: state.application.isAuth,
 });
 
 
 const mapDispatchToProps = dispatch => ({
-  authLogin: (info) => dispatch(loginForm(info))
+  authLogin: (info) => dispatch(loginForm(info)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

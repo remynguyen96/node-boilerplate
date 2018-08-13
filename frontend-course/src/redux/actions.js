@@ -1,6 +1,7 @@
 const FETCH_LOGIN = 'FETCH_LOGIN';
 const FETCH_LOGIN_SUCCESS = 'FETCH_LOGIN_SUCCESS';
 const FETCH_LOGIN_ERROR = 'FETCH_LOGIN_ERROR';
+const IS_AUTHENTICATE = 'IS_AUTHENTICATE';
 
 const FETCH_REGISTER = 'FETCH_REGISTER';
 const FETCH_REGISTER_SUCCESS = 'FETCH_REGISTER_SUCCESS';
@@ -25,6 +26,11 @@ const fetch_login_success = (payload) => ({
 
 const fetch_login_error = (payload) => ({
   type: FETCH_LOGIN_ERROR,
+  payload,
+});
+
+const is_authenticate = (payload) => ({
+  type: IS_AUTHENTICATE,
   payload,
 });
 
@@ -65,6 +71,9 @@ export {
   fetch_login,
   fetch_login_error,
   fetch_login_success,
+
+  IS_AUTHENTICATE,
+  is_authenticate,
 
   FETCH_REGISTER,
   FETCH_REGISTER_ERROR,

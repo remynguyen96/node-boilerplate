@@ -15,7 +15,7 @@ const config = {
   development: {
     MYSQL_DB: 'node-course',
     MYSQL_USERNAME: 'root',
-    MYSQL_PASSWORD: 'secret',
+    MYSQL_PASSWORD: '',
   },
   production: {
     MYSQL_DB: 'node-course',

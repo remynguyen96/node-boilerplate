@@ -1,6 +1,8 @@
 import { Layout } from 'antd';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { isAuth } from '../redux/service';
 import Login from '../Login/';
 import Register from '../Register/';
 import Posts from '../Posts/';
@@ -9,7 +11,13 @@ import MenuApp from '../router/MenuApp';
 import './App.css';
 
 
-class App extends Component {
+class App extends PureComponent { 
+
+  constructor(props) {
+    super(props);
+    this.props.isAuthenticate();
+  }
+
   render() {
     return ( 
       <Router>
@@ -25,6 +33,8 @@ class App extends Component {
   }
 }
 
-export {
-  App
-}
+const mapDispatchToProps = dispatch => ({
+  isAuthenticate: () => dispatch(isAuth())
+});
+
+export default connect(null, mapDispatchToProps)(App);

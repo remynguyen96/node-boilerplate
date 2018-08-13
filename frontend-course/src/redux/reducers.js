@@ -5,6 +5,8 @@ import {
 
   FETCH_REGISTER_ERROR,
   FETCH_REGISTER_SUCCESS,
+  
+  IS_AUTHENTICATE,
 
   FETCH_POSTS_SUCCESS,
   FETCH_POSTS_ERROR,
@@ -17,14 +19,11 @@ const initialize = {
   error_register: null,
   posts: null,
   error_posts: null,
+  isAuth: false,
 };
 
 const reducerApp = (state = initialize, action) => {
     switch (action.type) {
-      case FETCH_LOGIN_SUCCESS:
-        return Object.assign({}, state, {
-          users: action.payload
-        });
       case FETCH_LOGIN_ERROR:
         return Object.assign({}, state, {
           error_login: action.payload
@@ -41,9 +40,14 @@ const reducerApp = (state = initialize, action) => {
         return Object.assign({}, state, {
           error_register: action.payload
         });  
+      case FETCH_LOGIN_SUCCESS:
       case FETCH_REGISTER_SUCCESS:
         return Object.assign({}, state, {
           users: action.payload
+        });  
+      case IS_AUTHENTICATE:
+        return Object.assign({}, state, {
+          isAuth: action.payload
         });  
       default:
         return state;

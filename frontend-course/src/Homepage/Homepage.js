@@ -28,7 +28,7 @@ class Homepage extends PureComponent {
 
         <Layout className="list-card">
           {
-            posts && posts.map(post => (
+            posts && posts.map((post) => (
               <Card
               cover={<img alt={post.slug} src={`${URL_SERVER}/products/${post.images}`} />}
               actions={[<Icon type="setting" />, <Icon type="edit" />, <Icon type="ellipsis" />]}

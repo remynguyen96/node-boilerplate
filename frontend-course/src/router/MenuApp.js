@@ -1,16 +1,17 @@
 import { Icon, Layout, Menu } from 'antd';
 import React, { PureComponent } from 'react';
-import { withRouter, Link } from 'react-router-dom';
-import { URL_SERVER, isAuth, TOKEN } from '../redux/service';
+import { connect } from 'react-redux';
+import { withRouter, Link, Redirect } from 'react-router-dom';
+import { URL_SERVER, TOKEN, logoutPage } from '../redux/service';
 import './RootRouter.css';
 
 class MenuApp extends PureComponent {
 
   navigatePage = (link) => {
-    const { history } = this.props;
+    const { history, logoutPage } = this.props;
     if (link === '/logout' && window.localStorage.getItem(TOKEN)) {
-      window.localStorage.removeItem(TOKEN);
-      history.push('/login');
+      logoutPage();
+      return (<Redirect to='/login' />);
     }
     history.push(link);
   }
@@ -28,7 +29,7 @@ class MenuApp extends PureComponent {
         { id: 3, icon: 'user', link: '/login', name: 'Login' },
       ];
     }
-    if (isAuth()) {
+    if (this.props.isAuth) {
       listMenu = listMenu.map((item) => {
         if (item.id === 3) {
           item.icon = 'logout';
@@ -64,5 +65,15 @@ class MenuApp extends PureComponent {
   }
 }
 
-export default withRouter(MenuApp);
 
+const mapStateToProps = state => ({
+  isAuth: state.application.isAuth
+});
+
+
+const mapDispatchToProps = dispatch => ({
+  logoutPage: () => dispatch(logoutPage())
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MenuApp));

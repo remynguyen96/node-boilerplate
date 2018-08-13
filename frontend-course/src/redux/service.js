@@ -2,6 +2,7 @@ import {
   fetch_posts, fetch_posts_error, fetch_posts_success,
   fetch_login, fetch_login_error, fetch_login_success,
   fetch_register, fetch_register_error, fetch_register_success,
+  is_authenticate, 
  } from './actions';
 
 export const TOKEN = 'token';
@@ -23,11 +24,29 @@ const fetchApi = (url, method = 'GET', body = null) => {
 }
 
 export const isAuth = () => {
-  const token = window.localStorage.getItem(TOKEN);
-  if (token && token.length > 0) {
-    return true;
+  return (dispatch) => {
+    const token = window.localStorage.getItem(TOKEN);
+    if (token && token.length > 0) {
+      dispatch(is_authenticate(true));
+    } else {
+      dispatch(is_authenticate(false));
+    }
   }
-  return false;
+}
+
+export const logoutPage = () => {
+  return (dispatch) => {
+    const token = window.localStorage.getItem(TOKEN);
+    if (token) {
+      window.localStorage.removeItem(TOKEN);
+      dispatch(is_authenticate(false));
+    }
+  }
+}
+
+const setAuthenticate = (token, dispatch) => {
+  window.localStorage.setItem(TOKEN, token);
+  dispatch(is_authenticate(true));
 }
 
 export const fetchPosts = () => {
@@ -51,7 +70,7 @@ export const loginForm = (info) => {
       const url = `${URL_SERVER_API}/users/sign-in`;
       const resUsers = await fetchApi(url, 'POST', info);
       const getLogin = await resUsers.json();
-      window.localStorage.setItem(TOKEN, getLogin.accessToken);
+      setAuthenticate(getLogin.accessToken, dispatch)
       dispatch(fetch_login_success(getLogin));
     } catch (error) {
       dispatch(fetch_login_error('Email or password is not correct!'));
@@ -71,8 +90,8 @@ export const registerForm = (info) => {
         const { message } = errors[0];
         dispatch(fetch_register_error(message));
       } else {
+        setAuthenticate(token, dispatch)
         dispatch(fetch_register_success(getRegister));
-        window.localStorage.setItem(TOKEN, token);
       }
     } catch (err) {
       dispatch(fetch_register_error(err));

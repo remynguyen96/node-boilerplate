@@ -17,15 +17,10 @@ export const deleteData = () => {
 };
 
 const randomPhone = () => {
-  let phone = Math.floor(Math.random() * 9) + 1;
+  const phone = Math.floor(Math.random() * 9) + 1;
+  const random = faker.random.number(); 
   const prefix = 84;
-  let i = 0;
-  while (i < 6) {
-    const rollDice = Math.floor(Math.random() * 9) + 1;
-    phone += `${rollDice}`;
-    i++;
-  }
-  return parseInt(`${prefix}${phone}`, 10);
+  return parseInt(`${prefix}${phone}${random}`, 10);
 };
 
 export const seedsData = async () => {
