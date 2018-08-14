@@ -41,6 +41,24 @@
   line-height: 64px; 
   float: right;
 }
+.menu-left-app {
+  height: 100%;
+  border-right: 0;
+}
+.menu-left-app .ant-menu-sub.ant-menu-inline > .ant-menu-item {
+  line-height: 45px;
+  height: 45px;
+}
+.user-avatar.ant-avatar {
+  border: 1px solid #b8b8b8;
+  margin-left: -35px;
+  margin-right: 5px;
+}
+.user-name {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
 
 
 @media only screen and (max-width: 768px) {

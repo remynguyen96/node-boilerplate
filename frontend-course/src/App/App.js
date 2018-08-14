@@ -2,12 +2,12 @@ import { Layout } from 'antd';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { isAuth } from '../redux/service';
 import Login from '../Login/';
-import Register from '../Register/';
 import Posts from '../Posts/';
-import { RootRouter } from '../router/RootRouter';
+import { isAuth } from '../redux/service';
+import Register from '../Register/';
 import MenuApp from '../router/MenuApp';
+import RootRouter from '../router/RootRouter';
 import './App.css';
 
 
