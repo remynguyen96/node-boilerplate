@@ -1,9 +1,10 @@
 {
-  "name": "boilerplate",
+  "name": "course-boilerplate-mysql",
   "version": "1.0.0",
   "description": "Nodejs ES6 Boilerplate Course",
   "main": "index.js",
-  "author": "Remy Nguyen",
+  "repository": "https://github.com/remynguyen96/courseMysql.git",
+  "author": "Remy Nguyen <nguyentietngocchau@gmail.com>",
   "license": "MIT",
   "scripts": {
     "eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
@@ -12,8 +13,9 @@
     "seed": "cross-env NODE_ENV=development babel-node src/seeds/migrate.js",
     "start": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",
     "production": "cross-env NODE_ENV=production nodemon --exec babel-node src/index.js",
-    "dev": "backpack dev",
-    "build": "backpack build"
+    "clean": "rimraf build",
+    "dev:build": "npm run clean && webpack -w",
+    "dev": "cross-env NODE_ENV=development nodemon build/app.bundle.js"
   },
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",
@@ -36,11 +38,11 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.1",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "backpack-core": "^0.7.0",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
     "cors": "^2.8.4",
@@ -51,6 +53,10 @@
     "eslint-plugin-import": "^2.8.0",
     "helmet": "^3.9.0",
     "morgan": "^1.9.0",
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.12.1",
+    "rimraf": "^2.6.2",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0",
+    "webpack-node-externals": "^1.7.2"
   }
 }
