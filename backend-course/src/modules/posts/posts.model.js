@@ -40,5 +40,4 @@ const PostModels = (sequelize, DataTypes) => {
   return Posts;
 };
 
-
-export default PostModels;
+module.exports = PostModels;

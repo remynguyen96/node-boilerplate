@@ -53,7 +53,7 @@ p {
 </div>
 `);
 
-export const ConfirmAccount = (name, url, token) => {
+const ConfirmAccount = (name, url, token) => {
   const description = `
         <h2>Hi ${name} !</h2>
         <p>Before you go out and play on Website, please verify your email address.</p>
@@ -66,3 +66,9 @@ export const ConfirmAccount = (name, url, token) => {
         ${generalSectionTemplate(description)}
     `;
 };
+
+
+module.exports = {
+  ConfirmAccount,
+};
+

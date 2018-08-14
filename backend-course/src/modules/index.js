@@ -1,6 +1,6 @@
-import { Router } from 'express';
-import Users from './users/users';
-import Posts from './posts/posts';
+const { Router } = require('express');
+const Users = require('./users/users');
+const Posts = require('./posts/posts');
 
 const routes = new Router();
 routes.use((req, res, next) => {
@@ -12,4 +12,5 @@ routes.use((req, res, next) => {
 routes.use('/users', Users);
 routes.use('/posts', Posts);
 
-export default routes;
+module.exports = routes;
+

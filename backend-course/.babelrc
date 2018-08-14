@@ -1,20 +1,7 @@
 {
   "presets": [
-    [
-      "env",
-      {
-        "targets": {
-          "node": "current"
-        }
-      }
-    ]
-  ],
-  "plugins": [
-    [
-      "transform-object-rest-spread",
-      {
-        "useBuiltIns": true
-      }
-    ]
+    "backpack-core/babel",
+    "env",
+    "stage-2"
   ]
 }

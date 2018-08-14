@@ -1,5 +1,5 @@
-import multer from 'multer';
-import { Promise } from 'sequelize';
+const multer = require('multer');
+const { Promise } = require('sequelize');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -18,14 +18,14 @@ const storage = multer.diskStorage({
   },
 });
 
-export const uploadFile = multer({
+const uploadFile = multer({
   storage,
   limits: {
     fileSize: 8000000,
   },
 }).single('images');
 
-export const errorUpload = (err) => (
+const errorUpload = (err) => (
   new Promise((resolve, reject) => {
     if (err) {
       if (err.code === 'LIMIT_FILE_SIZE') {
@@ -38,3 +38,7 @@ export const errorUpload = (err) => (
   })
 );
 
+module.exports = {
+  uploadFile,
+  errorUpload,
+};

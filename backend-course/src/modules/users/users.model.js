@@ -1,6 +1,6 @@
-import { hashSync, compareSync } from 'bcrypt-nodejs';
-import { verify, sign } from 'jsonwebtoken';
-import { constants } from '../../config/constants';
+const { hashSync, compareSync } = require('bcrypt-nodejs');
+const { verify, sign } = require('jsonwebtoken');
+const { constants } = require('../../config/constants');
 
 const UserModel = (sequelize, DataTypes) => {
   const Users = sequelize.define('user', {
@@ -129,5 +129,5 @@ const UserModel = (sequelize, DataTypes) => {
   return Users;
 };
 
-export default UserModel;
+module.exports = UserModel;
 

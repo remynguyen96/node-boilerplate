@@ -1,16 +1,16 @@
 /* eslint-disable no-restricted-syntax,prefer-destructuring */
-import faker from 'faker';
-import { hashSync } from 'bcrypt-nodejs';
-import models from '../config/mysql';
+const faker = require('faker');
+const { hashSync } = require('bcrypt-nodejs');
+const models = require('../config/mysql');
 
 const { Posts, Users } = models;
 
-export const promiseSequence = (promiseA, promiseB) => {
+const promiseSequence = (promiseA, promiseB) => {
   const arr = [promiseA, promiseB];
   return arr.reduce((promiseHandle, itemPromise) => promiseHandle.then(itemPromise), Promise.resolve());
 };
 
-export const deleteData = () => {
+const deleteData = () => {
   Object.keys(models).forEach(async (model) => {
     await model.destroy({ where: {}, truncate: true });
   });
@@ -23,7 +23,7 @@ const randomPhone = () => {
   return parseInt(`${prefix}${phone}${random}`, 10);
 };
 
-export const seedsData = async () => {
+const seedsData = async () => {
   try {
     /**
      * @Description: Fake Data Roles
@@ -58,3 +58,11 @@ export const seedsData = async () => {
     throw err;
   }
 };
+
+
+module.exports = {
+  promiseSequence,
+  deleteData,
+  seedsData,
+};
+

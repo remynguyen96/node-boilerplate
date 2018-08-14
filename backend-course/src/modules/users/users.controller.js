@@ -1,7 +1,7 @@
-import { Promise } from 'sequelize';
-import models from '../../config/mysql';
-import { URL_SERVER } from '../../utils/helper';
-import { MailConfirmAccount, SendMailServer } from '../../config/mail';
+const { Promise } = require('sequelize');
+const models = require('../../config/mysql');
+const { URL_SERVER } = require('../../utils/helper');
+const { MailConfirmAccount, SendMailServer } = require('../../config/mail');
 
 const { Users } = models;
 
@@ -26,7 +26,7 @@ const verifiedAccount = (info) => {
   });
 };
 
-export const signUp = async (req, res) => {
+const signUp = async (req, res) => {
   try {
     const handleInfo = await verifiedAccount(req.body);
     const token = await Users.createToken(handleInfo);
@@ -45,7 +45,7 @@ export const signUp = async (req, res) => {
   }
 };
 
-export const signIn = async (req, res) => {
+const signIn = async (req, res) => {
   try {
     return res.status(200).json(req.user);
   } catch (err) {
@@ -53,7 +53,7 @@ export const signIn = async (req, res) => {
   }
 };
 
-export const listUser = async (req, res) => {
+const listUser = async (req, res) => {
   try {
     const listUsers = await Users.findAll({
       order: [
@@ -66,7 +66,7 @@ export const listUser = async (req, res) => {
   }
 };
 
-export const verifiedEmail = async (req, res) => {
+const verifiedEmail = async (req, res) => {
   try {
     const { token } = req.params;
     const verify = Users.verifyAccessToken(token);
@@ -80,3 +80,11 @@ export const verifiedEmail = async (req, res) => {
     return res.status(400).json(err);
   }
 };
+
+module.exports = {
+  signUp,
+  signIn,
+  listUser,
+  verifiedEmail,
+};
+

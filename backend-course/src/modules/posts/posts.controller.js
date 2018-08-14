@@ -1,6 +1,6 @@
-import { Op } from 'sequelize';
-import models from '../../config/mysql';
-import { uploadFile, errorUpload } from '../../utils/upload';
+const { Op } = require('sequelize');
+const models = require('../../config/mysql');
+const { uploadFile, errorUpload } = require('../../utils/upload');
 
 const { Posts, Users } = models;
 
@@ -73,7 +73,7 @@ const removePosts = async (req, res) => {
   }
 };
 
-export {
+module.exports = {
   addPosts,
   getPosts,
   getPost,

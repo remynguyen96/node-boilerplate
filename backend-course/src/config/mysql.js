@@ -1,5 +1,5 @@
-import Sequelize from 'sequelize';
-import { constants } from './constants';
+const Sequelize = require('sequelize');
+const { constants } = require('./constants');
 
 const configDB = {
   host: 'localhost',
@@ -34,10 +34,18 @@ const sequelize = new Sequelize(
   { ...configDB },
 );
 
+const Users = require('../modules/users/users.model')(sequelize, Sequelize);
+const Posts = require('../modules/posts/posts.model')(sequelize, Sequelize);
+
 const db = {
-  Users: sequelize.import('../modules/users/users.model'),
-  Posts: sequelize.import('../modules/posts/posts.model'),
+  Users,
+  Posts,
 };
+
+// const db = {
+//   Users: sequelize.import('../modules/users/users.model'),
+//   Posts: sequelize.import('../modules/posts/posts.model'),
+// };
 
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
@@ -46,4 +54,5 @@ Object.keys(db).forEach((modelName) => {
 });
 
 db.sequelize = sequelize;
-export default db;
+
+module.exports = db;

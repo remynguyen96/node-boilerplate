@@ -1,14 +1,16 @@
-import morgan from 'morgan';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import compression from 'compression';
-import helmet from 'helmet';
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const compression = require('compression');
+const helmet = require('helmet');
 
-export default (app) => {
+module.exports = (app) => {
   app.use(morgan('combined'));
   app.use(cors('*'));
   app.use(compression());
   app.use(helmet());
   app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.urlencoded({
+    extended: true,
+  }));
 };

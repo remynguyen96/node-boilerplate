@@ -1,7 +1,7 @@
-import nodemailer from 'nodemailer';
-import { Promise } from 'sequelize';
-import { constants } from './constants';
-import { ConfirmAccount } from '../utils/template-mail';
+const nodemailer = require('nodemailer');
+const { Promise } = require('sequelize');
+const { constants } = require('./constants');
+const { ConfirmAccount } = require('../utils/template-mail');
 
 const transporter = nodemailer.createTransport({
   host: constants.MAIL_HOST,

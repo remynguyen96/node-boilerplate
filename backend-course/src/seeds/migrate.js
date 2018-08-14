@@ -1,7 +1,7 @@
-import express from 'express';
-import { constants } from '../config/constants';
-import mysql from '../config/mysql';
-import { seedsData } from './faker';
+const express = require('express');
+const { constants } = require('../config/constants');
+const mysql = require('../config/mysql');
+const { seedsData } = require('./faker');
 
 const app = express();
 

@@ -1,9 +1,9 @@
-import passport from 'passport';
-import LocalStrategy from 'passport-local';
-import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
-import { decode } from 'jsonwebtoken';
-import models from '../config/mysql';
-import { constants } from '../config/constants';
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
+const { decode } = require('jsonwebtoken');
+const models = require('../config/mysql');
+const { constants } = require('../config/constants');
 
 const { Users } = models;
 
@@ -75,5 +75,10 @@ const jwtAccess = new JwtStrategy(jwtOpts, async (payload, done) => {
 passport.use(localLogin);
 passport.use(jwtAccess);
 
-export const authLocal = passport.authenticate('local', { session: false });
-export const authJwt = passport.authenticate('jwt', { session: false });
+const authLocal = passport.authenticate('local', { session: false });
+const authJwt = passport.authenticate('jwt', { session: false });
+
+module.exports = {
+  authLocal,
+  authJwt,
+};

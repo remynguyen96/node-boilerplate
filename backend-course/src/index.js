@@ -1,27 +1,27 @@
-import express from 'express';
-import path from 'path';
-import passport from 'passport';
-import { constants } from './config/constants';
-import mysql from './config/mysql';
-import middleware from './utils/middleware';
-import Routes from './modules';
+const express = require('express');
+const path = require('path');
+const passport = require('passport');
+const { constants } = require('./config/constants');
+const mysql = require('./config/mysql');
+const middleware = require('./utils/middleware');
+const Routes = require('./modules');
 /**
- * @Description: Setup Middleware
+ * *Description: Setup Middleware
  */
 const app = express();
 middleware(app);
 app.use(passport.initialize());
 /**
- * @Description: Setup Router Backend
+ * *Description: Setup Router Backend
  */
 app.use('/api', Routes);
 /**
- * @Description: Setup Router Frontend
+ * *Description: Setup Router Frontend
  */
 const images = path.join(__dirname, 'public');
 app.use('/', express.static(images));
 /**
- * @Description: Setup Listening Server
+ * *Description: Setup Listening Server
  */
 mysql.sequelize.sync({ force: false })
   .then(() => {

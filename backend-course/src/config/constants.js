@@ -20,13 +20,17 @@ const config = {
   production: {
     MYSQL_DB: 'node-course',
     MYSQL_USERNAME: 'root',
-    MYSQL_PASSWORD: '',
+    MYSQL_PASSWORD: 'secret',
   },
 };
 
 const getENV = (env) => config[env];
 
-export const constants = {
+const constants = {
   ...defaultConfig,
   ...getENV(process.env.NODE_ENV),
+};
+
+module.exports = {
+  constants, 
 };
