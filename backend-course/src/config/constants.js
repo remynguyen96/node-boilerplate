@@ -1,5 +1,5 @@
 const defaultConfig = {
-  PORT: process.env.PORT || 4500,
+  PORT: process.env.PORT || 4200,
   JWT_SECRET: 'jwt-secret',
 
   PASSPORTCODE: 'Auth',
