@@ -12,6 +12,7 @@ lib
 .DS_Store
 .idea
 /.vscode
+logs/
 yarn.lock
 package-lock.json
 application/cache

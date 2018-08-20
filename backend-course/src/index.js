@@ -5,6 +5,7 @@ const { constants } = require('./config/constants');
 const mysql = require('./config/mysql');
 const middleware = require('./utils/middleware');
 const Routes = require('./modules');
+const logger = require('./config/winston');
 /**
  * *Description: Setup Middleware
  */
@@ -29,9 +30,10 @@ mysql.sequelize.sync({ force: false })
       if (err) {
         throw err;
       } else {
-        console.log('Database Connection Has Been Established Successfully. !');
-        console.log(`${process.env.NODE_ENV} running with port: ${constants.PORT}`);
+        logger.log('info', 'Database Connection Has Been Established Successfully. !');
+        logger.log('info', `${process.env.NODE_ENV} running with port: ${constants.PORT}`);
       }
     });
   })
-  .catch((err) => console.error('Unable to connect to the database:', err));
+  .catch((error) => logger.log('error', 'Unable to connect to the database:', { error }));
+

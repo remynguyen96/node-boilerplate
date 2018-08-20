@@ -2,6 +2,8 @@ const express = require('express');
 const { constants } = require('../config/constants');
 const mysql = require('../config/mysql');
 const { seedsData } = require('./faker');
+const logger = require('../config/winston');
+
 
 const app = express();
 
@@ -12,8 +14,8 @@ mysql.sequelize.sync({ force: true })
       if (err) {
         throw err;
       } else {
-        console.log('Migrate data successful !');
+        logger.log('info', 'Migrate data successful !');
       }
     });
   })
-  .catch((err) => console.error('Unable to connect to the database:', err));
+  .catch((error) => logger.log('error', 'Unable to connect to the database:', { error }));

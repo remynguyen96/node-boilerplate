@@ -2,6 +2,7 @@ const nodemailer = require('nodemailer');
 const { Promise } = require('sequelize');
 const { constants } = require('./constants');
 const { ConfirmAccount } = require('../utils/template-mail');
+const logger = require('./winston');
 
 const transporter = nodemailer.createTransport({
   host: constants.MAIL_HOST,
@@ -36,7 +37,11 @@ export const SendMailServer = async (templateMail) => {
     if (error) {
       return error;
     }
-    console.log('Mail %s sent: %s', info.messageId, info.response);
+    logger.log({
+      level: 'info',
+      message: `Mail %s sent: ${info.messageId}, ${info.response}`,
+    });
+    // console.log('Mail %s sent: %s', info.messageId, info.response);
     return info;
   });
 };

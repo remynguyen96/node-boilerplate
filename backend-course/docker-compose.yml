@@ -1,27 +1,28 @@
 version: '3.1'
 services:
-  db:
-    image: mysql:8.0.12
+  mysqldb:
+    image: mysql:${MYSQL_VERSION}
+    container_name: ${MYSQL_HOST}
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     ports:
       - 3306:3306
     volumes:
-       - db_data:/var/lib/mysql
+       - db_mysql:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: node-course
-      MYSQL_ROOT_PASSWORD: secret
+     - MYSQL_DATABASE=${MYSQL_DATABASE}
+     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
 
   phpmyadmin:
     depends_on:
-      - db
+      - mysqldb
     image: phpmyadmin/phpmyadmin
     restart: always
     ports:
       - 8888:80
     environment:
-      PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: secret
-      
+     - PMA_HOST=${MYSQL_HOST}
+     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+
 volumes:
-  db_data:
+  db_mysql:
