@@ -1,3 +1,4 @@
-dist
-node_modules
-document
+dist/
+build/
+node_modules/
+src/public/

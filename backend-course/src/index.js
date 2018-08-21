@@ -21,6 +21,8 @@ app.use('/api', Routes);
  */
 const images = path.join(__dirname, 'public');
 app.use('/', express.static(images));
+
+
 /**
  * *Description: Setup Listening Server
  */

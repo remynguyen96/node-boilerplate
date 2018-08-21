@@ -13,6 +13,7 @@ lib
 .idea
 /.vscode
 logs/
+archive/
 yarn.lock
 package-lock.json
 application/cache

@@ -1,5 +1,5 @@
 {
-  "name": "course-boilerplate-mysql",
+  "name": "nodejs-boilerplate",
   "version": "1.0.0",
   "description": "Nodejs ES6 Boilerplate Course",
   "main": "index.js",
@@ -14,7 +14,7 @@
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",
     "production": "cross-env NODE_ENV=production nodemon --exec babel-node src/index.js",
     "start": "backpack dev",
-    "build": "backpack build"
+    "build": "node scripts/build.js"
   },
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",
@@ -49,9 +49,14 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-babel": "^4.1.2",
     "eslint-plugin-import": "^2.8.0",
+    "fs-extra": "^7.0.0",
+    "glob": "^7.1.2",
     "helmet": "^3.9.0",
     "morgan": "^1.9.0",
     "nodemon": "^1.12.1",
-    "winston": "^3.0.0"
+    "react-dev-utils": "^5.0.1",
+    "simple-git": "^1.96.0",
+    "winston": "^3.0.0",
+    "zip-folder": "^1.0.0"
   }
 }
