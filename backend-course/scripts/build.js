@@ -6,8 +6,6 @@ const path = require('path');
 const zipFolder = require('zip-folder');
 const glob = require('glob');
 const git = require('simple-git')();
-const { measureFileSizesBeforeBuild } = require('react-dev-utils/FileSizeReporter');
-const printHostingInstructions = require('react-dev-utils/printHostingInstructions');
 const { resolveApp, isFolderAndMkdir } = require('../src/utils/helper');
 const logger = require('../src/config/winston');
 
@@ -114,9 +112,14 @@ function buildFail(err) {
   process.exit(1);
 }
 
-measureFileSizesBeforeBuild(appBuildVirtual)
-  .then(generateBuildInfo)
-  .then(prepareBuildDir)
-  .then(printResult)
-  .then(packBuildDir)
-  .catch(buildFail);
+
+(async (app) => {
+  try {
+    const generateBuild = await generateBuildInfo(app);
+    const prepareBuild = await prepareBuildDir(generateBuild);
+    const zipBuildApp = await packBuildDir(prepareBuild);
+    return zipBuildApp;
+  } catch (error) {
+    return buildFail(error);
+  }
+})(appBuildVirtual);
