@@ -2,18 +2,16 @@
  * *Description: Setup Logger
  */
 const fs = require('fs');
-const appRoot = require('app-root-path');
 const { createLogger, format, transports } = require('winston');
+const { resolveApp, isFolderAndMkdir } = require('../utils/helper');
 
-const dirLogs = `${appRoot}/logs/`;
-if (!fs.existsSync(dirLogs)) {
-  fs.mkdirSync(dirLogs);
-}
+const dirLogs = `${resolveApp('')}/logs/`;
+isFolderAndMkdir(dirLogs);
 
 const options = {
   file: {
     level: 'info',
-    filename: `${appRoot}/logs/app.log`,
+    filename: `${resolveApp('')}/logs/app.log`,
     handleExceptions: true,
     json: true,
     maxsize: 5242880, // 5MB
@@ -43,7 +41,7 @@ const logger = createLogger({
     new transports.File({
       ...file,
       level: 'error',
-      filename: `${appRoot}/logs/errors.log`,
+      filename: `${resolveApp('')}/logs/errors.log`,
     }),
   ],
   exitOnError: false,
@@ -54,5 +52,6 @@ logger.stream = {
     logger.info(message);
   },
 };
+
 module.exports = logger;
 

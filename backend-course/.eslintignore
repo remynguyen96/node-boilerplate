@@ -1,4 +1,5 @@
-dist/
-build/
+dist/*
+build/*
 node_modules/
-src/public/
+logs/*
+src/public/*

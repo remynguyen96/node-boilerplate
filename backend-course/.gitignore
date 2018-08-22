@@ -12,14 +12,14 @@ lib
 .DS_Store
 .idea
 /.vscode
-logs/
-archive/
 yarn.lock
 package-lock.json
 application/cache
 /coverage
 # production
 /build
+/logs
+/archive
 # misc
 .DS_Store
 .env.local

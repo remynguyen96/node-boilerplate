@@ -5,33 +5,142 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="./buildinfo.css" type="text/css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <title>Build Info Page</title>
+  <title>Build Info Node-course</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+  <style>
+    html,
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: rgba(235, 255, 241, 0.75);
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      width: 85%;
+      margin: 60px auto;
+    }
+    .box {
+      display: flex;
+      justify-content: start;
+      margin-bottom: 25px;
+    }
+    .box-special {
+      flex-direction: column;
+    }
+    h3, p, ul, h4 {
+      margin: 0;
+      padding: 0;
+    }
+    p, a {
+      font-size: 18px;
+      color: #646363;
+      line-height: 30px;
+      font-weight: 400;
+      align-self: flex-end;
+      flex-basis: 85%;
+    }
+    a {
+      color: #3387e6;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    h3 {
+      font-size: 20px;
+      text-transform: capitalize;
+      color: #606060;
+      font-weight: 700;
+      flex-basis: 15%;
+    }
+    .commits {
+      display: flex;
+      flex-direction: column;
+    }
+    .commit {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 35px;
+    }
+    h4 {
+      font-size: 16px;
+      color: #6f6f6f;
+      text-transform: capitalize;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    span {
+      font-size: 16px;
+      color: #646363;
+      font-weight: 400;
+    }
+  </style>
 </head>
 
 <body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root">
-    <table>
-      <tr>
-        <th>Version</th>
-        <td id="version"></td>
-      </tr>
-      <tr>
-        <th>Build Number</th>
-        <td id="build_no"></td>
-      </tr>
-      <tr>
-        <th>Branch</th>
-        <td id="branch"></td>
-      </tr>
-      <tr>
-        <th>Build Hash</th>
-        <td id="current_commit"></td>
-      </tr>
-    </table>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<div class="container">
+  <div class="box">
+    <h3>version: </h3>
+    <p class="version"></p>
   </div>
-  <script type="text/javascript" src="./buildinfo.js"></script>
+  <div class="box">
+    <h3>branch: </h3>
+    <p class="branch"></p>
+  </div>
+  <div class="box">
+    <h3>build URL: </h3>
+    <a href="" target="_blank" class="build_url"></a>
+  </div>
+  <div class="box">
+    <h3>build hash: </h3>
+    <p class="build_hash"></p>
+  </div>
+  <div class="box box-special">
+    <h3>3 commits last: </h3>
+    <ol class="commits"></ol>
+  </div>
+</div>
+  <script>
+    const data = fetch('data.json')
+      .then((res) => res.json())
+      .then((result) => {
+        const { version, branch, build_url, current_commit, commits } = result;
+        $('.version').innerHTML = version;
+        $('.build_url').innerHTML = build_url;
+        $('.build_url').setAttribute('href', build_url);
+        $('.build_hash').innerHTML = current_commit;
+        $('.branch').innerHTML = branch;
+        commits.forEach((commit, index) => {
+          const { author_email, author_name, hash, date, message  } = commit;
+          const options = { 
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+            hour: '2-digit', minute: '2-digit', second: '2-digit'
+           }; 
+          $('.commits').insertAdjacentHTML('beforeend', `
+              <li class="commit">
+                <span>Commit <strong>${hash}</strong></span>
+                <div class="item">
+                    <h4 class"title">Name: </h4>
+                    <span class"content">${author_name}</span>
+                </div>
+                <div class="item">
+                    <h4 class"title">Email: </h4>
+                    <span class"content">${author_email}</span>
+                </div>
+                <div class="item">
+                    <h4 class"title">Commit Message: </h4>
+                    <span class"content">${message}</span>
+                </div>
+                <div class="item">
+                    <h4 class"title">Date: </h4>
+                    <span class"content">${new Date(date).toLocaleDateString('vi-VN', options)}</span>
+                </div>
+              </li>
+          `);
+        });
+      });
+    function $(element) {
+      return document.querySelector(element);
+    }
+  </script>
 </body>
 </html>

@@ -23,6 +23,7 @@ services:
     environment:
      - PMA_HOST=${MYSQL_HOST}
      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+     - PHP_UPLOAD_MAX_FILESIZE=100MB
 
 volumes:
   db_mysql:

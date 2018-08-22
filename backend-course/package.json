@@ -14,6 +14,7 @@
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",
     "production": "cross-env NODE_ENV=production nodemon --exec babel-node src/index.js",
     "start": "backpack dev",
+    "postinstall": "backpack build",
     "build": "node scripts/build.js"
   },
   "dependencies": {
@@ -35,7 +36,6 @@
     "validator": "^9.0.0"
   },
   "devDependencies": {
-    "app-root-path": "^2.1.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.1",
     "babel-preset-env": "^1.7.0",
