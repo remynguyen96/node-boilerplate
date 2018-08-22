@@ -119,6 +119,13 @@ const config = {
 };
 
 ```
+## Create MySQL database and phpMyAdmin with Docker
+
+1.  Download and install the [Docker, DockerCompose](https://www.docker.com/)
+2.  Edit variable password with **MYSQL_ROOT_PASSWORD** and name database with **MYSQL_DATABASE** in file **.env**
+3.  Run docker to create database with cmd `docker-compose up -d`.
+4.  Going to phpMyadmin and manager mysql with localhost [127.0.0.1:8888](http://127.0.0.1:8888/)
+5.  Login phpMyadmin with username is `root` and password is `secret`
 
 ## Deployment
 
