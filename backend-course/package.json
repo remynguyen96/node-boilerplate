@@ -15,7 +15,7 @@
     "production": "cross-env NODE_ENV=production nodemon --exec babel-node src/index.js",
     "start": "backpack dev",
     "postinstall": "backpack build",
-    "build": "node scripts/build.js"
+    "build": "yarn postinstall && node scripts/build.js"
   },
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",

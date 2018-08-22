@@ -12,6 +12,7 @@ const { resolveApp, isFolderAndMkdir } = require('../src/utils/helper');
 const logger = require('../src/config/winston');
 
 const pkg = require(resolveApp('package.json'));
+const appBuildVirtual = resolveApp('build/virtual');
 const appBuild = resolveApp('build');
 const appPublic = resolveApp('src/public');
 const useYarn = fs.existsSync('yarn.lock');
@@ -25,12 +26,13 @@ function prepareBuildDir(buildInfo) {
           fs.unlink(fileName);
         });
       });
-      fs.emptyDirSync(appBuild);
-      fs.copySync(appPublic, appBuild, {
+      fs.emptyDirSync(appBuildVirtual);
+      const publicDir = `${appBuildVirtual}/src/public`;
+      fs.copySync(appPublic, publicDir, {
         dereference: true,
       });
-      fs.copySync('./package.json', 'build/package.json');
-      fs.writeFileSync('./build/buildinfo/data.json', JSON.stringify(buildInfo[1], null, 2));
+      fs.copySync('./package.json', `${appBuildVirtual}/package.json`);
+      fs.writeFileSync(`${publicDir}/buildinfo/data.json`, JSON.stringify(buildInfo[1], null, 2));
       resolve();
     } catch (err) {
       reject(err);
@@ -74,7 +76,7 @@ function generateBuildInfo(previousFileSizes) {
 
 function printResult() {
   return new Promise((resolve) => {
-    const buildFolder = path.relative(process.cwd(), appBuild);
+    const buildFolder = path.relative(process.cwd(), appBuildVirtual);
     printHostingInstructions(
       pkg,
       appPublic,
@@ -87,6 +89,10 @@ function printResult() {
 
 function packBuildDir() {
   return new Promise((resolve, reject) => {
+    fs.copySync(appBuildVirtual, appBuild, {
+      dereference: true,
+    });
+    fs.removeSync(appBuildVirtual);
     const dirArchive = `${resolveApp('')}/archive/`;
     isFolderAndMkdir(dirArchive);
     const zipName = `${resolveApp('archive')}/${pkg.name}-${pkg.version}.zip`;
@@ -108,7 +114,7 @@ function buildFail(err) {
   process.exit(1);
 }
 
-measureFileSizesBeforeBuild(appBuild)
+measureFileSizesBeforeBuild(appBuildVirtual)
   .then(generateBuildInfo)
   .then(prepareBuildDir)
   .then(printResult)
