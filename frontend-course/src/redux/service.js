@@ -6,7 +6,7 @@ import {
  } from './actions';
 
 export const TOKEN = 'token';
-export const URL_SERVER = 'http://localhost:4500';
+export const URL_SERVER = 'http://10.100.219.166:4500';
 const URL_SERVER_API = `${URL_SERVER}/api`;
 
 const fetchApi = (url, method = 'GET', body = null) => {

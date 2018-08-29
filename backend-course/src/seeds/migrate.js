@@ -15,7 +15,7 @@ mysql.sequelize.sync({ force: true })
         throw err;
       } else {
         logger.log('info', 'Migrate data successful !');
-        process.exit();
+        //process.exit();
       }
     });
   })
