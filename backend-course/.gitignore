@@ -14,13 +14,13 @@ lib
 /.vscode
 yarn.lock
 package-lock.json
+lastBuiltHash.json
 application/cache
 /coverage
 # production
 /build
 /logs
 /archive
-lastBuiltHash.json
 # misc
 .DS_Store
 .env.local

@@ -42,11 +42,6 @@ const db = {
   Posts,
 };
 
-// const db = {
-//   Users: sequelize.import('../modules/users/users.model'),
-//   Posts: sequelize.import('../modules/posts/posts.model'),
-// };
-
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
     db[modelName].associate(db);

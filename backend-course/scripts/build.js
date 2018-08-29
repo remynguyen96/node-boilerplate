@@ -2,7 +2,6 @@
 process.env.NODE_ENV = 'production';
 process.on('unhandledRejection', (err) => { throw err; });
 const fs = require('fs-extra');
-const path = require('path');
 const zipFolder = require('zip-folder');
 const glob = require('glob');
 const git = require('simple-git')();
@@ -13,7 +12,6 @@ const pkg = require(resolveApp('package.json'));
 const appBuildVirtual = resolveApp('build/virtual');
 const appBuild = resolveApp('build');
 const appPublic = resolveApp('src/public');
-const useYarn = fs.existsSync('yarn.lock');
 
 function prepareBuildDir(buildInfo) {
   return new Promise((resolve, reject) => {
@@ -69,19 +67,6 @@ function generateBuildInfo(previousFileSizes) {
         }]);
       });
     });
-  });
-}
-
-function printResult() {
-  return new Promise((resolve) => {
-    const buildFolder = path.relative(process.cwd(), appBuildVirtual);
-    printHostingInstructions(
-      pkg,
-      appPublic,
-      buildFolder,
-      useYarn
-    );
-    resolve();
   });
 }
 

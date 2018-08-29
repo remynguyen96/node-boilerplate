@@ -30,7 +30,6 @@ const { combine, timestamp, prettyPrint, label } = format;
 const { console, file } = options;
 const logger = createLogger({
   format: combine(
-    // label({ label: 'right meow!' }),
     format.splat(),
     timestamp(),
     prettyPrint(),

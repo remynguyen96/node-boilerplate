@@ -41,7 +41,6 @@ export const SendMailServer = async (templateMail) => {
       level: 'info',
       message: `Mail %s sent: ${info.messageId}, ${info.response}`,
     });
-    // console.log('Mail %s sent: %s', info.messageId, info.response);
     return info;
   });
 };
