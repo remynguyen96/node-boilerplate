@@ -1,13 +1,16 @@
 FROM node:8.11.4
 
-RUN mkdir -p /backend
-WORKDIR /backend
+LABEL version="1.0.0" maintainer="Remy Nguyen <remynguyen96@gmail.com>"
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
 
 COPY . .
 
-RUN yarn install
-
 EXPOSE 4500
 
-CMD yarn start
+CMD ["npm", "start"]
 

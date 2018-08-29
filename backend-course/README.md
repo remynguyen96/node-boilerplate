@@ -119,9 +119,16 @@ const config = {
 };
 
 ```
-## Create MySQL database and phpMyAdmin with Docker
+## Create container Nodejs with Dockerfile
+1.  Download and install the [Docker](https://docs.docker.com/install/)
+2.  You can config version nodeJs in **Dockerfile**. *( By default backend server require nodeJS version >= 8 )*
+3.  To create images in docker for node backend `docker build -t node-application .` with name images is **node-application**. *( You can run `docker images` to check it was created )*
+4.  To create container for docker `docker run --name backend-node -p 4500:4500 -d node-application` *( Run `docker ps` to check containers )*.
+5.  Going to `http://localhost:4500/api/buildinfo` without run yarn start or anything about NodeJS
 
-1.  Download and install the [Docker, DockerCompose](https://www.docker.com/)
+## Create MySQL database and phpMyAdmin with Docker Compose
+
+1.  Download and install the [DockerCompose](https://docs.docker.com/compose/install/)
 2.  Edit variable password with **MYSQL_ROOT_PASSWORD** and name database with **MYSQL_DATABASE** in file **.env**
 3.  Run docker to create database with cmd `docker-compose up -d`.
 4.  Going to phpMyadmin and manager mysql with localhost [127.0.0.1:8888](http://127.0.0.1:8888/)
