@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:8.11.4-alpine
 
 RUN mkdir -p /frontend
 WORKDIR /frontend

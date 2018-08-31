@@ -1,5 +1,0 @@
-FROM mysql:8.0.12
-
-ENV MYSQL_ROOT_PASSWORD=secret MYSQL_DATABASE=node-course
-
-EXPOSE 3306
