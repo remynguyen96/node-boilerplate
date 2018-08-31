@@ -1,16 +1,15 @@
+require('dotenv').config();
 const express = require('express');
-const { constants } = require('../config/constants');
 const mysql = require('../config/mysql');
-const { seedsData } = require('./faker');
+const { seedsData, deleteData } = require('./faker');
 const logger = require('../config/winston');
 
-
 const app = express();
-
 mysql.sequelize.sync({ force: true })
   .then(async () => {
+    await deleteData();
     await seedsData();
-    app.listen(constants.PORT, (err) => {
+    app.listen(process.env.PORT || process.env.WEB_PORT, (err) => {
       if (err) {
         throw err;
       } else {

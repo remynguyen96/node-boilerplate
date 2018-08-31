@@ -1,11 +1,12 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const passport = require('passport');
-const { constants } = require('./config/constants');
 const mysql = require('./config/mysql');
 const middleware = require('./utils/middleware');
 const Routes = require('./modules');
 const logger = require('./config/winston');
+
 /**
  * *Description: Setup Middleware
  */
@@ -26,14 +27,14 @@ app.use('/', express.static(images));
  */
 mysql.sequelize.sync({ force: false })
   .then(() => {
-    app.listen(constants.PORT, (err) => {
+    //
+    app.listen(process.env.PORT || process.env.WEB_PORT, (err) => {
       if (err) {
         throw err;
       } else {
         logger.log('info', 'Database Connection Has Been Established Successfully. !');
-        logger.log('info', `${process.env.NODE_ENV} running with port: ${constants.PORT}`);
+        logger.log('info', `${process.env.NODE_ENV} running with port: ${process.env.WEB_PORT}`);
       }
     });
   })
   .catch((error) => logger.log('error', 'Unable to connect to the database:', { error }));
-

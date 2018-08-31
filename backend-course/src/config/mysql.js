@@ -1,8 +1,7 @@
 const Sequelize = require('sequelize');
-const { constants } = require('./constants');
 
 const configDB = {
-  host: '10.100.219.166',
+  host: 'localhost',
   dialect: 'mysql',
   port: 3306,
   protocol: null,
@@ -28,9 +27,9 @@ const configDB = {
 };
 
 const sequelize = new Sequelize(
-  constants.MYSQL_DB,
-  constants.MYSQL_USERNAME,
-  constants.MYSQL_PASSWORD,
+  process.env.MYSQL_DATABASE,
+  process.env.MYSQL_USERNAME,
+  process.env.MYSQL_ROOT_PASSWORD,
   { ...configDB },
 );
 

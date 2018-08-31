@@ -1,6 +1,5 @@
 const { hashSync, compareSync } = require('bcrypt-nodejs');
 const { verify, sign } = require('jsonwebtoken');
-const { constants } = require('../../config/constants');
 
 const UserModel = (sequelize, DataTypes) => {
   const Users = sequelize.define('user', {
@@ -105,8 +104,8 @@ const UserModel = (sequelize, DataTypes) => {
   Users.createAcToken = ({ id }) => (
     sign(
       { id },
-      constants.JWT_SECRET,
-      { expiresIn: constants.EXP_TOKEN_ACCESS, algorithm: 'HS384' },
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.EXP_TOKEN_ACCESS, algorithm: 'HS384' },
     )
   );
 
@@ -116,7 +115,7 @@ const UserModel = (sequelize, DataTypes) => {
   };
 
   Users.verifyAccessToken = (token) => (
-    verify(token, constants.JWT_SECRET, (err, decoded) => {
+    verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) throw err;
       return decoded;
     })
