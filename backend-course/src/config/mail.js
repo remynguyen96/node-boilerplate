@@ -1,16 +1,15 @@
 const nodemailer = require('nodemailer');
 const { Promise } = require('sequelize');
-const { constants } = require('./constants');
 const { ConfirmAccount } = require('../utils/template-mail');
 const logger = require('./winston');
 
 const transporter = nodemailer.createTransport({
-  host: constants.MAIL_HOST,
-  port: constants.MAIL_PORT,
+  host: process.env.MAIL_HOST,
+  port: process.env.MAIL_PORT,
   secure: false,
   auth: {
-    user: constants.MAIL_USERNAME,
-    pass: constants.MAIL_PASSWORD,
+    user: process.env.MAIL_USERNAME,
+    pass: process.env.MAIL_PASSWORD,
   },
 });
 

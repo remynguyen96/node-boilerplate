@@ -17,10 +17,4 @@ RUN npm install
 
 COPY . .
 
-COPY wait-for-it.sh .
-
-RUN chmod +x ./wait-for-it.sh
-
-CMD /wait-for-it.sh db:3306 -- npm run start
-
-
+CMD ["npm", "start"]

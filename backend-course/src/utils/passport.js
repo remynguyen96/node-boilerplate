@@ -3,7 +3,6 @@ const LocalStrategy = require('passport-local');
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
 const { decode } = require('jsonwebtoken');
 const models = require('../config/mysql');
-const { constants } = require('../config/constants');
 
 const { Users } = models;
 
@@ -13,7 +12,7 @@ const parseToken = (tokenVal) => {
     return null;
   }
   const matches = tokenVal.match(regx);
-  return matches && matches[1] === constants.PASSPORTCODE && matches[2];
+  return matches && matches[1] === process.env.PASSPORTCODE && matches[2];
 };
 
 
@@ -43,7 +42,7 @@ const localLogin = new LocalStrategy(localOpts, async (email, password, done) =>
 });
 
 const jwtOpts = {
-  secretOrKey: constants.JWT_SECRET,
+  secretOrKey: process.env.JWT_SECRET,
   jwtFromRequest: (req) => {
     const tokenAccess = parseToken(ExtractJwt.fromHeader('x-authorization')(req));
     if (tokenAccess) {

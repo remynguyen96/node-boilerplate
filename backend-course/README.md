@@ -53,9 +53,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 Server will start with port http://localhost:4500
 
-> By default application will run on port 4500. If you want to specify port, ex: **3005** , on Windows or Linux, Mac you modify on folder **src/config** part of **constants.js** file as below:
->  - **Current**: ``` PORT: process.env.PORT || 4500 ```  
->  - **Change to**: ``` PORT: process.env.PORT || 3005, ```
+> By default application will run on port 4500. If you want to specify port, ex: **3005** , on Windows or Linux, Mac you modify on folder **src/config** part of **.env** file as
+ below:
+>  - **Current**: ``` WEB_PORT=4500 ```  
+>  - **Change to**: ``` WEB_PORT=3005, ```
 
 #### Running seeder create fake data for application
 
@@ -100,31 +101,41 @@ Server will start with port http://localhost:4500 and environment NODE_ENV is de
 ### API
 * Config local or server development such as port, mail server and database, etc.
 ```js
-// Path: node-boilerplate\backend-course\src\config\constants.js
-const defaultConfig = {
-  PORT: process.env.PORT || 4500,
-  MAIL_HOST: 'smtp.mailtrap.io',
-  MAIL_PORT: '25',
-  MAIL_USERNAME: 'examble',
-  MAIL_PASSWORD: 'password',
-};
 
-const config = {
-  development: {
-    MYSQL_DB: 'node-course',
-    MYSQL_USERNAME: 'root',
-    MYSQL_PASSWORD: 'secret',
-  },
-  production: {},
-};
+// Path: node-boilerplate/backend-course/.env
+
+#MySQL
+MYSQL_VERSION=8.0.12
+MYSQL_HOST=mysql_app
+MYSQL_USERNAME=root
+MYSQL_DATABASE=node-course
+MYSQL_ROOT_PASSWORD=secret
+
+# Phpmyadmin
+PHPMYADMIN_NAME=phpmyadmin
+
+# Nodejs
+WEB_PORT=4500
+NODE_NAME=node
+JWT_SECRET=jwt-secret
+PASSPORTCODE=Auth
+EXP_TOKEN_ACCESS=1h
+
+# MailServer
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=examble
+MAIL_PASSWORD=examble
 
 ```
 ## Create container Nodejs with Dockerfile
 1.  Download and install the [Docker](https://docs.docker.com/install/)
 2.  You can config version nodeJs in **Dockerfile**. *( By default backend server require nodeJS version >= 8 )*
 3.  To create images in docker for node backend `docker build -t node-application .` with name images is **node-application**. *( You can run `docker images` to check it was created )*
-4.  To create container for docker `docker run --name backend-node -p 4500:4500 -d node-application` *( Run `docker ps` to check containers )*.
-5.  Going to `http://localhost:4500/api/buildinfo` without run yarn start or anything about NodeJS
+4.  Config host in file mysql to connect backend server with mysql database in path `node-boilerplate/backend-course/src/config/mysql.js` with host name container 
+mysql. 
+5.  To create container for docker `docker run --name backend-node -p 4500:4500 -d node-application` *( Run `docker ps` to check containers )*.
+6.  Going to `http://localhost:4500/api/buildinfo` without run yarn start or anything about NodeJS
 
 ## Create MySQL database and phpMyAdmin with Docker Compose
 

@@ -5,47 +5,38 @@ services:
     container_name: ${MYSQL_HOST}
     command: --default-authentication-plugin=mysql_native_password
     restart: always
-    networks: 
-      - webnet
     ports:
-      - 3306:3306
+    - 3306:3306
     volumes:
-      - db_mysql:/var/lib/mysql
+    - db_mysql:/var/lib/mysql
     environment:
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    - MYSQL_DATABASE=${MYSQL_DATABASE}
+    - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
 
   phpmyadmin:
     depends_on:
-      - mysqldb
+    - mysqldb
     image: phpmyadmin/phpmyadmin
     container_name: ${PHPMYADMIN_NAME}
     restart: always
-    networks:
-      - webnet
     ports:
-      - 8888:80
+    - 8888:80
     environment:
-      - PMA_HOST=${MYSQL_HOST}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - PHP_UPLOAD_MAX_FILESIZE=100MB
-  
+    - PMA_HOST=${MYSQL_HOST}
+    - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    - PHP_UPLOAD_MAX_FILESIZE=100MB
+
   node-application:
     depends_on:
-      - mysqldb
+    - mysqldb
     build: .
     image: node-server
     container_name: ${NODE_NAME}
     restart: always
-    networks:
-      - webnet
     volumes:
-      - .:/usr/src/app
+    - .:/usr/src/app
     ports:
-      - ${WEB_PORT}:${WEB_PORT}
+    - ${WEB_PORT}:${WEB_PORT}
 
 volumes:
   db_mysql:
-
-networks:
-  webnet:
