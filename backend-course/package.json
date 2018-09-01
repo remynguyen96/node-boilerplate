@@ -11,9 +11,9 @@
     "lint:js": "npm run eslint -- . ",
     "lint": "npm run lint:js",
     "seed": "cross-env NODE_ENV=development babel-node src/seeds/migrate.js",
-    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",
+    "start": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",
     "production": "cross-env NODE_ENV=production nodemon --exec babel-node src/index.js",
-    "start": "backpack dev",
+    "dev": "backpack dev",
     "postinstall": "backpack build",
     "build": "yarn postinstall && node scripts/build.js"
   },
