@@ -19,4 +19,4 @@ COPY . .
 
 EXPOSE 4500
 
-CMD ["npm", "start", "mysql_docker"]
+CMD ["npm", "start"]

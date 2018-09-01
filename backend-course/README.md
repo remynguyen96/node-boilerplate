@@ -141,9 +141,10 @@ mysql.
 
 1.  Download and install the [DockerCompose](https://docs.docker.com/compose/install/)
 2.  Edit variable password with **MYSQL_ROOT_PASSWORD** and name database with **MYSQL_DATABASE** in file **.env**
-3.  Run docker to create database with cmd `docker-compose up -d`.
-4.  Going to phpMyadmin and manager mysql with localhost [127.0.0.1:8888](http://127.0.0.1:8888/)
-5.  Login phpMyadmin with username is `root` and password is `secret`
+3.  Create images node server with cmd `docker-compose build`.
+4.  Run docker to create database with cmd `docker-compose up -d`.
+5.  Going to phpMyadmin and manager mysql with localhost [127.0.0.1:8888](http://127.0.0.1:8888/)
+6.  Login phpMyadmin with username is `root` and password is `secret`
 
 ## Deployment
 
