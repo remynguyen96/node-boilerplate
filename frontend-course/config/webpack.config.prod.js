@@ -10,6 +10,7 @@ const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 
@@ -35,8 +36,17 @@ if (env.stringified['process.env'].NODE_ENV !== '"production"') {
 }
 
 // Note: defined here because it will be used more than once.
-const cssFilename = 'static/css/[name].[contenthash:8].css';
+const scssFilename = 'static/css/app_[name]_scss.[contenthash:8].css';
+const cssFilename = 'static/css/app_[name]_css.[contenthash:8].css';
 
+const extractSCSS = new ExtractTextPlugin({
+  filename: scssFilename,
+  allChunks: true,
+});
+const extractCSS = new ExtractTextPlugin({
+  filename: cssFilename,
+  allChunks: true,
+});
 // ExtractTextPlugin expects the build output to be flat.
 // (See https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/27)
 // However, our output is structured with css, js and media folders.
@@ -167,7 +177,7 @@ module.exports = {
           // in the main CSS file.
           {
             test: /\.css$/,
-            loader: ExtractTextPlugin.extract(
+            loader: extractCSS.extract(
               Object.assign(
                 {
                   fallback: {
@@ -210,6 +220,33 @@ module.exports = {
                 extractTextPluginOptions
               )
             ),
+            // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+          },
+          {
+            test: /\.scss$/,
+            use: extractSCSS.extract(
+              Object.assign(
+                {
+                  fallback: require.resolve('style-loader'),
+                  use: [
+                    {
+                      loader: require.resolve('css-loader'),
+                      options: {
+                        modules: true,
+                        camelCase: 'dashes',
+                        localIdentName: '[name]__[local]___[hash:base64:5]',
+                      },
+                    },
+                    {
+                      loader: require.resolve('sass-loader'),
+                      options: {
+                        includePaths: [paths.stylePath],
+                        data: '@import \'abstracts/styles.scss\';',
+                      },
+                    },
+                  ],
+                })),
+            include: paths.appSrc,
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
           },
           // "file" loader makes sure assets end up in the `build` folder.
@@ -284,8 +321,15 @@ module.exports = {
       sourceMap: shouldUseSourceMap,
     }),
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
-    new ExtractTextPlugin({
-      filename: cssFilename,
+    extractCSS,
+    extractSCSS,
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.css$/g,
+      cssProcessor: require('cssnano'),
+      cssProcessorPluginOptions: {
+        preset: ['default', { discardComments: { removeAll: true } }],
+      },
+      canPrint: true
     }),
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without

@@ -6,7 +6,7 @@ import {
  } from './actions';
 
 export const TOKEN = 'token';
-export const URL_SERVER = 'http://10.100.219.166:4500';
+export const URL_SERVER = process.env.URL_SERVICE;
 const URL_SERVER_API = `${URL_SERVER}/api`;
 
 const fetchApi = (url, method = 'GET', body = null) => {
@@ -16,12 +16,12 @@ const fetchApi = (url, method = 'GET', body = null) => {
     headers: new Headers({
       'Content-Type': 'application/json',
     })
-  }
+  };
   if (method === 'GET' || method === 'DELETE') {
     return fetch(url, infoRequest);
   }
   return fetch(url, { ...infoRequest, body: JSON.stringify(body)});
-}
+};
 
 export const isAuth = () => {
   return (dispatch) => {
@@ -32,7 +32,7 @@ export const isAuth = () => {
       dispatch(is_authenticate(false));
     }
   }
-}
+};
 
 export const logoutPage = () => {
   return (dispatch) => {
@@ -42,12 +42,12 @@ export const logoutPage = () => {
       dispatch(is_authenticate(false));
     }
   }
-}
+};
 
 const setAuthenticate = (token, dispatch) => {
   window.localStorage.setItem(TOKEN, token);
   dispatch(is_authenticate(true));
-}
+};
 
 export const fetchPosts = () => {
   return async (dispatch) => {
@@ -61,7 +61,7 @@ export const fetchPosts = () => {
       dispatch(fetch_posts_error(error));
     }
   }
-}
+};
 
 export const loginForm = (info) => {
   return async (dispatch) => {
@@ -76,7 +76,7 @@ export const loginForm = (info) => {
       dispatch(fetch_login_error('Email or password is not correct!'));
     }
   }
-}
+};
 
 export const registerForm = (info) => {
   return async (dispatch) => {
@@ -97,4 +97,4 @@ export const registerForm = (info) => {
       dispatch(fetch_register_error(err));
     }
   }
-}
+};

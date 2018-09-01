@@ -10,8 +10,6 @@ npm-debug.log
 build
 node_modules
 lib
-/.idea
-/.vscode
 yarn.lock
 package-lock.json
 .history/

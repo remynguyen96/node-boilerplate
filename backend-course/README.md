@@ -102,7 +102,7 @@ Server will start with port http://localhost:4500 and environment NODE_ENV is de
 * Config local or server development such as port, mail server and database, etc.
 ```js
 
-// Path: node-boilerplate/backend-course/.env
+.env.examble
 
 #MySQL
 MYSQL_VERSION=8.0.12

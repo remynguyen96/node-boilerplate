@@ -11,9 +11,6 @@ const FETCH_POSTS = 'FETCH_POSTS';
 const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS';
 const FETCH_POSTS_ERROR = 'FETCH_POSTS_ERROR';
 
-
-
-
 // * Login
 const fetch_login = () => ({
   type: FETCH_LOGIN,

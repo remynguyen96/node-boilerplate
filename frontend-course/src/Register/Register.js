@@ -2,8 +2,9 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { AutoComplete, Button, Form, Icon, Input, Select, Tooltip } from 'antd';
 import { Redirect } from 'react-router-dom';
+import classnames from 'classnames';
 import { registerForm } from '../redux/service';
-import './Register.css';
+import Styles from './Register.scss';
   
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -29,12 +30,12 @@ class WrappedRegister extends PureComponent {
         register(infomation);
       }
     });
-  }
+  };
 
   handleConfirmBlur = (e) => {
     const value = e.target.value;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-  }
+  };
 
   compareToFirstPassword = (rule, value, callback) => {
     const form = this.props.form;
@@ -43,7 +44,7 @@ class WrappedRegister extends PureComponent {
     } else {
       callback();
     }
-  }
+  };
 
   validateToNextPassword = (rule, value, callback) => {
     const form = this.props.form;
@@ -51,7 +52,7 @@ class WrappedRegister extends PureComponent {
       form.validateFields(['confirm'], { force: true });
     }
     callback();
-  }
+  };
 
   handleWebsiteChange = (value) => {
     let autoCompleteResult;
@@ -61,7 +62,7 @@ class WrappedRegister extends PureComponent {
       autoCompleteResult = ['.com', '.vn', '.org', '.net'].map(domain => `${value}${domain}`);
     }
     this.setState({ autoCompleteResult });
-  }
+  };
 
   render() {
     const { form: { getFieldDecorator }, error, isAuth  } = this.props;
@@ -108,8 +109,8 @@ class WrappedRegister extends PureComponent {
     ));
 
     return (
-      <Form onSubmit={this.handleSubmit} className="form-register">
-        <h2 className="title-page register-title">Register Member</h2>
+      <Form onSubmit={this.handleSubmit} className={Styles.formRegister}>
+        <h2 className={classnames(Styles.titlePage, Styles.registerTitle)}>Register Member</h2>
         <FormItem
           {...formItemLayout}
           label="E-mail"
@@ -202,9 +203,9 @@ class WrappedRegister extends PureComponent {
           )}
         </FormItem>
         <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit" className="btn-register">Register</Button>
+          <Button type="primary" htmlType="submit" className={Styles.btnRegister}>Register</Button>
         </FormItem>
-        {error && <p className="error">{error}</p>}
+        {error && <p className={Styles.error}>{error}</p>}
       </Form>
     );
   }

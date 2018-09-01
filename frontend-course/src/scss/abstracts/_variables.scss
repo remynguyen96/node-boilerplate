@@ -1,0 +1,61 @@
+@import './functions';
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+$color-grey: #CCCCCC;
+$color-light-grey: #F4F4F4;
+$color-grey-1: #888C90;
+$color-blue: #0CA2D0;
+$color-white: #FFFFFF;
+$color-light-green: #E0F1E5;
+$color-light-yellow: #fff5cc;
+$color-blue-selected: #CEECF6;
+
+$primary-color: $color-blue;
+$danger-color: #CC0033;
+$dark-color-1: #484848;
+$dark-color: #4A5456;
+$grey-color-1: #75797d;
+$grey-divider-table: #D9DBDC;
+
+$border-color: $color-grey;
+
+$text-grey: $color-grey-1;
+$text-input-black: #4a5456;
+
+$light-color-1: #F4F4F4;
+$light-color-2: $color-grey;
+$line-color: $color-grey;
+$grey-color: #4A5456;
+$back-btn-color: #CDEBF6;
+
+$layout-padding: 1.25rem;
+$gutter-size: 16px;
+$default-font-size: 12px;
+$echotree-padding: 10px;
+$header-height: 68px;
+$actions-nav-height: 106px;
+$actions-nav-padding-top: 10px;
+$header-nav-line-height: 44px;
+$decimal-input-width: 100px;
+$inventory-header-nav-padding-top: 8px;
+$inventory-header-height: 48px;
+$icon-size: 18px;
+
+$font-default: calc-rem(12px);
+$font-size-xss: calc-rem(10px);
+$font-size-xs: calc-rem(12px);
+$font-size-sms: calc-rem(13px);
+$font-size-sm: calc-rem(14px);
+$font-size-mds: calc-rem(15px);
+$font-size-md: calc-rem(16px);
+$font-size-lg: calc-rem(18px);
+$font-size-xl: calc-rem(20px);
+$font-size-header: calc-rem(24px);
+$alert-bar-width: 300px;
+$min-width-screen: 1024px;
+$modal-content-padding: 15px;
+$font-size-medium: 14px;
+//Breakpoints
+$ipadBreakpoint:  'only screen and (min-width: 768px) and (max-width: 1024px)';

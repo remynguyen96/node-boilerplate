@@ -3,12 +3,10 @@ import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { loginForm } from '../redux/service';
-import './Login.css';
+import Styles from './Login.scss';
 
 const FormItem = Form.Item;
-
 class WrappedLogin extends PureComponent {
-
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -17,7 +15,7 @@ class WrappedLogin extends PureComponent {
         this.props.authLogin(values);
       }
     });
-  }
+  };
 
   render() {
     const { form: { getFieldDecorator }, error, isAuth } = this.props;
@@ -27,8 +25,8 @@ class WrappedLogin extends PureComponent {
       ) 
     }
     return (
-      <Form onSubmit={this.handleSubmit} className="login-form">
-        <h2 className="title-page">Login</h2>
+      <Form onSubmit={this.handleSubmit} className={Styles.loginForm}>
+        <h2 className={Styles.titlePage}>Login</h2>
         <FormItem>
           {getFieldDecorator('email', {
             rules: [
@@ -53,12 +51,12 @@ class WrappedLogin extends PureComponent {
           })(
             <Checkbox>Remember me</Checkbox>
           )}
-          <Link className="login-form-forgot" to="/forgot-password">Forgot password</Link>
-          <Button type="primary" htmlType="submit" className="login-form-button">
+          <Link className={Styles.loginFormForgot} to="/forgot-password">Forgot password</Link>
+          <Button type="primary" htmlType="submit" className={Styles.loginFormButton}>
             Log in
           </Button>
           Or <Link to="/register">register now!</Link>
-          {error && <p className="error">{error}</p>}
+          {error && <p className={Styles.error}>{error}</p>}
           </FormItem>
       </Form>
     );

@@ -50,10 +50,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 Server will start with port http://localhost:3000
 
-> By default application will run on port 4500. If you want to specify port, ex: **3005** , on Windows you modify **scripts** part of **package.json** file as below:
->  - **Current**: ``` "start": "node scripts/start.js" ```  
->  - **Change to**: ``` "start": "set PORT=3005 && node scripts/start.js" ```
-
+> By default application will run on port 300. If you want to specify port, ex: **4000** , on Windows you modify **WEB_PORT** part of **.env** file as below:
+>  - **Current**: `3000`  
+>  - **Change to**: `4000`  
 
 #### Running the tests
 
@@ -67,16 +66,15 @@ Server will start with port http://localhost:3000
   yarn build
 ```
 
-
 ## Usage
 
 ### API
-* Config connect *API* server. Default application will connect with server through port **4500**
-```js
-// Path: node-boilerplate\frontend-course\src\redux\service.js
-export const URL_SERVER = 'http://localhost:4500';
-```
-*You can change port server above to connect your server*
+* Config connect *API* server. Default application will connect with server through **http://localhost:4500/**
+* You can change port server above to connect your server in a part of **.env** file as below:
+>  - **Current**: `URL_SERVICE='http://localhost:4500'`  
+>  - **Change to**: `URL_SERVICE='192.168.1.10:4500'`  
+>  - **Other method**: `yarn start 192.168.1.10:4500`  
+
 
 ## Deployment
 

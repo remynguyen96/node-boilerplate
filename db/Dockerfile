@@ -1,6 +1,6 @@
 ARG PASSWORD=secret
 ARG NAME_DB=node-course
-ARG HOST=test_mysql
+ARG HOST=mysql_docker
 
 FROM mysql:8.0.12
 

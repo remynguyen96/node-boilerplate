@@ -1,0 +1,69 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin display-flex() {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+@mixin flex-align-item($align: flex-start) {
+  -webkit-box-align: $align;
+  -webkit-align-items: $align;
+  -moz-box-align: $align;
+  -ms-flex-align: $align;
+  align-items: $align;
+}
+
+@mixin flex-direction($direction: row) {
+  flex-direction: $direction;
+  -ms-flex-direction: $direction;
+  -webkit-flex-direction: $direction;
+}
+
+@mixin flex-basis($unit: 100%) {
+  -webkit-flex-basis: $unit;
+  -moz-flex-basis: $unit;
+  flex-basis: $unit;
+}
+
+@mixin x-appearance($value) {
+	-webkit-appearance: $value; // iOS
+  -moz-appearance: $value;
+	appearance: $value;
+}
+
+@mixin x-box-shadow ($values...) {
+  -webkit-box-shadow: $values; // iOS Safari 3.2 - 4.3, Android 2.1+
+  -moz-box-shadow: $values;
+	box-shadow: $values;
+}
+
+@mixin x-animation($values...){
+  -webkit-animation: $values;
+  -moz-animation: $values;
+  -o-animation: $values;
+  -ms-animation: $values;
+  animation: $values;
+}
+
+// Make those words wrap, yo
+@mixin word-wrap() {
+  -ms-word-break: break-all;
+  word-wrap: break-word;
+  word-break: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}

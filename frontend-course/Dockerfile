@@ -1,12 +1,17 @@
-FROM node:10
+FROM node:8.11.4-alpine
 
-RUN mkdir -p /frontend
-WORKDIR /frontend
+LABEL version="1.0.0" maintainer="Remy Nguyen <remynguyen96@gmail.com>"
+
+RUN mkdir -p /usr/src/frontend
+
+WORKDIR /usr/src/frontend
+
+COPY package*.json .
+
+RUN npm install
 
 COPY . .
 
-RUN yarn install
-
 EXPOSE 3000
 
-CMD yarn start
+CMD ["npm", "start"]

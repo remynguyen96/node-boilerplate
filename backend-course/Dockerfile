@@ -17,4 +17,6 @@ RUN npm install
 
 COPY . .
 
-CMD ["npm", "start"]
+EXPOSE 4500
+
+CMD ["npm", "start", "mysql_docker"]

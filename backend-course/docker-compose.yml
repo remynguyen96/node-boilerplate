@@ -26,17 +26,17 @@ services:
     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     - PHP_UPLOAD_MAX_FILESIZE=100MB
 
-#  node-application:
-#    depends_on:
-#    - mysqldb
-#    build: .
-#    image: node-server
-#    container_name: ${NODE_NAME}
-#    restart: always
-#    volumes:
-#    - .:/usr/src/app
-#    ports:
-#    - ${WEB_PORT}:${WEB_PORT}
+  node-application:
+    depends_on:
+    - mysqldb
+    build: .
+    image: node-server
+    container_name: ${NODE_NAME}
+    restart: always
+    volumes:
+    - .:/usr/src/app
+    ports:
+    - ${WEB_PORT}:4500
 
 volumes:
   db_mysql:

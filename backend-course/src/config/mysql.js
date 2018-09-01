@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 const configDB = {
-  host: 'localhost',
+  host: process.argv[2] || 'localhost',
   dialect: 'mysql',
   port: 3306,
   protocol: null,

@@ -1,7 +1,7 @@
 import { Layout } from 'antd';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import './Profile.css';
+import Styles from './Profile.scss';
 
 class Profile extends PureComponent {
 
@@ -14,10 +14,10 @@ class Profile extends PureComponent {
 
   render() {
     // const { user } = this.props;
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <Layout>
-        <h4 className="title-page">Profile</h4>
+        <h4 className={Styles.titlePage}>Profile</h4>
       </Layout>
     )
   }
@@ -27,8 +27,9 @@ const mapStateToProps = (state) => ({
   user: state.application.users,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+// const mapDispatchToProps = (dispatch) => ({
+//
+// });
 
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps)(Profile);
+// export default connect(mapStateToProps, mapDispatchToProps)(Profile);

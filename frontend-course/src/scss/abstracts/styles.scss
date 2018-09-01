@@ -1,0 +1,36 @@
+@import 'variables',
+'functions',
+'mixins';
+
+.title-page {
+  text-align: center;
+  font-size: 40px;
+  padding: 25px 40px;
+  color: #fff;
+  font-family: Arvo;
+  font-weight: bold;
+  text-shadow: -3px -3px 0 #222, 3px -3px 0 #222, -3px 3px 0 #222, 3px 3px 0 #222, 4px 4px 0 #fff, 5px 5px 0 #fff, 6px 6px 0 #fff, 7px 7px 0 #fff;
+  line-height: 0.8em;
+  letter-spacing: 0.1em;
+  transform: scaleY(0.7) skewY(-5deg);
+  margin: 0;
+  text-align: center;
+}
+
+.list-card {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.cardItem {
+  width: 300px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+@media only screen and (max-width: 768px) {
+  .cardItem {
+    width: 100%;
+  }
+}

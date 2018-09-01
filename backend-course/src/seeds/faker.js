@@ -5,11 +5,6 @@ const models = require('../config/mysql');
 
 const { Posts, Users } = models;
 
-const promiseSequence = (promiseA, promiseB) => {
-  const arr = [promiseA, promiseB];
-  return arr.reduce((promiseHandle, itemPromise) => promiseHandle.then(itemPromise), Promise.resolve());
-};
-
 const randomPhone = () => {
   const phone = Math.floor(Math.random() * 9) + 1;
   const random = faker.random.number();
@@ -18,6 +13,7 @@ const randomPhone = () => {
 };
 
 const deleteData = async () => {
+  /* eslint-disable no-await-in-loop */
   for (const model of [Posts, Users]) {
     await model.destroy({ where: {}, truncate: { cascade: true } });
   }
@@ -25,7 +21,7 @@ const deleteData = async () => {
 
 const seedsData = async () => {
   try {
-    const runCreateData = await Array.from({ length: 10 }).forEach(async (_, key) => {
+    const runCreateData = await Array.from({ length: 10 }).reduce(async (promise, _, key) => {
       /**
        * @Description: Fake Data Users
        */
@@ -50,8 +46,9 @@ const seedsData = async () => {
           user_id: item.id,
         });
       }
-    });
-    console.log(runCreateData, 'runCreateData');
+      return promise.then((result) => Promise.resolve(result + key));
+    }, Promise.resolve(0));
+    return runCreateData;
   } catch (err) {
     throw err;
   }
@@ -60,41 +57,4 @@ const seedsData = async () => {
 module.exports = {
   seedsData,
   deleteData,
-  deleteData,
 };
-
-// // promise function 1
-// var p1 = (time) => {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       resolve("good p1");
-//     }, time)
-//   });
-// }
-//
-// // promise function 2
-// var p2 = (time) => {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       resolve("good p2");
-//     }, (time - 200));
-//   });
-// }
-//
-// // function 3  - will be wrapped in a resolved promise by .then()
-// var p3 = (time) => {
-//   return setTimeout(() => {
-//     console.log("good p3");
-//   }, (time - 400));
-// }
-//
-// // promise function 4
-// var p4 = (time) => {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       resolve("good p4");
-//     }, (time - 600));
-//   });
-// }
-// var promiseArr = [p1, p2, p3, p4];
-// promiseArr.reduce((promiseChain, currentFunction) => promiseChain.then(currentFunction), Promise.resolve()).then(console.log);

@@ -10,8 +10,7 @@ import MenuApp from '../router/MenuApp';
 import RootRouter from '../router/RootRouter';
 import './App.css';
 
-
-class App extends PureComponent { 
+class App extends PureComponent {
 
   constructor(props) {
     super(props);

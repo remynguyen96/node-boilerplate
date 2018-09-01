@@ -1,0 +1,81 @@
+// -----------------------------------------------------------------------------
+// Basic typography style for copy text
+// -----------------------------------------------------------------------------
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+html {
+  font-size: 12px;
+
+  font-family: sans-serif;
+  /* 1 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */ 
+}
+
+body {
+  font-family: "Open Sans", Verdana, Helvetica, Arial, sans-serif;
+  font-size: 1.25rem;
+  font-weight: normal;
+}
+
+h1 {
+  font-size: 3rem;
+  line-height: 3.6666666666666665rem;
+}
+
+h2 {
+  font-size: 2rem;
+  line-height: 3.6666666666666665rem;
+}
+
+h3 {
+  font-size: 1.75rem
+}
+
+h4 {
+  font-size: 1.5rem
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+ol li ul li {
+  padding-left: 20px;
+}
+
+.text-size-xss,
+.font-size-xss {
+  font-size: $font-size-xss !important;
+}
+
+.text-size-xs,
+.font-size-xs {
+  font-size: $font-size-xs !important;
+}
+
+.text-size-sm,
+.font-size-sm {
+  font-size: $font-size-sm !important;
+}
+
+.text-size-md,
+.font-size-md {
+  font-size: $font-size-md !important;
+}
+
+.text-size-lg,
+.font-size-lg {
+  font-size: $font-size-lg !important;
+}
+
+.text-size-xl,
+.font-size-xl {
+  font-size: $font-size-xl !important;
+}

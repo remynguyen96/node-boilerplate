@@ -8,13 +8,17 @@ const app = express();
 mysql.sequelize.sync({ force: true })
   .then(async () => {
     await deleteData();
-    await seedsData();
+    const finishCreated = await seedsData();
     app.listen(process.env.PORT || process.env.WEB_PORT, (err) => {
       if (err) {
         throw err;
       } else {
         logger.log('info', 'Migrate data successful !');
-        // process.exit();
+        if (finishCreated && finishCreated === 45) {
+          setTimeout(() => {
+            process.exit();
+          }, finishCreated * 10);
+        }
       }
     });
   })

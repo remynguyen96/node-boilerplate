@@ -1,0 +1,7 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass functions.
+// -----------------------------------------------------------------------------
+
+@function calc-rem($pixels){
+  @return ($pixels/12px)+rem;
+}

@@ -33,6 +33,7 @@ const createDevServerConfig = require('../config/webpackDevServer.config');
 
 const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;
+const log = console.log;
 
 // Warn and crash if required files are missing
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
@@ -40,23 +41,34 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 }
 
 // Tools like Cloud9 rely on this.
-const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
+const DEFAULT_PORT = parseInt(process.env.PORT, 10) || parseInt(process.env.WEB_PORT, 10);
 const HOST = process.env.HOST || '0.0.0.0';
 
 if (process.env.HOST) {
-  console.log(
+  log(
     chalk.cyan(
       `Attempting to bind to HOST environment variable: ${chalk.yellow(
         chalk.bold(process.env.HOST)
       )}`
     )
   );
-  console.log(
+  log(
     `If this was unintentional, check that you haven't mistakenly set it in your shell.`
   );
-  console.log(`Learn more here: ${chalk.yellow('http://bit.ly/2mwWSwH')}`);
-  console.log();
+  log(`Learn more here: ${chalk.yellow('http://bit.ly/2mwWSwH')}`);
+  log();
 }
+
+// const staticBackendUrl = {
+//   local: 'http://localhost:4500',
+// };
+//
+// const team = process.argv[2];
+// let backendUrl = '';
+// if (team && staticBackendUrl[team]) {
+//   backendUrl = `?service=${staticBackendUrl[team]}`;
+// }
+
 
 // We attempt to use the default port but if it is busy, we offer the user to
 // run on a different port. `choosePort()` Promise resolves to the next free port.
@@ -83,13 +95,15 @@ choosePort(HOST, DEFAULT_PORT)
     // Launch WebpackDevServer.
     devServer.listen(port, HOST, err => {
       if (err) {
-        return console.log(err);
+        return log(err);
       }
       if (isInteractive) {
         clearConsole();
       }
-      console.log(chalk.cyan('Starting the development server...\n'));
+      log(chalk.bold.hex('#73FF8D')(`Starting the development server with port ${DEFAULT_PORT}\n`));
+      log(chalk.bold.hex('#6CFF2D')(`Connecting with backend server ${process.argv[2] || process.env.URL_SERVICE}\n`));
       openBrowser(urls.localUrlForBrowser);
+      // openBrowser(`${urls.localUrlForBrowser}${backendUrl}`);
     });
 
     ['SIGINT', 'SIGTERM'].forEach(function(sig) {
@@ -101,7 +115,7 @@ choosePort(HOST, DEFAULT_PORT)
   })
   .catch(err => {
     if (err && err.message) {
-      console.log(err.message);
+      log(err.message);
     }
     process.exit(1);
   });
