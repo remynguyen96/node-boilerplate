@@ -10,12 +10,12 @@
     "eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
     "lint:js": "npm run eslint -- . ",
     "lint": "npm run lint:js",
-    "seed": "cross-env NODE_ENV=development babel-node src/seeds/migrate.js",
-    "start": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",
-    "production": "cross-env NODE_ENV=production nodemon --exec babel-node src/index.js",
+    "seed": "babel-node src/seeds/migrate.js",
+    "start": "nodemon --exec babel-node src/index.js",
+    "production": "nodemon --exec babel-node src/index.js",
     "dev": "backpack dev",
     "postinstall": "backpack build",
-    "build": "yarn postinstall && node scripts/build.js"
+    "build": "npm run postinstall && node scripts/build.js"
   },
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",
@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.0-beta.0",
     "babel-eslint": "^8.2.1",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "^6.24.1",
@@ -41,7 +42,6 @@
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
     "cors": "^2.8.4",
-    "cross-env": "^5.1.0",
     "dotenv": "^6.0.0",
     "eslint": "^4.15.0",
     "eslint-config-airbnb-base": "^12.1.0",

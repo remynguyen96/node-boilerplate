@@ -8,11 +8,11 @@ WORKDIR /usr/src/app
 
 COPY package*.json .
 
-RUN npm cache verify
-
-RUN npm install
+RUN npm i
 
 COPY . .
+
+ENV PORT=4500
 
 EXPOSE 4500
 
