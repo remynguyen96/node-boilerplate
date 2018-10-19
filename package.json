@@ -1,0 +1,42 @@
+{
+  "name": "nodejs-boilerplate",
+  "version": "1.0.0",
+  "description": "Nodejs ES6 Boilerplate Course",
+  "main": "index.js",
+  "repository": "https://github.com/remynguyen96/courseMysql.git",
+  "author": "Remy Nguyen <nguyentietngocchau@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
+    "lint:js": "npm run eslint -- . ",
+    "lint": "npm run lint:js",
+    "start": "backpack dev",
+    "build": "backpack build"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "express-validator": "^4.2.1",
+    "lowdb": "^1.0.0",
+    "nodemailer": "^4.2.0",
+    "validator": "^9.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-loader": "^8.0.0-beta.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "backpack-core": "^0.7.0",
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "cors": "^2.8.4",
+    "dotenv": "^6.0.0",
+    "eslint": "^4.15.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-import": "^2.8.0",
+    "helmet": "^3.9.0",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.12.1"
+  }
+}
