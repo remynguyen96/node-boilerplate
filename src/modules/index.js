@@ -1,5 +1,5 @@
 const { Router } = require('express');
-// const UserController = require('./users.controller');
+const { sendMail } = require('./users.controller');
 
 const routes = new Router();
 routes.use((req, res, next) => {
@@ -9,7 +9,7 @@ routes.use((req, res, next) => {
   next();
 });
 
-// routes.post('/send-mail', UserController.sendMail);
+routes.post('/send-mail', sendMail);
 // routes.get('/list-email-register', UserController.listMailRegister);
 
 module.exports = routes;

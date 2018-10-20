@@ -15,10 +15,8 @@
   },
   "dependencies": {
     "express": "^4.16.2",
-    "express-validator": "^4.2.1",
     "lowdb": "^1.0.0",
-    "nodemailer": "^4.2.0",
-    "validator": "^9.0.0"
+    "nodemailer": "^4.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

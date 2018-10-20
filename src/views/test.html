@@ -1,5 +1,11 @@
-const generalSectionTemplate = (description) => (`
-<style>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Thông Tin Đăng Kí Mua Sách</title>
+  <style>
     .container {
       width: 50%;
       margin: 30px auto;
@@ -51,9 +57,9 @@ const generalSectionTemplate = (description) => (`
       text-align: center;
     }
     .container .table {
-      overflow-x:auto;  
+      overflow-x:auto;
     }
-    
+
     @media only screen and (max-width: 1280px) {
       .container {
         width: 70%;
@@ -79,61 +85,36 @@ const generalSectionTemplate = (description) => (`
         margin-top: 35px;
       }
     }
-</style>
+  </style>
+</head>
+<body>
 <div class="container">
   <img src="http://localhost:4500/bg-mail-order.jpg" alt="Background Books">
   <div class="row">
-    ${description}
+    <h1>Thông Tin Xác Nhận Đăng Kí Mua sách</h1>
+    <p>Xin chào <strong>${name}</strong>, bạn vui lòng xác nhận lại thông tin đăng kí mua sách bên dưới: </p>
+    <div class="table">
+
+    </div>
+    <div class="table">
+      <table class="order">
+        <tr>
+          <th>Đăng ký nhận sách</th>
+          <th>Chọn mua</th>
+          <th>Số lượng</th>
+          <th>Tổng tiền</th>
+        </tr>
+        <tr>
+          <td>${receiving}</td>
+          <td>${books}</td>
+          <td>${quantity}</td>
+          <td>940,000 vnđ vnđ</td>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
-`);
 
-const TemplateMail = ({ name, email, phone, address, quantity, receive, books }) => {
-  const parseGetPrice = (strBooks) => {
-    const arr = strBooks.split(/[^0-9]/);
-    return parseInt(arr.filter((item) => item !== '')[0], 10);
-  };
-  const total = (parseGetPrice(books) * quantity * 1000).toLocaleString('de-DE');
-  const receiving = receive === 'M1' ? 'M1: Miền Bắc- Miền Trung' : 'M2: Miền Nam';
-  const description = `
-  <h1>Thông Tin Xác Nhận Đăng Kí Mua sách</h1>
-  <p>Xin chào <strong>${name}</strong>, bạn vui lòng xác nhận lại thông tin đăng kí mua sách bên dưới: </p>
-  <div class="table">
-    <table>
-      <tr>
-        <th>Tên</th>
-        <th>Địa Chỉ</th>
-        <th>email</th>
-        <th>số điện thoại</th>
-      </tr>
-      <tr>
-        <td>${name}</td>
-        <td>${address}</td>
-        <td>${email}</td>
-        <td>${phone}</td>
-      </tr>
-    </table>
-  </div>
-  <div class="table">
-    <table class="order">
-      <tr>
-        <th>Đăng ký nhận sách</th>
-        <th>Chọn mua</th>
-        <th>Số lượng</th>
-        <th>Tổng tiền</th>
-      </tr>
-      <tr>
-        <td>${receiving}</td>
-        <td>${books}</td>
-        <td>${quantity}</td>
-        <td>${total} vnđ</td>
-      </tr>
-    </table>
-  </div>`;
-  return `${generalSectionTemplate(description)}`;
-};
 
-module.exports = {
-  TemplateMail,
-};
-
+</body>
+</html>

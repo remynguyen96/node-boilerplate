@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const { ConfirmAccount } = require('../utils/template-mail');
+const { TemplateMail } = require('../utils/template-mail');
 
 const transporter = nodemailer.createTransport({
   host: process.env.MAIL_HOST,
@@ -11,25 +11,39 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const MailConfirmAccount = (info) => {
-  const { email, name, url, token } = info;
-  return new Promise((resolve, reject) => {
-    if (info) {
+const MailConfirmOrder = ({ name, email, phone, address, quantity, receive, books }) => (
+  new Promise((resolve, reject) => {
+    if (email && phone) {
       const mail = {
-        from: 'Welcome to website meditation 👻 <remynguyen@gmail.com>',
+        from: 'Mail Xác Nhận Việc Đăng kí Mua Sách 📗 - <hoatulip8504@gmail.com>',
         to: `${email}`,
-        subject: `Hello ${name} ! This is Mail Confirm Account ✔`,
-        text: 'Please confirm email to login website !',
-        html: ConfirmAccount(name, url, token),
+        subject: `${name} Đăng Kí Mua Sách Thành Công ✔`,
+        html: TemplateMail({ name, email, phone, address, quantity, receive, books }),
       };
       resolve(mail);
     } else {
       reject(new Error('Don\'t have infomation to send mail !'));
     }
-  });
-};
+  })
+);
 
-export const SendMailServer = async (templateMail) => {
+const MailOwner = ({ name, email, phone, address, quantity, receive, books }) => (
+  new Promise((resolve, reject) => {
+    if (email && phone) {
+      const mail = {
+        from: `Đăng Kí Mua Sách 📖 - ${email}`,
+        to: process.env.MAIL_OWNER,
+        subject: `${name} đăng kí mua: ${books} ✔`,
+        html: TemplateMail({ name, email, phone, address, quantity, receive, books }),
+      };
+      resolve(mail);
+    } else {
+      reject(new Error('Don\'t have infomation to send mail !'));
+    }
+  })
+);
+
+const SendMailServer = async (templateMail) => {
   await transporter.sendMail(templateMail, (error, info) => {
     if (error) {
       return error;
@@ -41,3 +55,10 @@ export const SendMailServer = async (templateMail) => {
     return info;
   });
 };
+
+module.exports = {
+  SendMailServer,
+  MailOwner,
+  MailConfirmOrder,
+};
+
