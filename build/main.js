@@ -118,7 +118,7 @@ app.listen(process.env.PORT || process.env.WEB_PORT, function (err) {
   if (err) {
     throw err;
   } else {
-    log('Environment ' + "development" + ' running with port: ' + process.env.WEB_PORT);
+    log('Environment ' + "production" + ' running with port: ' + process.env.WEB_PORT);
   }
 });
 /* WEBPACK VAR INJECTION */}.call(exports, "src"))

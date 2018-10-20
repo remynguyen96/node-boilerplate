@@ -361,9 +361,10 @@ body {
 form {
   background-color: #ffffff;
   max-width: 40%;
-  padding: 20px 40px;
+  padding: 20px 40px 45px;
   margin: 0 auto;
   position: relative;
+  box-shadow: 1px 4px 15px 0 #969696;
 }
 .title {
   margin-top: 0;
@@ -378,7 +379,6 @@ form {
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 28px;
-  /*color: #202020;*/
   color: #3f3f3f;
   margin: 35px 0 20px;
 }
@@ -1015,7 +1015,7 @@ input[type=checkbox]:checked + .checkbox-material .check {
     padding: 35px 8%;
   }
   form {
-    max-width: 75%;
+    max-width: 80%;
   }
 
 }
@@ -1029,6 +1029,7 @@ input[type=checkbox]:checked + .checkbox-material .check {
   form {
     max-width: 100%;
     padding: 0 20px;
+    box-shadow: 0 0 0 transparent;
   }
   .title {
     letter-spacing: 4px;

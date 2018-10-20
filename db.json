@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Nguyễn Châu",
+      "email": "remynguyen96@gmail.com",
+      "phone": "0987654321",
+      "address": "23/3B 102 Street, Tang Nhon Phu A Ward, District 9, Saigon",
+      "quantity": "3",
+      "receive": "M2",
+      "books": "Combo sách và audio - 550k"
+    }
+  ]
+}
