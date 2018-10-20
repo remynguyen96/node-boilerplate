@@ -130,7 +130,7 @@ const pageSuccess = ({ name, email, phone, address, quantity, receive, books }) 
     <div class="container-success">
   <img src="./bg-mail-order.jpg" alt="Background Books">
     <div class="row">
-    <h1>Thông Tin Xác Nhận Đăng Kí Mua sách</h1>
+    <h1>Thông Tin Xác Nhận Đăng Kí Mua Sách</h1>
   <p>Xin chào <strong>${name}</strong>, bạn vui lòng xác nhận lại thông tin đăng kí mua sách bên dưới: </p>
   <div class="table">
     <table>
