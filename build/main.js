@@ -118,7 +118,7 @@ app.listen(process.env.PORT || process.env.WEB_PORT, function (err) {
   if (err) {
     throw err;
   } else {
-    log('Environment ' + "production" + ' running with port: ' + process.env.WEB_PORT);
+    log('Environment ' + "development" + ' running with port: ' + process.env.WEB_PORT);
   }
 });
 /* WEBPACK VAR INJECTION */}.call(exports, "src"))
@@ -200,7 +200,8 @@ var _require = __webpack_require__(0),
     Router = _require.Router;
 
 var _require2 = __webpack_require__(13),
-    sendMail = _require2.sendMail;
+    sendMail = _require2.sendMail,
+    listMailRegister = _require2.listMailRegister;
 
 var routes = new Router();
 routes.use(function (req, res, next) {
@@ -211,7 +212,7 @@ routes.use(function (req, res, next) {
 });
 
 routes.post('/send-mail', sendMail);
-// routes.get('/list-email-register', UserController.listMailRegister);
+routes.get('/list-infomation', listMailRegister);
 
 module.exports = routes;
 
@@ -232,7 +233,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-/* eslint-disable no-useless-escape,no-restricted-syntax,no-prototype-builtins */
+/* eslint-disable no-useless-escape,no-restricted-syntax,no-prototype-builtins,no-buffer-constructor */
 var low = __webpack_require__(16);
 var FileSync = __webpack_require__(17);
 
@@ -315,6 +316,13 @@ var isEmpty = function isEmpty(obj) {
   return true;
 };
 
+var isEmptyData = function isEmptyData() {
+  if (!isEmpty(db.getState())) {
+    return true;
+  }
+  return false;
+};
+
 var sendMail = function () {
   var _ref3 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee2(req, res) {
     var _req$body, name, email, phone, address, quantity, receive, books, _ref4, _ref5, validateForm, validateEmail, validatePhone, templateMailOrder, templateMailOwner, id;
@@ -326,7 +334,13 @@ var sendMail = function () {
             _context2.prev = 0;
             _req$body = req.body, name = _req$body.name, email = _req$body.email, phone = _req$body.phone, address = _req$body.address, quantity = _req$body.quantity, receive = _req$body.receive, books = _req$body.books;
             _context2.next = 4;
-            return Promise.all([verifiedForm({ name: name, address: address, quantity: quantity, receive: receive, books: books }), verifiedEmail(email), verifiedPhone(phone)]);
+            return Promise.all([verifiedForm({
+              name: name,
+              address: address,
+              quantity: quantity,
+              receive: receive,
+              books: books
+            }), verifiedEmail(email), verifiedPhone(phone)]);
 
           case 4:
             _ref4 = _context2.sent;
@@ -356,12 +370,21 @@ var sendMail = function () {
           case 18:
             id = 1;
 
-            if (!isEmpty(db.getState())) {
+            if (isEmptyData()) {
               db.getState();
               id += db.getState().users.length;
             }
             db.defaults({ users: [] }).write();
-            db.get('users').push({ id: id, name: name, email: email, phone: phone, address: address, quantity: quantity, receive: receive, books: books }).write();
+            db.get('users').push({
+              id: id,
+              name: name,
+              email: email,
+              phone: phone,
+              address: address,
+              quantity: quantity,
+              receive: receive,
+              books: books
+            }).write();
             return _context2.abrupt('return', res.status(201).json({ success: true }));
 
           case 23:
@@ -385,24 +408,32 @@ var sendMail = function () {
   };
 }();
 
-// const listMailRegister = async (req, res) => {
-//   try {
-//     const { token } = req.params;
-//     const verify = Users.verifyAccessToken(token);
-//     const users = await Users.findById(verify.id);
-//     if (users) {
-//       await users.update({ verified: true });
-//       res.redirect('/');
-//     }
-//     return null;
-//   } catch (err) {
-//     return res.status(400).json(err);
-//   }
-// };
+var listMailRegister = function listMailRegister(req, res) {
+  var url = req.protocol + '://' + req.get('host') + '/favicon.ico';
+  res.set('Content-Type', 'text/html');
+  if (isEmptyData()) {
+    var _db$getState = db.getState(),
+        users = _db$getState.users;
+
+    res.send(new Buffer('\n        <!doctype html>\n        <html lang="en">\n        <head>\n          <meta charset="UTF-8">\n          <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">\n          <meta http-equiv="X-UA-Compatible" content="ie=edge">\n          <title>Th\xF4ng Tin Ng\u01B0\u1EDDi Mua S\xE1ch</title>\n          <link id="favicon" rel="icon" type="image/x-icon" href="' + url + '">\n          <style type="text/css">\n          .container {\n            width: 100%;\n            margin: 10px auto;\n            font-size: 16px;\n            overflow-x: auto;\n          }\n          .container table {\n            border-collapse: collapse;\n            width: 100%;\n          }\n          .container table, td, th {\n            border: 1px solid #bababa;\n            margin-bottom: 35px;\n          }\n          .container td {\n            padding: 8px;\n          }\n          .container th {\n            text-transform: capitalize;\n            text-align: center;\n            height: 40px;\n            padding: 0 5px;\n          }\n          .container td {\n            text-align: center;\n          }\n          .container tr:nth-child(even) {\n            background-color: #f8f8f8;\n          }\n        </style>\n        </head>\n        <body>\n        <div class="container">\n          <table>\n            <tr>\n              <th>ID</th>\n              <th>T\xEAn</th>\n              <th>\u0110\u1ECBa Ch\u1EC9</th>\n              <th>email</th>\n              <th>s\u1ED1 \u0111i\u1EC7n tho\u1EA1i</th>\n              <th>\u0110\u0103ng k\xFD nh\u1EADn s\xE1ch</th>\n              <th>Ch\u1ECDn mua</th>\n              <th>S\u1ED1 l\u01B0\u1EE3ng</th>\n            </tr>\n            ' + users.map(function (_ref6) {
+      var id = _ref6.id,
+          name = _ref6.name,
+          address = _ref6.address,
+          email = _ref6.email,
+          phone = _ref6.phone,
+          receive = _ref6.receive,
+          books = _ref6.books,
+          quantity = _ref6.quantity;
+      return '\n              <tr>\n                <td>' + id + '</td>\n                <td>' + name + '</td>\n                <td>' + address + '</td>\n                <td>' + email + '</td>\n                <td>' + phone + '</td>\n                <td>' + receive + '</td>\n                <td>' + books + '</td>\n                <td>' + quantity + '</td>\n              </tr>\n            ';
+    }) + '\n          </table>\n        </div>\n        </body>\n        </html>\n    '));
+  } else {
+    res.send(new Buffer('\n    <h3 style="text-align: center; font-size: 28px; color: #5A5F61">\n    Sorry, We Cannot Find That!\n    </h3>'));
+  }
+};
 
 module.exports = {
-  sendMail: sendMail
-  // listMailRegister,
+  sendMail: sendMail,
+  listMailRegister: listMailRegister
 };
 
 /***/ }),
@@ -1232,7 +1263,7 @@ var MailConfirmOrder = function MailConfirmOrder(_ref) {
   return new Promise(function (resolve, reject) {
     if (email && phone) {
       var mail = {
-        from: 'Mail Xác Nhận Việc Đăng kí Mua Sách 📗 - <hoatulip8504@gmail.com>',
+        from: 'Mail X\xE1c Nh\u1EADn \u0110\u0103ng k\xED Mua S\xE1ch \uD83D\uDCD7 - <' + process.env.MAIL_OWNER + '>',
         to: '' + email,
         subject: name + ' \u0110\u0103ng K\xED Mua S\xE1ch Th\xE0nh C\xF4ng \u2714',
         html: TemplateMail({ name: name, email: email, phone: phone, address: address, quantity: quantity, receive: receive, books: books })
@@ -1255,7 +1286,7 @@ var MailOwner = function MailOwner(_ref2) {
   return new Promise(function (resolve, reject) {
     if (email && phone) {
       var mail = {
-        from: '\u0110\u0103ng K\xED Mua S\xE1ch \uD83D\uDCD6 - ' + email,
+        from: email + ' \u0110\u0103ng K\xED Mua S\xE1ch \uD83D\uDCD6',
         to: process.env.MAIL_OWNER,
         subject: name + ' \u0111\u0103ng k\xED mua: ' + books + ' \u2714',
         html: TemplateMail({ name: name, email: email, phone: phone, address: address, quantity: quantity, receive: receive, books: books })

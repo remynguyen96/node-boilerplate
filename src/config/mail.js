@@ -15,7 +15,7 @@ const MailConfirmOrder = ({ name, email, phone, address, quantity, receive, book
   new Promise((resolve, reject) => {
     if (email && phone) {
       const mail = {
-        from: 'Mail Xác Nhận Việc Đăng kí Mua Sách 📗 - <hoatulip8504@gmail.com>',
+        from: `Mail Xác Nhận Đăng kí Mua Sách 📗 - <${process.env.MAIL_OWNER}>`,
         to: `${email}`,
         subject: `${name} Đăng Kí Mua Sách Thành Công ✔`,
         html: TemplateMail({ name, email, phone, address, quantity, receive, books }),
@@ -31,7 +31,7 @@ const MailOwner = ({ name, email, phone, address, quantity, receive, books }) =>
   new Promise((resolve, reject) => {
     if (email && phone) {
       const mail = {
-        from: `Đăng Kí Mua Sách 📖 - ${email}`,
+        from: `${email} Đăng Kí Mua Sách 📖`,
         to: process.env.MAIL_OWNER,
         subject: `${name} đăng kí mua: ${books} ✔`,
         html: TemplateMail({ name, email, phone, address, quantity, receive, books }),
