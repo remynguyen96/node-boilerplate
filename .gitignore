@@ -18,7 +18,6 @@ lastBuiltHash.json
 application/cache
 /coverage
 # production
-/build
 /logs
 /archive
 # misc

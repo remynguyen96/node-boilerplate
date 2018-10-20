@@ -174,7 +174,7 @@ const handleSubmit = ({ name, address, receive, phone, email, typeBook, quantity
     try {
       event.preventDefault();
       const serialize = getValue({ name, address, receive, phone, email, typeBook, quantity });
-      const url = 'http://localhost:4500/api/send-mail';
+      const url = `${window.location.origin}/api/send-mail`;
       const fetchData = await fetch(url, {
         method: 'POST',
         headers: new Headers({

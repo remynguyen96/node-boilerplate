@@ -10,8 +10,7 @@
     "eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
     "lint:js": "npm run eslint -- . ",
     "lint": "npm run lint:js",
-    "start": "node src/index.js",
-    "dev": "backpack dev",
+    "start": "backpack dev",
     "build": "backpack build"
   },
   "dependencies": {
