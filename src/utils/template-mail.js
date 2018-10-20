@@ -23,7 +23,7 @@ const TemplateMail = ({ name, email, phone, address, quantity, receive, books })
              bgcolor="#FFFFFF">
         <tr>
           <td align="center">
-            <img src="https://daycontuhoc.herokuapp.com/bg-mail-order.jpg" alt="Image Banner" style="display: block;border:0;" height="100%%" width="600"/>
+             <img src="https://daycontuhoc.herokuapp.com/bg-mail-order.jpg" alt="Image Banner" height="100%%" width="600" style="margin:0; padding:0; border:none; display:block;" border="0" /> 
           </td>
         </tr>
         <tr>
