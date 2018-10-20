@@ -23,7 +23,7 @@ const TemplateMail = ({ name, email, phone, address, quantity, receive, books })
              bgcolor="#FFFFFF">
         <tr>
           <td align="center">
-            <img src="../views/bg-mail-order.jpg" alt="Image Banner" style="display: block;border:0;" height="100%%" width="600"/>
+            <img src="https://daycontuhoc.herokuapp.com/bg-mail-order.jpg" alt="Image Banner" style="display: block;border:0;" height="100%%" width="600"/>
           </td>
         </tr>
         <tr>
@@ -55,7 +55,7 @@ const TemplateMail = ({ name, email, phone, address, quantity, receive, books })
                     </tr>
                     <tr>
                       <td align="center"
-                          style="height: 95px; color:#4d4d4d;font-size: 14px;padding: 10px 0 0 0;">
+                          style="height: 110px; color:#4d4d4d;font-size: 14px;padding: 10px 0 0 0;">
                         ${name}
                       </td>
                     </tr>
@@ -73,7 +73,7 @@ const TemplateMail = ({ name, email, phone, address, quantity, receive, books })
                     </tr>
                     <tr>
                       <td align="center"
-                          style="height: 95px; color:#4d4d4d;font-size: 14px;padding: 10px 0 0 0;">
+                          style="height: 110px; color:#4d4d4d;font-size: 14px;padding: 10px 0 0 0;">
                         ${address}
                       </td>
                     </tr>
@@ -91,7 +91,7 @@ const TemplateMail = ({ name, email, phone, address, quantity, receive, books })
                     </tr>
                     <tr>
                       <td align="center"
-                          style="height: 95px; color:#4d4d4d;font-size: 14px;padding: 10px 0 0 0;">
+                          style="height: 110px; color:#4d4d4d;font-size: 14px;padding: 10px 0 0 0;">
                         ${email}
                       </td>
                     </tr>
@@ -109,7 +109,7 @@ const TemplateMail = ({ name, email, phone, address, quantity, receive, books })
                     </tr>
                     <tr>
                       <td align="center"
-                          style="height: 95px; color:#4d4d4d;font-size: 14px;padding: 10px 0 0 0;">
+                          style="height: 110px; color:#4d4d4d;font-size: 14px;padding: 10px 0 0 0;">
                         ${phone}
                       </td>
                     </tr>
@@ -132,7 +132,7 @@ const TemplateMail = ({ name, email, phone, address, quantity, receive, books })
                     </tr>
                     <tr>
                       <td align="center"
-                          style="height: 80px; color:#4d4d4d;font-size: 14px;padding: 10px 0 0 0;">
+                          style="height: 95px; color:#4d4d4d;font-size: 14px;padding: 10px 0 0 0;">
                         ${receiving}
                       </td>
                     </tr>
@@ -151,7 +151,7 @@ const TemplateMail = ({ name, email, phone, address, quantity, receive, books })
                     </tr>
                     <tr>
                       <td align="center"
-                          style="height: 80px; color:#4d4d4d;font-size: 14px;padding: 10px 0 0 0;">
+                          style="height: 95px; color:#4d4d4d;font-size: 14px;padding: 10px 0 0 0;">
                         ${books}
                       </td>
                     </tr>
@@ -170,7 +170,7 @@ const TemplateMail = ({ name, email, phone, address, quantity, receive, books })
                     </tr>
                     <tr>
                       <td align="center"
-                          style="height: 80px; color:#4d4d4d;font-size: 14px;padding: 10px 0 0 0;">
+                          style="height: 95px; color:#4d4d4d;font-size: 14px;padding: 10px 0 0 0;">
                         ${quantity}
                       </td>
                     </tr>
@@ -189,7 +189,7 @@ const TemplateMail = ({ name, email, phone, address, quantity, receive, books })
                     </tr>
                     <tr>
                       <td align="center"
-                          style="height: 80px; color:#4d4d4d;font-size: 14px;padding: 10px 0 0 0;">
+                          style="height: 95px; color:#4d4d4d;font-size: 14px;padding: 10px 0 0 0;">
                         ${total} VNĐ
                       </td>
                     </tr>
