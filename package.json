@@ -1,10 +1,10 @@
 {
   "name": "nodejs-boilerplate",
   "version": "1.0.0",
-  "description": "Nodejs ES6 Boilerplate Course",
+  "description": "Nodejs ES6 Boilerplate Form Buy Books",
   "main": "index.js",
-  "repository": "https://github.com/remynguyen96/courseMysql.git",
-  "author": "Remy Nguyen <nguyentietngocchau@gmail.com>",
+  "repository": "https://github.com/remynguyen96/formBooks.git",
+  "author": "Remy Nguyen <remynguyen96@gmail.com>",
   "license": "MIT",
   "scripts": {
     "eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
