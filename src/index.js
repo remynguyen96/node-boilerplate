@@ -10,7 +10,7 @@ const app = express();
 const { log } = console;
 middleware(app);
 /**
- @Description: Setup Router Backend
+ @Description: Setup Router
  */
 app.use('/api', Routes);
 const views = path.join(__dirname, 'views');
